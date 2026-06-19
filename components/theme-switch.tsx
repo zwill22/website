@@ -4,11 +4,7 @@ import clsx from "clsx";
 
 import { SunFilledIcon, MoonFilledIcon } from "@/components/icons";
 
-export interface ThemeSwitchProps {
-  className?: string;
-}
-
-export const ThemeSwitch: FC<ThemeSwitchProps> = ({ className }) => {
+export function ThemeSwitch(props: { className?: string }) {
   const [isMounted, setIsMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
 
@@ -22,21 +18,24 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ className }) => {
     setIsMounted(true);
   }, []);
 
-
   if (!isMounted) return <div aria-hidden className="w-6 h-6" />;
 
   return (
     <button
       aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
       className={clsx(
-        "px-px transition-opacity hover:opacity-80 cursor-pointer",
+        "px-px transition-opacity hover:opacity-60 cursor-pointer",
         "inline-flex items-center justify-center",
         "w-auto h-auto bg-transparent rounded-lg text-muted",
-        className,
+        props.className,
       )}
       onClick={handleToggle}
     >
-      {isLight ? <SunFilledIcon className="text-xl"/> : <MoonFilledIcon className="text-xl"/>}
+      {isLight ? (
+        <SunFilledIcon className="text-xl" />
+      ) : (
+        <MoonFilledIcon className="text-xl" />
+      )}
     </button>
   );
-};
+}
