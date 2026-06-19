@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    width="300"
+    height="300"
+    viewBox="0 0 300 300"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <rect
+        x="20"
+        y="20"
+        height="260"
+        width="260"
+        fill="black"
+        stroke="black"
+        stroke-width="10"
+        rx="50"
+        ry="50"
+    />
+
+    <path 
+    d="
+    M   50  120 
+    L   200 30 
+    Q   225 30  215 65
+    L   120 220 
+    L   240 160 
+    Q   275 155 260 190
+    L   100 270 
+    Q   70  260 80 240 
+    L   180 80
+    L   60 150
+    Q   40 145 50 120
+    "
+    fill="white"
+    stroke="white"
+    stroke-width="1"
+    />
+</svg>

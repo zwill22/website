@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+	--font-sans: "font", sans-serif;
+	--font-mono: "monospace", monospace;
+	--font-cookie: var(--font-cookie);
+	--coffee-yellow: #FFDD00;
+	--coffee-red: #FF5F5F;
+}

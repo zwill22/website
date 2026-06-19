@@ -1,0 +1,18 @@
+export type SiteConfig = typeof siteConfig;
+
+export const siteConfig = {
+  name: "My site",
+  description: "My beautiful website",
+  navItems: [
+    {
+      label: "Home",
+      href: "/",
+    },
+  ],
+  navMenuItems: [],
+  links: {
+    linkedin: "https://www.linkedin.com/in/zmwill",
+    github: "https://github.com/zwill22",
+    sponsor: "https://coff.ee/zmwill",
+  },
+};
