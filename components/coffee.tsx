@@ -121,7 +121,7 @@ export function BuyMeACoffee(props: {
 
 export function DefaultVersion() {
   return (
-    <div className="hidden sm:flex py-8">
+    <div className="hidden sm:flex">
       <BuyMeACoffee
         href="https://buymeacoffee.com/zmwill"
         className="text-white bg-(--coffee-yellow) text-[28px] h-10"
@@ -132,10 +132,13 @@ export function DefaultVersion() {
 
 export function SponserButton() {
   return (
-    <div className="hidden sm:flex py-8">
+    <div className="hidden sm:flex py-4 px-1">
       <BuyMeACoffee
         href="https://buymeacoffee.com/zmwill"
-        className="text-white bg-(--coffee-red) text-[28px] h-10 shadow shadow-black"
+        className={clsx(
+          "text-white bg-(--coffee-red) text-[28px] h-10 shadow shadow-foreground/50",
+          "hover:shadow hover:shadow-foreground",
+        )}
         text="Buy me a Diet Cola"
       >
         🥤

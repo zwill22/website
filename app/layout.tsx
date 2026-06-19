@@ -9,6 +9,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans, fontMono, fontCookie } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import { Sidebar } from "@/components/sidebar";
 
 export const metadata: Metadata = {
   title: {
@@ -41,18 +42,30 @@ export default function RootLayout({
           "min-h-screen text-foreground bg-background font-sans antialiased",
           fontSans.variable,
           fontMono.variable,
-          fontCookie.variable
+          fontCookie.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
+          <div className="relative flex flex-col h-screen md:hidden">
             <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 grow">
-              {children}
-            </main>
-            <footer className="w-full flex items-center justify-center py-3">
-              My site
-            </footer>
+            <div className="flex flex-col m-4 rounded-xl h-full bg-black/10 dark:bg-white/5">
+              <main className="container mx-auto max-w-7xl pt-16 px-6 grow">
+                {children}
+              </main>
+              <footer className="w-full flex items-center justify-center py-3">
+                My site
+              </footer>
+            </div>
+          </div>
+
+          <div className="hidden md:flex">
+            <Sidebar />
+            <div className="flex flex-col rounded-xl w-full m-1 bg-black/10 dark:bg-white/5">
+              <main className="container mx-auto grow">{children}</main>
+              <footer className="w-full flex items-center justify-center py-3">
+                My site
+              </footer>
+            </div>
           </div>
         </Providers>
       </body>
