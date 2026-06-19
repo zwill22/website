@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { GithubIcon, LinkedInIcon, Logo } from "@/components/icons";
+import { SponserButton } from "@/components/coffee";
 
 export function Navbar() {
   return (
@@ -50,6 +51,7 @@ export function Navbar() {
             <GithubIcon className="text-xl hover:opacity-80" />
           </Link>
           <ThemeSwitch />
+          <SponserButton />
         </div>
       </header>
     </nav>
