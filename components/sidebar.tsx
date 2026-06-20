@@ -7,7 +7,53 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { GithubIcon, LinkedInIcon, Logo } from "@/components/icons";
 import { SponserButton } from "@/components/coffee";
-import { HomeIcon } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
+import { LogoLink, SocialLink } from "@/components/links";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+
+interface Item {
+  label: string;
+  href: string;
+  icon: ForwardRefExoticComponent<
+    React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & {
+      title?: string;
+      titleId?: string;
+    } & RefAttributes<SVGSVGElement>
+  >;
+  solidIcon: ForwardRefExoticComponent<
+    React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & {
+      title?: string;
+      titleId?: string;
+    } & RefAttributes<SVGSVGElement>
+  >;
+}
+
+function SideLink(props: { item: Item }) {
+  const item = props.item;
+
+  const pathname = usePathname();
+  const isActive = pathname == item.href;
+
+  return (
+    <Link
+      className={clsx(
+        "flex gap-4 font-mono rounded-md w-full h-10 hover:shadow-foreground",
+        "font-semibold text-foreground transition-colors px-4",
+        isActive
+          ? "shadow shadow-foreground/20 bg-foreground/5 hover:shadow-foreground/30"
+          : "hover:bg-foreground/5 hover:shadow hover:shadow-foreground/40 hover:font-extrabold hover:text-foreground",
+      )}
+      key={item.label}
+      href={item.href}
+      aria-label={item.label}
+    >
+      <div className="flex flex-col justify-center size-5">
+        {isActive ? <item.solidIcon /> : <item.icon />}
+      </div>
+      {item.label}
+    </Link>
+  );
+}
 
 export function Sidebar() {
   return (
@@ -15,53 +61,26 @@ export function Sidebar() {
       <div className="flex flex-col justify-between h-full">
         <div className="flex flex-col gap-6">
           <div className="flex justify-between p-2">
-            <Link
-              className="flex items-center hover:shadow hover:shadow-foreground"
-              href="/"
-            >
-              <Logo size={50} />
-            </Link>
+            <LogoLink />
             <div className="flex items-center gap-4">
-              <Link
-                aria-label="LinkedIn"
-                href={siteConfig.links.linkedin}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <LinkedInIcon className="text-xl hover:opacity-80" />
-              </Link>
-              <Link
-                aria-label="Github"
-                href={siteConfig.links.github}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <GithubIcon className="text-xl hover:opacity-80" />
-              </Link>
+              <SocialLink label="LinkedIn" href={siteConfig.links.linkedin}>
+                <LinkedInIcon className="text-xl" />
+              </SocialLink>
+              <SocialLink label="Github" href={siteConfig.links.github}>
+                <GithubIcon className="text-xl" />
+              </SocialLink>
               <ThemeSwitch />
             </div>
           </div>
           <div className="flex flex-col gap-4 p-2">
             {siteConfig.navItems.map((item) => (
-              <Link
-                className={clsx(
-                  "flex gap-4 active:font-mono, hover:bg-foreground/5",
-                  "rounded-md w-full h-10 active:shadow active:shadow-foreground/50 hover:shadow-foreground",
-                  "font-semibold hover:font-extrabold hover:text-foreground",
-                  "text-foreground hover:text-accent transition-colors px-4",
-                  "data-[active=true]:text-accent data-[active=true]:font-medium",
-                )}
-                href={item.href}
-              >
-                <div className="flex flex-col justify-center size-5">
-                  <HomeIcon />
-                </div>
-                {item.label}
-              </Link>
+              <SideLink key={item.label} item={item} />
             ))}
           </div>
         </div>
-        <SponserButton />
+        <div className="flex flex-col px-2 py-4">
+          <SponserButton />
+        </div>
       </div>
     </nav>
   );

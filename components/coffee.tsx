@@ -132,17 +132,15 @@ export function DefaultVersion() {
 
 export function SponserButton() {
   return (
-    <div className="hidden sm:flex py-4 px-1">
-      <BuyMeACoffee
-        href="https://buymeacoffee.com/zmwill"
-        className={clsx(
-          "text-white bg-(--coffee-red) text-[28px] h-10 shadow shadow-foreground/50",
-          "hover:shadow hover:shadow-foreground",
-        )}
-        text="Buy me a Diet Cola"
-      >
-        🥤
-      </BuyMeACoffee>
-    </div>
+    <BuyMeACoffee
+      href="https://buymeacoffee.com/zmwill"
+      className={clsx(
+        "text-white bg-(--coffee-red) text-[28px] h-10 shadow shadow-foreground/50",
+        "hover:shadow hover:shadow-foreground",
+      )}
+      text="Buy me a Diet Cola"
+    >
+      🥤
+    </BuyMeACoffee>
   );
 }

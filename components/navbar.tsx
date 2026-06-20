@@ -1,58 +1,78 @@
 "use client";
 
-import { Link } from "@heroui/react";
-import clsx from "clsx";
-
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon, LinkedInIcon, Logo } from "@/components/icons";
-import { SponserButton } from "@/components/coffee";
+import { GithubIcon, LinkedInIcon } from "@/components/icons";
 import { MenuButton } from "@/components/buttons";
+import { LogoLink, SocialLink } from "@/components/links";
+import { useState } from "react";
+import clsx from "clsx";
+import { Link, Drawer } from "@heroui/react";
+import { SponserButton } from "@/components/coffee";
+
+function NavMenu() {
+  return (
+    <Drawer>
+      <MenuButton />
+
+      <Drawer.Backdrop variant="blur">
+        <Drawer.Content placement="left">
+          <Drawer.Dialog aria-label="navigation-menu">
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Navigation</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body className="py-4">
+              <nav className="flex flex-col gap-1">
+                {siteConfig.navItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    className="flex items-center w-full gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
+                    href={item.href}
+                  >
+                    <item.icon className="size-5 text-muted" />
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </Drawer.Body>
+            <Drawer.Footer>
+              <SponserButton />
+            </Drawer.Footer>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+  );
+}
 
 export function Navbar() {
-  return (
-    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
-      <header className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6">
-        <div className="flex items-center gap-4">
-          <Link className="flex items-center hover:shadow hover:shadow-foreground" href="/">
-            <Logo size={50} />
-          </Link>
-          <ul className="hidden lg:flex gap-4 ml-2">
-            {siteConfig.navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  className={clsx(
-                    "text-foreground hover:text-accent transition-colors",
-                    "data-[active=true]:text-accent data-[active=true]:font-medium",
-                  )}
-                  href={item.href}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+  let [showMenu, setShowMenu] = useState(false);
 
-        <div className="flex items-center gap-4">
-          <Link
-            aria-label="LinkedIn"
-            href={siteConfig.links.linkedin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <LinkedInIcon className="text-xl hover:opacity-80" />
-          </Link>
-          <Link
-            aria-label="Github"
-            href={siteConfig.links.github}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <GithubIcon className="text-xl hover:opacity-80" />
-          </Link>
+  return (
+    <nav
+      className={clsx(
+        "sticky top-0 z-40 w-full border-b border-separator",
+        "bg-background/70 backdrop-blur-lg",
+      )}
+    >
+      <header
+        className={clsx(
+          "mx-auto flex h-16 max-w-6xl items-center justify-between",
+          "gap-4 px-6",
+        )}
+      >
+        <LogoLink />
+
+        <div className="flex items-center gap-3">
+          <SocialLink label="LinkedIn" href={siteConfig.links.linkedin}>
+            <LinkedInIcon className="text-xl" />
+          </SocialLink>
+          <SocialLink label="Github" href={siteConfig.links.github}>
+            <GithubIcon className="text-xl" />
+          </SocialLink>
           <ThemeSwitch />
-          <MenuButton />
+          <NavMenu />
         </div>
       </header>
     </nav>

@@ -1,11 +1,10 @@
-import { FC, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
 
 import { SunFilledIcon, MoonFilledIcon } from "@/components/icons";
+import { Button } from "@heroui/react";
 
 export function ThemeSwitch(props: { className?: string }) {
-  const [isMounted, setIsMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
 
   const isLight = resolvedTheme === "light";
@@ -14,19 +13,14 @@ export function ThemeSwitch(props: { className?: string }) {
     setTheme(isLight ? "dark" : "light");
   };
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return <div aria-hidden className="w-6 h-6" />;
-
   return (
-    <button
+    <Button
       aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
       className={clsx(
-        "px-px transition-opacity hover:opacity-60 cursor-pointer",
+        "px-1 transition-opacity hover:opacity-60 cursor-pointer",
         "inline-flex items-center justify-center",
-        "w-auto h-auto bg-transparent rounded-lg text-muted",
+        "w-auto h-auto bg-transparent rounded-lg text-foreground",
+        "focus-visible:ring-foreground focus-visible:ring-offset-background",
         props.className,
       )}
       onClick={handleToggle}
@@ -36,6 +30,6 @@ export function ThemeSwitch(props: { className?: string }) {
       ) : (
         <MoonFilledIcon className="text-xl" />
       )}
-    </button>
+    </Button>
   );
 }
