@@ -130,6 +130,39 @@ export function DefaultVersion() {
   );
 }
 
+
+export function BuyMeWidget(props: {
+  coffeeColour?: string;
+  outlineColour?: string;
+  children?: ReactNode;
+  className?: string;
+  href: string;
+}) {
+  const coffeeColour = props.coffeeColour ?? "fill-white";
+  const logoOutline = props.outlineColour ?? "fill-black";
+
+  const children = props.children ?? (
+    <BuyMeACoffeeLogo coffeeColour={coffeeColour} outlineColour={logoOutline} />
+  );
+
+  return (
+    <div>
+      <Link
+        className={clsx(
+          "flex border-none radius rounded-full px-1.5 py-1 leading-6.75 decoration-0",
+          "inline-flex items-center box-border hover:decoration-0 hover:cursor-pointer",
+          "active:decoration-0 active:cursor-pointer focus:decoration-0 focus:cursor-pointer",
+          props.className,
+        )}
+        target="_blank"
+        href={props.href}
+      >
+        {children}
+      </Link>
+    </div>
+  );
+}
+
 export function SponserButton() {
   return (
     <BuyMeACoffee
@@ -142,5 +175,19 @@ export function SponserButton() {
     >
       🥤
     </BuyMeACoffee>
+  );
+}
+
+export function SponserWidget() {
+  return (
+    <BuyMeWidget
+      href="https://buymeacoffee.com/zmwill"
+      className={clsx(
+        "text-white bg-(--coffee-red) text-lg shadow shadow-foreground/50",
+        "hover:shadow hover:shadow-foreground",
+      )}
+    >
+      🥤
+    </BuyMeWidget>
   );
 }
