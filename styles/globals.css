@@ -4,9 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-	--font-sans: "font", sans-serif;
-	--font-mono: "monospace", monospace;
-	--font-cookie: var(--font-cookie);
-	--coffee-yellow: #FFDD00;
-	--coffee-red: #FF5F5F;
+  --font-sans: "font", sans-serif;
+  --font-mono: "monospace", monospace;
+  --font-cookie: var(--font-cookie);
+  --font-heading: var(--font-heading);
+  --coffee-yellow: #ffdd00;
+  --coffee-red: #ff5f5f;
 }

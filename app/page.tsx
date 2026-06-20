@@ -3,11 +3,19 @@ import { GithubIcon, LinkedInIcon } from "@/components/icons";
 import { Link } from "@heroui/react";
 
 export default function Home() {
+  const time = new Date().getHours();
+  const titleText =
+    time >= 17
+      ? "Good Evening"
+      : time >= 12
+        ? "Good Afternoon"
+        : time >= 6
+          ? "Good Morning"
+          : "Late night?";
+
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <h1>My page</h1>
-      </div>
+      <h1 className="text-5xl md:text-6xl font-heading p-2">{titleText}</h1>
 
       <div className="flex gap-3">
         <Link
@@ -16,7 +24,7 @@ export default function Home() {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <GithubIcon className="text-xl pr-2"/>
+          <GithubIcon className="text-xl pr-2" />
           GitHub
         </Link>
         <Link
@@ -32,9 +40,7 @@ export default function Home() {
 
       <div className="mt-8">
         <div className="flex items-center gap-2 rounded-xl bg-surface shadow-surface px-4 py-2">
-          <pre className="text-sm  font-mediumfont-mono">
-            Home page
-          </pre>
+          <pre className="text-sm  font-mediumfont-mono">Home page</pre>
         </div>
       </div>
     </section>

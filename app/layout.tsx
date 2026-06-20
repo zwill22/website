@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
-import { fontSans, fontMono, fontCookie } from "@/config/fonts";
+import { fontSans, fontMono, fontCookie, fontLilita } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 
@@ -43,28 +43,23 @@ export default function RootLayout({
           fontSans.variable,
           fontMono.variable,
           fontCookie.variable,
+          fontLilita.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen md:hidden">
             <Navbar />
-            <div className="flex flex-col m-4 rounded-xl h-full bg-black/10 dark:bg-white/5">
-              <main className="container mx-auto max-w-7xl pt-16 px-6 grow">
+            <div className="flex flex-col rounded-xl h-full bg-foreground/5">
+              <main className="container grow">
                 {children}
               </main>
-              <footer className="w-full flex items-center justify-center py-3">
-                My site
-              </footer>
             </div>
           </div>
 
-          <div className="hidden md:flex">
+          <div className="hidden md:relative md:flex">
             <Sidebar />
-            <div className="flex flex-col rounded-xl w-full m-1 bg-black/10 dark:bg-white/5">
-              <main className="container mx-auto grow">{children}</main>
-              <footer className="w-full flex items-center justify-center py-3">
-                My site
-              </footer>
+            <div className="flex flex-col rounded-xl m-4 w-full bg-foreground/5">
+              <main className="container grow">{children}</main>
             </div>
           </div>
         </Providers>
