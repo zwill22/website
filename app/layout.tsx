@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
-import { fontSans, fontMono, fontCookie, fontLilita } from "@/config/fonts";
+import { fontBody, fontHeading, fontPlain, fontCookie } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 import { SponserWidget } from "@/components/coffee";
@@ -40,11 +40,11 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen text-foreground bg-background font-sans antialiased",
-          fontSans.variable,
-          fontMono.variable,
+          "text-foreground bg-background font-body antialiased",
+          fontBody.variable,
+          fontHeading.variable,
+          fontPlain.variable,
           fontCookie.variable,
-          fontLilita.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>

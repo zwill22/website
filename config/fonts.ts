@@ -1,21 +1,18 @@
-import {
-  Cookie,
-  Fira_Code as FontMono,
-  Inter as FontSans,
-  Lilita_One as FontLilita,
-} from "next/font/google";
+import { Cookie, Sora, Amaranth, Lilita_One } from "next/font/google";
 
-export const fontSans = FontSans({
+export const fontBody = Amaranth({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-body",
+  weight: ["400", "700"],
 });
 
-export const fontMono = FontMono({
+export const fontPlain = Sora({
   subsets: ["latin"],
-  variable: "--font-mono",
+  weight: "400",
+  variable: "--font-plain",
 });
 
-export const fontLilita = FontLilita({
+export const fontHeading = Lilita_One({
   subsets: ["latin"],
   variable: "--font-heading",
   weight: "400",

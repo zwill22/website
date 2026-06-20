@@ -20,7 +20,9 @@ function NavMenu() {
           <Drawer.Dialog aria-label="navigation-menu">
             <Drawer.CloseTrigger />
             <Drawer.Header>
-              <Drawer.Heading>Navigation</Drawer.Heading>
+              <Drawer.Heading className="font-heading">
+                Navigation
+              </Drawer.Heading>
             </Drawer.Header>
             <Drawer.Body className="py-4">
               <nav className="flex flex-col gap-1">

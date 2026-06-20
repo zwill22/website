@@ -17,9 +17,13 @@ export default function Home() {
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <h1 className="text-5xl md:text-6xl font-heading p-2">{titleText}</h1>
 
+      <p>
+        Welcome to my site
+      </p>
+
       <div className="flex gap-3">
         <Link
-          className="button button--tertiary button--md rounded-full"
+          className="button button--tertiary button--md rounded-full font-plain"
           href={siteConfig.links.github}
           rel="noopener noreferrer"
           target="_blank"
@@ -28,7 +32,7 @@ export default function Home() {
           GitHub
         </Link>
         <Link
-          className="button button--tertiary button--md rounded-full"
+          className="button button--tertiary button--md rounded-full font-plain"
           href={siteConfig.links.linkedin}
           rel="noopener noreferrer"
           target="_blank"
@@ -40,7 +44,7 @@ export default function Home() {
 
       <div className="mt-8">
         <div className="flex items-center gap-2 rounded-xl bg-surface shadow-surface px-4 py-2">
-          <pre className="text-sm  font-mediumfont-mono">Home page</pre>
+          <pre className="text-sm font-medium font-plain">Home page</pre>
         </div>
       </div>
     </section>

@@ -37,7 +37,7 @@ function SideLink(props: { item: Item }) {
   return (
     <Link
       className={clsx(
-        "flex gap-4 font-mono rounded-md w-full h-10 hover:shadow-foreground",
+        "flex gap-4 rounded-md w-full h-10 hover:shadow-foreground",
         "font-semibold text-foreground transition-colors px-4",
         isActive
           ? "shadow shadow-foreground/20 bg-foreground/5 hover:shadow-foreground/30"
