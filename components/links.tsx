@@ -9,7 +9,7 @@ export function LogoLink() {
       className={clsx(
         "flex items-center hover:shadow hover:shadow-foreground",
         "focus-visible:outline-0 focus-visible:ring-offset-background",
-        "focus-visible:ring-foreground"
+        "focus-visible:ring-foreground",
       )}
       href="/"
     >

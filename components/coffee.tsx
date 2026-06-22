@@ -130,7 +130,6 @@ export function DefaultVersion() {
   );
 }
 
-
 export function BuyMeWidget(props: {
   coffeeColour?: string;
   outlineColour?: string;

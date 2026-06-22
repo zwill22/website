@@ -17,9 +17,7 @@ export default function Home() {
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <h1 className="text-5xl md:text-6xl font-heading p-2">{titleText}</h1>
 
-      <p>
-        Welcome to my site
-      </p>
+      <p>Welcome to my site</p>
 
       <div className="flex gap-3">
         <Link
