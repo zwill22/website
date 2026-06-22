@@ -1,12 +1,13 @@
 # My website
 
-[![TypeScript][typescript-badge]](#)
+[![TypeScript][typescript-badge]][typescript-lang]
 [![Next.js][next-badge]][nextjs]
 [![React][react-badge]][react]
 [![Tailwind CSS][tailwind-badge]][tailwindcss]
 [![HTML][html-badge]](#)
+[![CSS][css-badge]](#)
 [![GitHub][github-badge]][repo]
-[![pnpm][pnpm-badge]](#)
+[![pnpm][pnpm-badge]][pnpm]
 [![Coffee][buy-me-coffee]][coffee]
 [![License: MIT][license-badge]][license]
 [![No AI][noai-badge]](#)
@@ -19,7 +20,13 @@ Source code for my website, built using:
 - [HeroIcons][heroicons]
 - [Bootstrap Icons][bootstrap]
 
+This project was initialised using the HeroUI template:
+```bash
+npx heroui-cli@latest init -t app -p pnpm
+```
+
 [//]: # (Links)
+[typescript-lang]: https://www.typescriptlang.org
 [repo]: https://github.com/zwill22/website
 [license]: https://github.com/zwill22/website/blob/main/LICENSE
 [nextjs]: https://nextjs.org
@@ -42,3 +49,4 @@ Source code for my website, built using:
 [typescript-badge]: https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff
 [tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white
 [html-badge]: https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white
+[css-badge]: https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff
