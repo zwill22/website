@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config/site";
 import { GithubIcon, LinkedInIcon } from "@/components/icons";
 import { Link } from "@heroui/react";
+import { Section, SectionTitle } from "@/components/section";
 
 export default function Home() {
   const time = new Date().getHours();
@@ -14,8 +15,8 @@ export default function Home() {
           : "Late night?";
 
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <h1 className="text-5xl md:text-6xl font-heading p-2">{titleText}</h1>
+    <Section>
+      <SectionTitle>{titleText}</SectionTitle>
 
       <p>Welcome to my site</p>
 
@@ -45,6 +46,6 @@ export default function Home() {
           <pre className="text-sm font-medium font-plain">Home page</pre>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
