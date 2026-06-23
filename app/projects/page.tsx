@@ -1,11 +1,27 @@
+import { Project } from "@/components/project";
 import { Section, SectionTitle } from "@/components/section";
 
-export default function Projects() {
+async function getProjects() {
+  return [
+    {
+      id: "some unique id",
+      title: "Project title"
+    },
+  ];
+}
+
+export default async function Projects() {
+  const projects = await getProjects();
+
   return (
     <Section>
       <SectionTitle>My Projects</SectionTitle>
 
-      <p>A list of some of my current projects</p>
+      <ul>
+        {projects.map((project) => (
+          <Project key={project.id} project={project} />
+        ))}
+      </ul>
     </Section>
   );
 }
