@@ -1,11 +1,29 @@
+import { BlogPost } from "@/components/blog";
 import { Section, SectionTitle } from "@/components/section";
+import { fetchBlogPosts } from "@/lib/blogs";
+import { ScrollShadow } from "@heroui/react";
+import { BlogPostSkeleton, ListSkeleton } from "@/components/skeletons";
+import { Suspense } from "react";
 
-export default function Blog() {
+export default async function Blog() {
+  const posts = await fetchBlogPosts();
+
   return (
     <Section>
-      <SectionTitle>My Blog</SectionTitle>
+      <SectionTitle>Blog Posts</SectionTitle>
 
-      <p>My blog, with links to articles</p>
+      <Suspense fallback={<ListSkeleton />}>
+        <ScrollShadow>
+          <div className="w-full p-2">
+            {posts.map((post) => (
+              <BlogPost key={post.id} post={post} />
+            ))}
+            {Array.from({length: 3}).map((_, index) => (
+                <BlogPostSkeleton key={index} />
+            ))}
+          </div>
+        </ScrollShadow>
+      </Suspense>
     </Section>
   );
 }
