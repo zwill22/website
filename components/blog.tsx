@@ -71,7 +71,7 @@ export function BlogPost(props: { key: string; post: BlogPostData }) {
       className={clsx(
         "flex max-w-200 gap md:gap-4 border border-foreground/10 rounded-xl shadow-foreground/20",
         "bg-background px-2 lg:px-4 my-2 hover:bg-foreground/5 transition-colors hover:shadow",
-        "hover:shadow-foreground/30",
+        "hover:shadow-foreground/30 mx-auto max-h-28 md:max-h-52",
       )}
     >
       <PreviewImage
@@ -79,7 +79,7 @@ export function BlogPost(props: { key: string; post: BlogPostData }) {
         description={props.post.imageDescription}
       />
 
-      <div className="flex w-3/4 flex-col md:p-4 gap-2">
+      <div className="flex w-3/4 flex-col p-2 md:p-4 gap-2">
         <h2
           className={clsx(
             "font-heading text-lg overflow-hidden line-clamp-2",
