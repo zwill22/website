@@ -3,8 +3,6 @@ import Image from "next/image";
 import clsx from "clsx";
 import { BlogPostData } from "@/lib/blogs";
 import { fetchImageSize } from "@/lib/image";
-import { Suspense } from "react";
-import { ImageSkeleton } from "@/components/skeletons";
 
 function getMonth(n: number) {
   switch (n) {

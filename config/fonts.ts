@@ -1,4 +1,10 @@
-import { Cookie, Sora, Amaranth, Lilita_One } from "next/font/google";
+import {
+  Cookie,
+  Sora,
+  Amaranth,
+  Lilita_One,
+  Fira_Mono,
+} from "next/font/google";
 
 export const fontBody = Amaranth({
   subsets: ["latin"],
@@ -10,6 +16,12 @@ export const fontPlain = Sora({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-plain",
+});
+
+export const fontMono = Fira_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: "400",
 });
 
 export const fontHeading = Lilita_One({

@@ -1,23 +1,15 @@
-import { Section, SectionTitle } from "@/components/section";
-
-async function getPost(postName: string) {
-  return {
-    title: "Post title",
-    content: "Post content",
-  };
-}
+import { Section } from "@/components/section";
+import { getPostHTML } from "@/lib/blogs";
 
 export default async function Post(props: {
-  params: Promise<{ name: string }>;
+  params: Promise<{ post: string }>;
 }) {
-  const { name } = await props.params;
-  const post = await getPost(name);
+  const params = await props.params;
+  const postHTML = await getPostHTML(params.post);
 
   return (
     <Section>
-      <SectionTitle>{post.title}</SectionTitle>
-
-      <p>{post.content}</p>
+      <div className="max-w-4xl">{postHTML}</div>
     </Section>
   );
 }

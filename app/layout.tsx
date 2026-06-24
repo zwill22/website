@@ -7,7 +7,13 @@ import clsx from "clsx";
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
-import { fontBody, fontHeading, fontPlain, fontCookie } from "@/config/fonts";
+import {
+  fontBody,
+  fontHeading,
+  fontPlain,
+  fontCookie,
+  fontMono,
+} from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 import { SponserWidget } from "@/components/coffee";
@@ -43,6 +49,7 @@ export default function RootLayout({
           "text-foreground bg-background font-body antialiased",
           fontBody.variable,
           fontHeading.variable,
+          fontMono.variable,
           fontPlain.variable,
           fontCookie.variable,
         )}
