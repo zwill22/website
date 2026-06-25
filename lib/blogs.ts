@@ -3,20 +3,22 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypePicture from "rehype-picture";
 import rehypeHighlight from "rehype-highlight";
-import rehypeClasses from "rehype-class-names";
+import rehypeProbeImageSize from "rehype-probe-image-size";
+import rehypeUnwrapImages from "rehype-unwrap-images";
 import rehypeSanitize from "rehype-sanitize";
 import rehypeFormat from "rehype-format";
 import rehypeReact from "rehype-react";
 import rehypeUrls from "rehype-urls";
 import type { Root as MdRoot } from "mdast";
-import type { Root as HastRoot } from "hast";
 import matter from "gray-matter";
-import production from "react/jsx-runtime";
+import prod from "react/jsx-runtime";
 import { findAfter } from "unist-util-find-after";
 import { visitParents } from "unist-util-visit-parents";
 import replaceAllBetween from "unist-util-replace-all-between";
-import { h } from "hastscript";
-import clsx from "clsx";
+import { SectionTitle } from "@/components/section";
+import { Link } from "@heroui/react";
+import { CodeBlock } from "@/components/code-block";
+import { BlogImage, Paragraph, Subheading, Code } from "@/components/blog-post";
 
 type BlogData = {
   file: string;
@@ -122,42 +124,27 @@ function remarkImages() {
   };
 }
 
-function rehypeCopyButton() {
-  return (tree: HastRoot) => {
-    visitParents(tree, "element", (node, parents) => {
-      if (node.tagName !== "code") {
-        return;
-      }
-
-      const parent = parents[parents.length - 1];
-      if (parent.type !== "element" || parent.tagName !== "pre") {
-        return;
-      }
-
-      const icon = h("i", { class: "bi bi-clipboard" });
-      const div = h("div", {}, icon);
-
-      const copy = (e: Event) => {
-        if (!e.target) {
-          return;
-        }
-
-        console.log(e.target);
-      };
-
-      let button = h("button", { class: "copy-btn", type: "button" }, div);
-
-      parent.children.push(button);
-    });
-  };
-}
-
-export async function getPostHTML(name: string): Promise<any> {
+export async function getPostHTML(name: string): Promise<React.JSX.Element> {
   const post = await getPost(name);
 
   function fixUrls(url: any) {
     return `${post.rootUrl}/${url.path}`;
   }
+
+  const production = {
+    Fragment: prod.Fragment,
+    jsx: prod.jsx,
+    jsxs: prod.jsxs,
+    components: {
+      h1: SectionTitle,
+      h2: Subheading,
+      p: Paragraph,
+      a: Link,
+      pre: CodeBlock,
+      code: Code,
+      img: BlogImage,
+    },
+  };
 
   try {
     const matterResult = matter(post.content);
@@ -170,24 +157,8 @@ export async function getPostHTML(name: string): Promise<any> {
       .use(rehypeFormat)
       .use(rehypeSanitize)
       .use(rehypeHighlight)
-      .use(rehypeCopyButton)
-      .use(rehypeClasses, {
-        h1: "grow text-4xl md:text-6xl font-heading py-4 md:py-8 text-wrap",
-        h2: "grow text-2xl md:text-3xl font-heading py-3 md:py-6 text-wrap",
-        p: "grow text-justify md:text-lg py-2 text-wrap",
-        pre: "relative grow my-0.5 mx-0 overflow-x-auto z-0 hljs rounded-lg pr-10 shadow shadow-foreground/50",
-        code: "font-mono rounded-lg z-1",
-        "pre code": "flex grow sm:text-sm",
-        "p code": "hljs p-0 not-italic",
-        "li code": "hljs p-0 not-italic",
-        ul: "text-left p-4 md:text-lg",
-        "pre button": clsx(
-          "absolute bg-white-/10 shadow shadow-white/50 cursor-pointer top-0 right-0 px-2 py-1 mr-4 my-2.5 z-2",
-          "rounded-lg hover:bg-white/20 hover:shadow-white hover:text-bold",
-        ),
-        i: "text-white",
-        img: "mx-auto",
-      })
+      .use(rehypeUnwrapImages)
+      .use(rehypeProbeImageSize)
       .use(rehypePicture)
       .use(rehypeReact, production);
 

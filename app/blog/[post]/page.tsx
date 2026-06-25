@@ -1,7 +1,7 @@
 import { Section } from "@/components/section";
 import { getPostHTML } from "@/lib/blogs";
 
-export default async function Post(props: {
+export default async function BlogPage(props: {
   params: Promise<{ post: string }>;
 }) {
   const params = await props.params;
