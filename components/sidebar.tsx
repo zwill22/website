@@ -57,7 +57,7 @@ function SideLink(props: { item: Item }) {
 
 export function Sidebar() {
   return (
-    <nav className="sticky z-40 h-svh backdrop-blur-lg">
+    <nav className="left-0 top-0 z-40 h-dvh backdrop-blur-lg border">
       <div className="flex flex-col justify-between h-full">
         <div className="flex flex-col gap-6">
           <div className="flex justify-between p-2">
@@ -78,7 +78,7 @@ export function Sidebar() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col px-2 py-4">
+        <div className="mx-auto px-2 py-4">
           <SponserButton />
         </div>
       </div>

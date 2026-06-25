@@ -9,7 +9,7 @@ export default async function Post(props: {
 
   return (
     <Section>
-      <div className="max-w-4xl">{postHTML}</div>
+      <div className="max-w-4xl w-full text-left">{postHTML}</div>
     </Section>
   );
 }

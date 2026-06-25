@@ -51,7 +51,7 @@ export function Navbar() {
   return (
     <nav
       className={clsx(
-        "sticky top-0 z-40 w-full border-b border-separator",
+        "fixed top-0 z-40 w-full border-b border-separator",
         "bg-background/70 backdrop-blur-lg",
       )}
     >
