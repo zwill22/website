@@ -1,0 +1,24 @@
+{
+  "title": "Projects",
+  "updated": "2026-06-26",
+  "projects": [
+    {
+      "id": "planet_sim_rust_2026",
+      "title": "Planet Simulation",
+      "date": "2026-05-25",
+      "url": "https://github.com/zwill22/PlanetSim/",
+      "blurb": "2D Solar System Simulation written in Rust showing the motion of planets and dwarf planets around the Sun, the motion of satellites around each of these bodies, and the orbital motion around a fixed elliptical path",
+      "imageSrc": "https://raw.githubusercontent.com/zwill22/PlanetSim/d90733c1d2eb4676bd186b7f5f5fcd8b9a2861e8/screenshots/main.png",
+      "imgAlt": "Image showing the main view of the Solar System with default settings in Planet Simulation"
+    },
+    {
+      "id": "this_website_original_2026",
+      "title": "This website",
+      "date": "2026-06-24",
+      "url": "https://github.com/zwill22/website/",
+      "blurb": "A website showing my personal blog and projects as well as contact details. The website is built using Next.js, React, Typescript, HeroUI, with Tailwind CSS for styling.",
+      "imageSrc": "main.png",
+      "imgAlt": "Image showing the welcome page of this website"
+    }
+  ]
+}

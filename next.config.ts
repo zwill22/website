@@ -7,7 +7,7 @@ const config: NextConfig = {
         protocol: "https",
         hostname: "raw.githubusercontent.com",
         port: "",
-        pathname: "/zwill22/blogs/refs/heads/main/thumbnails/**",
+        pathname: "/zwill22/**",
         search: "",
       },
     ],

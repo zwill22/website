@@ -1,27 +1,17 @@
-import { Project } from "@/components/project";
-import { Section, SectionTitle } from "@/components/section";
-
-async function getProjects() {
-  return [
-    {
-      id: "some unique id",
-      title: "Project title"
-    },
-  ];
-}
+import { ListMenu } from "@/components/menu/menu-list";
+import { Section, SectionTitle } from "@/components/ui/section";
+import { fetchProjects } from "@/lib/projects";
 
 export default async function Projects() {
-  const projects = await getProjects();
+  const projects = await fetchProjects();
 
   return (
     <Section>
       <SectionTitle>My Projects</SectionTitle>
 
-      <ul>
-        {projects.map((project) => (
-          <Project key={project.id} project={project} />
-        ))}
-      </ul>
+      <div className="w-full">
+        <ListMenu items={projects} href="/projects" />
+      </div>
     </Section>
   );
 }
