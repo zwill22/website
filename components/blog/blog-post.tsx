@@ -94,7 +94,7 @@ export function BlogImage(props: ImageProps) {
     <Suspense fallback={<BlogImageSkeleton {...props} />}>
       <div className="w-full shrink">
         <img
-          className="mx-auto"
+          className="mx-auto shadow shadow-foreground"
           alt={props.alt}
           title={props.title}
           src={props.src}
