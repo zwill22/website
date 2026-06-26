@@ -1,5 +1,4 @@
-import { BlogPost } from "@/components/blog-menu";
-import { Section, SectionTitle } from "@/components/section";
+import { Section, SectionTitle } from "@/components/ui/section";
 import { fetchBlogPosts } from "@/lib/blogs";
 import { ListSkeleton } from "@/components/skeletons";
 import { Suspense } from "react";

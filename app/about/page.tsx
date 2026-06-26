@@ -1,4 +1,4 @@
-import { Section, SectionTitle } from "@/components/section";
+import { Section, SectionTitle } from "@/components/ui/section";
 
 export default function About() {
   return (

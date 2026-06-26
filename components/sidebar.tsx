@@ -1,12 +1,10 @@
-"use client";
-
 import { Link } from "@heroui/react";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon, LinkedInIcon, Logo } from "@/components/icons";
-import { SponserButton } from "@/components/coffee";
+import { ThemeSwitch } from "@/components/ui/theme-switch";
+import { GithubIcon, LinkedInIcon, Logo } from "@/components/ui/icons";
+import { SponserButton } from "@/components/ui/coffee";
 import { usePathname } from "next/navigation";
 import { LogoLink, SocialLink } from "@/components/links";
 import { ForwardRefExoticComponent, RefAttributes } from "react";

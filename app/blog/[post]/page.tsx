@@ -1,5 +1,5 @@
-import { Section } from "@/components/section";
-import { getPostHTML } from "@/lib/blogs";
+import { Section } from "@/components/ui/section";
+import { fetchPostHTML } from "@/lib/blogs";
 
 export default async function BlogPage(props: {
   params: Promise<{ post: string }>;

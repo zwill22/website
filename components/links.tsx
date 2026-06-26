@@ -1,4 +1,4 @@
-import { Logo } from "@/components/icons";
+import { Logo } from "@/components/ui/icons";
 import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { ReactNode } from "react";

@@ -1,7 +1,7 @@
 import { siteConfig } from "@/config/site";
-import { GithubIcon, LinkedInIcon } from "@/components/icons";
+import { GithubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { Link } from "@heroui/react";
-import { Section, SectionTitle } from "@/components/section";
+import { Section, SectionTitle } from "@/components/ui/section";
 
 export default function Home() {
   const time = new Date().getHours();

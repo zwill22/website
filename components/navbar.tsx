@@ -1,13 +1,11 @@
-"use client";
-
 import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon, LinkedInIcon } from "@/components/icons";
-import { MenuButton } from "@/components/buttons";
+import { ThemeSwitch } from "@/components/ui/theme-switch";
+import { GithubIcon, LinkedInIcon } from "@/components/ui/icons";
+import { MenuButton } from "@/components/ui/buttons";
 import { LogoLink, SocialLink } from "@/components/links";
 import clsx from "clsx";
 import { Link, Drawer } from "@heroui/react";
-import { SponserButton } from "@/components/coffee";
+import { SponserButton } from "@/components/ui/coffee";
 
 function NavMenu() {
   return (

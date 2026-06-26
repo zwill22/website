@@ -1,4 +1,4 @@
-import { Section } from "@/components/section";
+import { Section } from "@/components/ui/section";
 import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 
