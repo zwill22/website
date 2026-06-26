@@ -59,7 +59,7 @@ async function PreviewImage(props: { src: string; description: string }) {
         alt={props.description}
         width={imageSize.width}
         height={imageSize.height}
-        className="object-contain max-h-full max-w-full"
+        className="object-contain max-h-full"
       />
     </div>
   );
@@ -78,7 +78,7 @@ export function BlogPost(props: { key: string; post: BlogPostData }) {
       )}
     >
       <div className="flex gap-2 md:gap-4 p-2 md:p-4 max-h-28 md:max-h-52">
-        <div className="max-h-full md:max-h-full w-1/4 border border-white">
+        <div className="max-h-full md:max-h-full w-1/4">
           <Suspense fallback={<PreviewImageSkeleton />}>
             <PreviewImage
               src={props.post.image}
