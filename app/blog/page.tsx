@@ -1,7 +1,6 @@
 import { Section, SectionTitle } from "@/components/ui/section";
 import { fetchBlogPosts } from "@/lib/blogs";
-import { ListSkeleton } from "@/components/skeletons";
-import { Suspense } from "react";
+import { ListMenu } from "@/components/menu/menu-list";
 
 export default async function BlogMenu() {
   const posts = await fetchBlogPosts();
@@ -10,13 +9,7 @@ export default async function BlogMenu() {
     <Section>
       <SectionTitle>Blog Posts</SectionTitle>
       <div className="w-full">
-        <Suspense fallback={<ListSkeleton length={4}/>}>
-          <div className="grid grid-cols-1 gap-4 p-2 md:p-4">
-            {posts.map((post) => (
-              <BlogPost key={post.id} post={post} />
-            ))}
-          </div>
-        </Suspense>
+        <ListMenu items={posts} href="/blog" />
       </div>
     </Section>
   );

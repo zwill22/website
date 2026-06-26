@@ -1,10 +1,14 @@
 import { Link } from "@heroui/react";
 import Image from "next/image";
 import clsx from "clsx";
-import { BlogPostData } from "@/lib/blogs";
+import { MenuItemData } from "@/lib/types";
 import { fetchImageSize } from "@/lib/image";
 import { Suspense } from "react";
-import { PreviewImageSkeleton } from "@/components/skeletons";
+import { imageSizeFromFile } from "image-size/fromFile";
+import {
+  ListSkeleton,
+  PreviewImageSkeleton,
+} from "@/components/menu/skeletons";
 
 function getMonth(n: number) {
   switch (n) {
@@ -47,30 +51,66 @@ function getDateString(date: Date) {
   return `${day} ${fullMonth} ${year}`;
 }
 
-async function PreviewImage(props: { src: string; description: string }) {
+interface ImageProps {
+  src: string;
+  description: string;
+}
+
+async function LocalImage(props: ImageProps) {
+  const imageFile = props.src;
+  const imagePath = `./public/${imageFile}`;
+  const imageSrc = `/${imageFile}`;
+
+  const dimensions = await imageSizeFromFile(imagePath);
+
+  return (
+    <Image
+      src={imageSrc}
+      alt={props.description}
+      width={dimensions.width}
+      height={dimensions.height}
+      className="object-contain max-h-full"
+    />
+  );
+}
+
+async function RemoteImage(props: ImageProps) {
   const imageSize = await fetchImageSize(props.src);
 
-  console.log(imageSize);
+  return (
+    <Image
+      src={props.src}
+      alt={props.description}
+      width={imageSize.width}
+      height={imageSize.height}
+      className="object-contain max-h-full"
+    />
+  );
+}
+
+function PreviewImage(props: ImageProps) {
+  const isRemote = props.src.startsWith("https");
 
   return (
     <div className="flex flex-col h-full w-full relative justify-center">
-      <Image
-        src={props.src}
-        alt={props.description}
-        width={imageSize.width}
-        height={imageSize.height}
-        className="object-contain max-h-full"
-      />
+      {isRemote ? <RemoteImage {...props} /> : <LocalImage {...props} />}
     </div>
   );
 }
 
-export function BlogPost(props: { key: string; post: BlogPostData }) {
-  const dateString = getDateString(props.post.date);
+export function MenuItem(props: {
+  key: string;
+  itemData: MenuItemData;
+  hrefRoot: string;
+}) {
+  const menuItem = props.itemData;
+  const hrefRoot = props.hrefRoot;
+
+  const dateString = getDateString(menuItem.date);
 
   return (
     <Link
-      href={`/blog/${props.post.id}`}
+      href={`${hrefRoot}/${menuItem.id}`}
       className={clsx(
         "border border-foreground/10 rounded-xl shadow shadow-foreground/20",
         "bg-foreground/5 hover:bg-foreground/10 transition-colors hover:shadow",
@@ -81,8 +121,8 @@ export function BlogPost(props: { key: string; post: BlogPostData }) {
         <div className="max-h-full md:max-h-full w-1/4">
           <Suspense fallback={<PreviewImageSkeleton />}>
             <PreviewImage
-              src={props.post.image}
-              description={props.post.imageDescription}
+              src={menuItem.image}
+              description={menuItem.imageDescription}
             />
           </Suspense>
         </div>
@@ -94,7 +134,7 @@ export function BlogPost(props: { key: string; post: BlogPostData }) {
               "md:text-2xl md:min-h-16 md:leading-8",
             )}
           >
-            {props.post.title}
+            {menuItem.title}
           </h2>
           <p>{dateString}</p>
           <p
@@ -102,10 +142,22 @@ export function BlogPost(props: { key: string; post: BlogPostData }) {
               "hidden md:flex text-left max-h-18 text-foreground/70 italic line-clamp-3",
             )}
           >
-            {props.post.preview}
+            {menuItem.preview}
           </p>
         </div>
       </div>
     </Link>
+  );
+}
+
+export function ListMenu(props: { items: MenuItemData[]; href: string }) {
+  return (
+    <Suspense fallback={<ListSkeleton length={4} />}>
+      <div className="grid grid-cols-1 gap-4 p-2 md:p-4">
+        {props.items.map((item) => (
+          <MenuItem key={item.id} itemData={item} hrefRoot={props.href} />
+        ))}
+      </div>
+    </Suspense>
   );
 }

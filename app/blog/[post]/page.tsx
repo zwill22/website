@@ -5,7 +5,7 @@ export default async function BlogPage(props: {
   params: Promise<{ post: string }>;
 }) {
   const params = await props.params;
-  const postHTML = await getPostHTML(params.post);
+  const postHTML = await fetchPostHTML(params.post);
 
   return (
     <Section>
