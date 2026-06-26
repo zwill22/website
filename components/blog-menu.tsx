@@ -3,6 +3,8 @@ import Image from "next/image";
 import clsx from "clsx";
 import { BlogPostData } from "@/lib/blogs";
 import { fetchImageSize } from "@/lib/image";
+import { Suspense } from "react";
+import { PreviewImageSkeleton } from "@/components/skeletons";
 
 function getMonth(n: number) {
   switch (n) {
@@ -48,13 +50,16 @@ function getDateString(date: Date) {
 async function PreviewImage(props: { src: string; description: string }) {
   const imageSize = await fetchImageSize(props.src);
 
+  console.log(imageSize);
+
   return (
-    <div className="flex flex-col justify-center max-w-1/4 gap-2 m-2 lg:m-4">
+    <div className="flex flex-col h-full w-full relative justify-center">
       <Image
         src={props.src}
+        alt={props.description}
         width={imageSize.width}
         height={imageSize.height}
-        alt={props.description}
+        className="object-contain max-h-full max-w-full"
       />
     </div>
   );
@@ -67,29 +72,39 @@ export function BlogPost(props: { key: string; post: BlogPostData }) {
     <Link
       href={`/blog/${props.post.id}`}
       className={clsx(
-        "flex max-w-200 gap md:gap-4 border border-foreground/10 rounded-xl shadow-foreground/20",
-        "bg-background px-2 lg:px-4 my-2 hover:bg-foreground/5 transition-colors hover:shadow",
-        "hover:shadow-foreground/30 mx-auto max-h-28 md:max-h-52",
+        "border border-foreground/10 rounded-xl shadow shadow-foreground/20",
+        "bg-foreground/5 hover:bg-foreground/10 transition-colors hover:shadow",
+        "hover:shadow-foreground/30",
       )}
     >
-      <PreviewImage
-        src={props.post.image}
-        description={props.post.imageDescription}
-      />
+      <div className="flex gap-2 md:gap-4 p-2 md:p-4 max-h-28 md:max-h-52">
+        <div className="max-h-full md:max-h-full w-1/4 border border-white">
+          <Suspense fallback={<PreviewImageSkeleton />}>
+            <PreviewImage
+              src={props.post.image}
+              description={props.post.imageDescription}
+            />
+          </Suspense>
+        </div>
 
-      <div className="flex w-3/4 flex-col p-2 md:p-4 gap-2">
-        <h2
-          className={clsx(
-            "font-heading text-lg overflow-hidden line-clamp-2",
-            "md:text-2xl min-h-16 leading-8",
-          )}
-        >
-          {props.post.title}
-        </h2>
-        <p>{dateString}</p>
-        <p className="hidden md:flex text-left max-h-18 text-foreground/70 italic line-clamp-3">
-          {props.post.preview}
-        </p>
+        <div className="flex flex-col w-3/4">
+          <h2
+            className={clsx(
+              "font-heading text-lg overflow-hidden line-clamp-2",
+              "md:text-2xl md:min-h-16 md:leading-8",
+            )}
+          >
+            {props.post.title}
+          </h2>
+          <p>{dateString}</p>
+          <p
+            className={clsx(
+              "hidden md:flex text-left max-h-18 text-foreground/70 italic line-clamp-3",
+            )}
+          >
+            {props.post.preview}
+          </p>
+        </div>
       </div>
     </Link>
   );
