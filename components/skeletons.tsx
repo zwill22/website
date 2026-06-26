@@ -1,11 +1,11 @@
 import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 
-export function ImageSkeleton() {
+export function PreviewImageSkeleton() {
   return (
     <Skeleton
       className={clsx(
-        "w-40 aspect-square max-w-1/4 container m-2 lg:m-4 border border-foreground/10 rounded-lg shadow shadow-foreground/20",
+        "h-full w-full border border-foreground/10 rounded-lg shadow shadow-foreground/20",
         "bg-background justify-center",
       )}
     />
@@ -21,7 +21,7 @@ export function BlogPostSkeleton(props: { key: number }) {
         "bg-background px-2 lg:px-4 my-2 transition-colors mx-auto max-h-28 md:max-h-52",
       )}
     >
-      <ImageSkeleton />
+      <PreviewImageSkeleton />
 
       <div className="flex flex-col w-3/4 md:p-4 gap-2">
         <div>
