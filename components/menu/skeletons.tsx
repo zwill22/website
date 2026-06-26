@@ -12,7 +12,7 @@ export function PreviewImageSkeleton() {
   );
 }
 
-export function BlogPostSkeleton(props: { key: number }) {
+export function MenuItemSkeleton(props: { key: number }) {
   return (
     <div
       key={props.key}
@@ -43,7 +43,7 @@ export function ListSkeleton(props: { length: number }) {
   return (
     <div>
       {Array.from({ length: props.length }).map((_, index) => (
-        <BlogPostSkeleton key={index} />
+        <MenuItemSkeleton key={index} />
       ))}
     </div>
   );
