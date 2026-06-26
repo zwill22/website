@@ -13,26 +13,27 @@ type ProjectData = {
 
 export async function fetchProjects(): Promise<MenuItemData[]> {
   try {
-    console.log("Attempting to ..");
     const jsonString = await fs.readFile("./data/project-data.json", {
       encoding: "utf8",
     });
 
-    console.log("Fetched json data");
-
     const jsonData = JSON.parse(jsonString);
-    console.log(jsonData);
 
-    return jsonData.projects.map((project: ProjectData) => {
-      return {
-        id: project.id,
-        title: project.title,
-        date: new Date(project.date),
-        preview: project.blurb,
-        image: project.imageSrc,
-        imageDescription: project.imgAlt,
-      };
-    });
+    return jsonData.projects
+      .map((project: ProjectData): MenuItemData => {
+        return {
+          id: project.id,
+          title: project.title,
+          date: new Date(project.date),
+          preview: project.blurb,
+          image: project.imageSrc,
+          imageDescription: project.imgAlt,
+        };
+      })
+      .sort(
+        (project1: MenuItemData, project2: MenuItemData) =>
+          project2.date.getTime() - project1.date.getTime(),
+      );
   } catch (error) {
     throw new Error("Failed to fetch Blog Posts");
   }
