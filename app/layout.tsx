@@ -15,7 +15,7 @@ import {
   fontMono,
 } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
-import { Sidebar } from "@/components/sidebar";
+import { Sidebar } from "@/components/sidebar/sidebar";
 import { SponserWidget } from "@/components/ui/coffee";
 
 export const metadata: Metadata = {
