@@ -1,7 +1,9 @@
+"use client";
+
 import { useTheme } from "next-themes";
 import clsx from "clsx";
 
-import { SunFilledIcon, MoonFilledIcon } from "@/components/icons";
+import { SunFilledIcon, MoonFilledIcon } from "@/components/ui/icons";
 import { Button } from "@heroui/react";
 
 export function ThemeSwitch(props: { className?: string }) {
