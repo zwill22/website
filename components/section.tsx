@@ -1,4 +1,3 @@
-import { Typography } from "@heroui/react";
 import { ReactNode } from "react";
 
 export function Section(props: { children?: ReactNode }) {
@@ -11,19 +10,8 @@ export function Section(props: { children?: ReactNode }) {
   );
 }
 
-export function SectionTitle(props: {
-  children?: ReactNode;
-  align?: any;
-  weight?: any;
-}) {
+export function SectionTitle(props: { children?: ReactNode }) {
   return (
-    <Typography
-      type="h1"
-      align={props.align ?? "start"}
-      weight={props.weight ?? "normal"}
-      className="flex grow w-full text-5xl md:text-6xl font-heading p-2 text-pretty"
-    >
-      {props.children}
-    </Typography>
+    <h1 className="text-5xl md:text-6xl font-heading p-2">{props.children}</h1>
   );
 }

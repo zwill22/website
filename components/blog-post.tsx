@@ -2,6 +2,23 @@ import { Skeleton, Typography } from "@heroui/react";
 import clsx from "clsx";
 import { ReactNode, Suspense } from "react";
 
+export function Heading(props: {
+  children?: ReactNode;
+  align?: any;
+  weight?: any;
+}) {
+  return (
+    <Typography
+      type="h1"
+      align={props.align ?? "start"}
+      weight={props.weight ?? "normal"}
+      className="flex grow w-full text-5xl md:text-6xl font-heading p-2 text-pretty"
+    >
+      {props.children}
+    </Typography>
+  );
+}
+
 export function Subheading(props: {
   children?: ReactNode;
   align?: any;

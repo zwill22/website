@@ -18,7 +18,13 @@ import replaceAllBetween from "unist-util-replace-all-between";
 import { SectionTitle } from "@/components/section";
 import { Link } from "@heroui/react";
 import { CodeBlock } from "@/components/code-block";
-import { BlogImage, Paragraph, Subheading, Code } from "@/components/blog-post";
+import {
+  BlogImage,
+  Paragraph,
+  Subheading,
+  Code,
+  Heading,
+} from "@/components/blog-post";
 
 type BlogData = {
   file: string;
@@ -136,7 +142,7 @@ export async function getPostHTML(name: string): Promise<React.JSX.Element> {
     jsx: prod.jsx,
     jsxs: prod.jsxs,
     components: {
-      h1: SectionTitle,
+      h1: Heading,
       h2: Subheading,
       p: Paragraph,
       a: Link,
