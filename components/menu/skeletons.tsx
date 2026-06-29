@@ -12,10 +12,10 @@ export function PreviewImageSkeleton() {
   );
 }
 
-export function MenuItemSkeleton(props: { key: number }) {
+export function MenuItemSkeleton(props: { id: number }) {
   return (
     <div
-      key={props.key}
+      key={props.id}
       className={clsx(
         "flex max-w-200 items-center gap md:gap-4 border border-foreground/10 rounded-xl shadow-foreground/20",
         "bg-background px-2 lg:px-4 my-2 transition-colors mx-auto max-h-28 md:max-h-52",
@@ -43,7 +43,7 @@ export function ListSkeleton(props: { length: number }) {
   return (
     <div>
       {Array.from({ length: props.length }).map((_, index) => (
-        <MenuItemSkeleton key={index} />
+        <MenuItemSkeleton key={index} id={index} />
       ))}
     </div>
   );
