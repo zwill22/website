@@ -114,10 +114,10 @@ export function MenuItem(props: {
       className={clsx(
         "border border-foreground/10 rounded-xl shadow shadow-foreground/20",
         "bg-foreground/5 hover:bg-foreground/10 transition-colors hover:shadow",
-        "hover:shadow-foreground/30",
+        "hover:shadow-foreground/30 w-full",
       )}
     >
-      <div className="flex gap-2 md:gap-4 p-2 md:p-4 max-h-28 md:max-h-52">
+      <div className="flex gap-2 md:gap-4 p-2 md:p-4 max-h-28 md:max-h-52 w-full">
         <div className="max-h-full md:max-h-full w-1/4">
           <Suspense fallback={<PreviewImageSkeleton />}>
             <PreviewImage
