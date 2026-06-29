@@ -16,10 +16,10 @@ import prod from "react/jsx-runtime";
 import { findAfter } from "unist-util-find-after";
 import { visitParents } from "unist-util-visit-parents";
 import replaceAllBetween from "unist-util-replace-all-between";
-import { Link } from "@heroui/react";
-import { CodeBlock } from "@/components/blog/code-block";
+import { CodeBlock } from "@/components/markdown/code-block";
 import {
-  BlogImage,
+  Image,
+  Link,
   Paragraph,
   Subheading,
   Code,
@@ -99,7 +99,7 @@ export async function processMd(
       a: Link,
       pre: CodeBlock,
       code: Code,
-      img: BlogImage,
+      img: Image,
       ul: List,
       li: ListItem,
     },
@@ -126,6 +126,6 @@ export async function processMd(
 
     return file.result;
   } catch (error) {
-    throw new Error("Failed to process markdown");
+    throw new Error(`Failed to process markdown: ${error}`);
   }
 }

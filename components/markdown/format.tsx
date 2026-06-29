@@ -6,6 +6,7 @@ import {
 import { Skeleton, Typography } from "@heroui/react";
 import clsx from "clsx";
 import { ReactNode, Suspense } from "react";
+import { Link as HeroLink } from "@heroui/react";
 
 export function Heading(props: {
   children?: ReactNode;
@@ -99,7 +100,7 @@ interface ImageProps {
   src: string;
 }
 
-function BlogImageSkeleton(props: ImageProps) {
+function ImageSkeleton(props: ImageProps) {
   return (
     <div className="flex w-full">
       <Skeleton
@@ -111,10 +112,10 @@ function BlogImageSkeleton(props: ImageProps) {
   );
 }
 
-export function BlogImage(props: ImageProps) {
+export function Image(props: ImageProps) {
   return (
-    <Suspense fallback={<BlogImageSkeleton {...props} />}>
-      <div className="w-full shrink">
+    <Suspense fallback={<ImageSkeleton {...props} />}>
+      <div className="max-w-full shrink py-2">
         <img
           className="mx-auto shadow shadow-foreground"
           alt={props.alt}
@@ -147,5 +148,20 @@ export function ListItem(props: { children: ReactNode; depth: number }) {
       </div>
       <p className="md:text-lg justify-start leading-8">{props.children}</p>
     </div>
+  );
+}
+
+export function Link(props: { children: ReactNode; href: string }) {
+  return (
+    <HeroLink
+      className={clsx(
+        "text-purple-800 dark:text-purple-300 underline",
+        "hover:text-purple-600 dark:hover:text-purple-500",
+        "hover:shadow hover:shadow-background",
+      )}
+      href={props.href}
+    >
+      {props.children}
+    </HeroLink>
   );
 }
