@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "highlight.js/styles/github-dark.css";
 
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
