@@ -1,3 +1,4 @@
+import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
 import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
@@ -27,9 +28,9 @@ function ParagraphSkeleton(props: { className?: string; length: number }) {
   );
 }
 
-export default function BlogSkeleton() {
+export function PostSkeleton() {
   return (
-    <Section>
+    <>
       <div className="flex flex-col w-full p-2">
         <Skeleton className="bg-foreground/20 h-8 w-full rounded p-2 my-2 md:my-4" />
         <Skeleton className="bg-foreground/20 h-8 w-3/4 rounded p-2 my-2 md:my-4" />
@@ -38,6 +39,6 @@ export default function BlogSkeleton() {
         <ParagraphSkeleton length={12} />
         <ParagraphSkeleton className="hidden md:inline" length={6} />
       </div>
-    </Section>
+    </>
   );
 }

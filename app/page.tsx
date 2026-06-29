@@ -2,6 +2,7 @@ import { siteConfig } from "@/config/site";
 import { GithubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { Link } from "@heroui/react";
 import { Section, SectionTitle } from "@/components/ui/section";
+import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 
 export default function Home() {
   const time = new Date().getHours();
@@ -16,6 +17,8 @@ export default function Home() {
 
   return (
     <Section>
+      <PageBreadcrumbs current="Home" />
+
       <SectionTitle>{titleText}</SectionTitle>
 
       <p>Welcome to my site</p>

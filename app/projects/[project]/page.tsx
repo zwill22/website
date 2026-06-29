@@ -1,6 +1,8 @@
+import { PostSkeleton } from "@/components/markdown/skeletons";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
 import { fetchProjectHTML } from "@/lib/projects";
+import { Suspense } from "react";
 
 export default async function ProjectPage(props: {
   params: Promise<{ project: string }>;
@@ -21,7 +23,9 @@ export default async function ProjectPage(props: {
         current="Current Project"
       />
 
-      <div className="max-w-4xl w-full text-left">{postHTML}</div>
+      <Suspense fallback={<PostSkeleton />}>
+        <div className="max-w-4xl w-full text-left">{postHTML}</div>
+      </Suspense>
     </Section>
   );
 }
