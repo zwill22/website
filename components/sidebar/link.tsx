@@ -38,11 +38,19 @@ function getIcons(label: string) {
   return { SolidIcon: SolidCodeBracketIcon, Icon: CodeBracketIcon };
 }
 
+function pathIsActive(currentPath: string, itemPath: string) {
+  if (itemPath !== "/") {
+    return currentPath.startsWith(itemPath);
+  }
+
+  return currentPath === itemPath;
+}
+
 export function SideLink(props: { item: Item }) {
   const item = props.item;
 
   const pathname = usePathname();
-  const isActive = pathname == item.href;
+  const isActive = pathIsActive(pathname, item.href);
 
   const { SolidIcon, Icon } = getIcons(item.label);
 

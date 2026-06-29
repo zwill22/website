@@ -126,6 +126,6 @@ export async function processMd(
 
     return file.result;
   } catch (error) {
-    throw new Error(`Failed to process markdown: ${error}`);
+    throw new Error(`Failed to process markdown: ${input}`);
   }
 }
