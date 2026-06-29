@@ -76,11 +76,18 @@ export function Paragraph(props: {
   );
 }
 
-export function Code(props: { children?: ReactNode; className?: string }) {
+export function Code(props: {
+  children?: ReactNode;
+  className?: string;
+  inline: boolean;
+}) {
   return (
     <Typography
       className={clsx(
-        "shrink font-mono hljs p-0 not-italic text-pretty",
+        "shrink font-mono hljs not-italic",
+        props.inline
+          ? "rounded-lg shadow shadow-foreground/50"
+          : "p-0 text-pretty",
         props.className,
       )}
       type="code"

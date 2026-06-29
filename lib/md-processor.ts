@@ -75,6 +75,25 @@ function remarkImages() {
   };
 }
 
+function rehypeTagCodeBlocks() {
+  return (tree: HastRoot) => {
+    visitParents(tree, "element", (node, parents) => {
+      if (node.tagName !== "code") {
+        return;
+      }
+
+      node.properties.inline = true;
+      for (let i = 0; i < parents.length; i++) {
+        const parent = parents[i];
+        if (parent.type === "element" && parent.tagName === "pre") {
+          node.properties.inline = false;
+          return;
+        }
+      }
+    });
+  };
+}
+
 export async function processMd(
   input: string,
   rootUrl: string,
@@ -120,6 +139,7 @@ export async function processMd(
       .use(rehypeProbeImageSize)
       .use(rehypePicture)
       .use(rehypeListDepth)
+      .use(rehypeTagCodeBlocks)
       .use(rehypeReact, production);
 
     const file = await processor.process(matterResult.content);
