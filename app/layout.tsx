@@ -55,22 +55,20 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative h-dvh md:hidden bg-foreground/5">
-            <Navbar />
-            <div className="rounded-xl grow bg-background overflow-y-auto h-dvh py-8">
-              <main className="container grow mx-auto">{children}</main>
-              <footer className="fixed bottom-0 right-0 p-5 z-30">
-                <SponserWidget />
-              </footer>
+          <div className="relative bg-foreground/5 h-dvh md:flex">
+            <div className="hidden md:flex">
+              <Sidebar />
             </div>
-          </div>
-
-          <div className="hidden md:flex bg-foreground/5">
-            <Sidebar />
-            <div className="relative grow h-dvh mx-auto max-w-full">
-              <main className="mt-4 mx-4 rounded-xl bg-background h-29/30 overflow-y-auto px-4">
+            <div className="md:hidden">
+              <Navbar />
+            </div>
+            <div className="relative grow bg-background h-full max-w-full overflow-y-scroll ">
+              <main className="container grow mx-auto pt-10 md:pt-4 p-4">
                 {children}
               </main>
+              <footer className="fixed md:hidden bottom-0 right-0 p-5 z-30">
+                <SponserWidget />
+              </footer>
             </div>
           </div>
         </Providers>
