@@ -3,12 +3,8 @@ import Image from "next/image";
 import clsx from "clsx";
 import { MenuItemData } from "@/lib/types";
 import { fetchImageSize } from "@/lib/image";
-import { Suspense } from "react";
 import { imageSizeFromFile } from "image-size/fromFile";
-import {
-  ListSkeleton,
-  PreviewImageSkeleton,
-} from "@/components/menu/skeletons";
+import { ListSkeleton } from "@/components/menu/skeletons";
 
 function getMonth(n: number) {
   switch (n) {
@@ -119,27 +115,25 @@ export function MenuItem(props: {
     >
       <div className="flex gap-2 md:gap-4 p-2 md:p-4 max-h-28 md:max-h-52 w-full">
         <div className="max-h-full md:max-h-full w-1/4">
-          <Suspense fallback={<PreviewImageSkeleton />}>
-            <PreviewImage
-              src={menuItem.image}
-              description={menuItem.imageDescription}
-            />
-          </Suspense>
+          <PreviewImage
+            src={menuItem.image}
+            description={menuItem.imageDescription}
+          />
         </div>
 
         <div className="flex flex-col w-3/4">
           <h2
             className={clsx(
-              "font-heading text-lg overflow-hidden line-clamp-2",
-              "md:text-2xl md:min-h-16 md:leading-8",
+              "font-heading text-lg overflow-hidden line-clamp-2 leading-5",
+              "md:text-2xl min-h-16 md:min-h-18 leading-6 md:leading-8",
             )}
           >
             {menuItem.title}
           </h2>
-          <p>{dateString}</p>
+          <p className="leading-8 h-8 my-auto">{dateString}</p>
           <p
             className={clsx(
-              "hidden md:flex text-left max-h-18 text-foreground/70 italic line-clamp-3",
+              "hidden md:flex text-left h-18 text-foreground/70 italic line-clamp-3",
             )}
           >
             {menuItem.preview}
@@ -152,12 +146,12 @@ export function MenuItem(props: {
 
 export function ListMenu(props: { items: MenuItemData[]; href: string }) {
   return (
-    <Suspense fallback={<ListSkeleton length={4} />}>
+    <>
       <div className="grid grid-cols-1 gap-4 p-2 md:p-4">
         {props.items.map((item) => (
           <MenuItem key={item.id} itemData={item} hrefRoot={props.href} />
         ))}
       </div>
-    </Suspense>
+    </>
   );
 }
