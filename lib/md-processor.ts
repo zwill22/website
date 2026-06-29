@@ -10,6 +10,7 @@ import rehypeFormat from "rehype-format";
 import rehypeReact from "rehype-react";
 import rehypeUrls from "rehype-urls";
 import type { Root as MdRoot } from "mdast";
+import type { Root as HastRoot } from "hast";
 import matter from "gray-matter";
 import prod from "react/jsx-runtime";
 import { findAfter } from "unist-util-find-after";
@@ -23,7 +24,30 @@ import {
   Subheading,
   Code,
   Heading,
-} from "@/components/blog/blog-post";
+  MinorHeading,
+  List,
+  ListItem,
+} from "@/components/markdown/format";
+
+function rehypeListDepth() {
+  return (tree: HastRoot) => {
+    visitParents(tree, "element", (node, parents) => {
+      if (node.tagName !== "li") {
+        return;
+      }
+
+      let depth = 0;
+      for (let i = 0; i < parents.length; i++) {
+        const parent = parents[i];
+        if (parent.type === "element" && parent.tagName === "ul") {
+          depth += 1;
+        }
+      }
+
+      node.properties.depth = depth;
+    });
+  };
+}
 
 function remarkImages() {
   return (tree: MdRoot) => {
@@ -56,7 +80,11 @@ export async function processMd(
   rootUrl: string,
 ): Promise<React.JSX.Element> {
   function fixUrls(url: any) {
-    return `${rootUrl}/${url.path}`;
+    if (url.protocol == null) {
+      return `${rootUrl}/${url.path}`;
+    }
+
+    return url.href;
   }
 
   const production = {
@@ -66,11 +94,14 @@ export async function processMd(
     components: {
       h1: Heading,
       h2: Subheading,
+      h3: MinorHeading,
       p: Paragraph,
       a: Link,
       pre: CodeBlock,
       code: Code,
       img: BlogImage,
+      ul: List,
+      li: ListItem,
     },
   };
 
@@ -88,12 +119,13 @@ export async function processMd(
       .use(rehypeUnwrapImages)
       .use(rehypeProbeImageSize)
       .use(rehypePicture)
+      .use(rehypeListDepth)
       .use(rehypeReact, production);
 
     const file = await processor.process(matterResult.content);
 
     return file.result;
   } catch (error) {
-    throw new Error("Failed to process Blog Post");
+    throw new Error("Failed to process markdown");
   }
 }
