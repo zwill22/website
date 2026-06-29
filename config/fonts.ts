@@ -4,6 +4,7 @@ import {
   Amaranth,
   Lilita_One,
   Fira_Mono,
+  Mona_Sans,
 } from "next/font/google";
 
 export const fontBody = Amaranth({
@@ -34,4 +35,9 @@ export const fontCookie = Cookie({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-cookie",
+});
+
+export const fontGitHub = Mona_Sans({
+  subsets: ["latin"],
+  variable: "--font-github",
 });

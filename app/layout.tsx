@@ -14,6 +14,7 @@ import {
   fontPlain,
   fontCookie,
   fontMono,
+  fontGitHub,
 } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar/sidebar";
@@ -53,6 +54,7 @@ export default function RootLayout({
           fontMono.variable,
           fontPlain.variable,
           fontCookie.variable,
+          fontGitHub.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
