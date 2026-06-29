@@ -146,7 +146,7 @@ export function ListItem(props: { children: ReactNode; depth: number }) {
           <ChevronDoubleRightIcon />
         )}
       </div>
-      <p className="md:text-lg justify-start leading-8">{props.children}</p>
+      <div className="md:text-lg justify-start leading-8">{props.children}</div>
     </div>
   );
 }
