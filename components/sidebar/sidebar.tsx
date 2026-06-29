@@ -7,7 +7,7 @@ import { SideLink } from "@/components/sidebar/link";
 
 export function Sidebar() {
   return (
-    <nav className="left-0 top-0 z-40 h-dvh backdrop-blur-lg border">
+    <nav className="left-0 top-0 z-40 h-dvh backdrop-blur-lg shadow">
       <div className="flex flex-col justify-between h-full">
         <div className="flex flex-col gap-6">
           <div className="flex justify-between p-2">

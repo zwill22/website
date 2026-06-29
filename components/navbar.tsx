@@ -4,8 +4,9 @@ import { GithubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { MenuButton } from "@/components/ui/buttons";
 import { LogoLink, SocialLink } from "@/components/links";
 import clsx from "clsx";
-import { Link, Drawer } from "@heroui/react";
+import { Drawer } from "@heroui/react";
 import { SponserButton } from "@/components/ui/coffee";
+import { SideLink } from "@/components/sidebar/link";
 
 function NavMenu() {
   return (
@@ -22,20 +23,13 @@ function NavMenu() {
               </Drawer.Heading>
             </Drawer.Header>
             <Drawer.Body className="py-4">
-              <nav className="flex flex-col gap-1">
+              <nav className="flex flex-col gap-4 p-2">
                 {siteConfig.navItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    className="flex items-center w-full gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
-                    href={item.href}
-                  >
-                    <item.icon className="size-5 text-muted" />
-                    {item.label}
-                  </Link>
+                  <SideLink key={item.label} item={item} />
                 ))}
               </nav>
             </Drawer.Body>
-            <Drawer.Footer>
+            <Drawer.Footer className="flex justify-center">
               <SponserButton />
             </Drawer.Footer>
           </Drawer.Dialog>
@@ -49,7 +43,7 @@ export function Navbar() {
   return (
     <nav
       className={clsx(
-        "fixed top-0 z-40 w-full border-b border-separator",
+        "fixed top-0 z-40 w-full border-b border-separator shadow",
         "bg-background/70 backdrop-blur-lg",
       )}
     >
