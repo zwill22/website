@@ -64,7 +64,7 @@ export default function RootLayout({
               <Navbar />
             </div>
             <div className="relative grow bg-background h-full max-w-full overflow-y-scroll ">
-              <main className="container grow mx-auto pt-10 md:pt-4 p-4">
+              <main className="container grow mx-auto py-16 md:py-4 p-4">
                 {children}
               </main>
               <footer className="fixed md:hidden bottom-0 right-0 p-5 z-30">

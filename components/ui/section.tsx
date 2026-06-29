@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export function Section(props: { children?: ReactNode }) {
   return (
-    <section className="flex justify-center mx-auto py-8 md:py-10">
+    <section className="flex justify-center mx-auto">
       <div className="flex flex-col w-full max-w-4xl gap-2 items-center">
         {props.children}
       </div>
