@@ -21,7 +21,7 @@ export default async function BlogPage(props: {
         current="Current Post"
       />
 
-      <div className="max-w-4xl w-full text-left">{postHTML}</div>
+      <div className="w-full text-left">{postHTML}</div>
     </Section>
   );
 }

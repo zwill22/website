@@ -48,7 +48,7 @@ export default async function ProjectPage(props: {
 
   return (
     <Section>
-      <div className="flex w-full max-w-4xl">
+      <div className="flex w-full">
         <PageBreadcrumbs
           crumbs={breadcrumbs}
           back="/projects"
@@ -58,7 +58,7 @@ export default async function ProjectPage(props: {
         <GitHubLink project={params.project} />
       </div>
 
-      <div className="max-w-4xl w-full text-left">{postHTML}</div>
+      <div className="w-full text-left">{postHTML}</div>
     </Section>
   );
 }

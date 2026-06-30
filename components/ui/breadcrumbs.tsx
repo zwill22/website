@@ -16,7 +16,7 @@ export function PageBreadcrumbs(props: {
   const iconLink = props.back ?? "/";
 
   return (
-    <div className="flex gap-2 max-w-4xl w-full">
+    <div className="flex gap-2 w-full">
       <Link className="py-2" href={iconLink}>
         <div
           className={clsx(
@@ -28,7 +28,7 @@ export function PageBreadcrumbs(props: {
           {props.back ? <ArrowUturnLeftIcon /> : <HomeIcon />}
         </div>
       </Link>
-      <div className="flex flex-col max-w-4xl w-full text-left justify-center">
+      <div className="flex flex-col w-full text-left justify-center">
         <Breadcrumbs>
           {breadcrumbs.map((crumb) => (
             <Breadcrumbs.Item key={crumb.href} href={crumb.href}>

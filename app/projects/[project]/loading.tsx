@@ -35,7 +35,7 @@ export default function ProjectsLoadingPage() {
 
   return (
     <Section>
-      <div className="flex w-full max-w-4xl">
+      <div className="flex w-full">
         <PageBreadcrumbs
           crumbs={breadcrumbs}
           back="/projects"
