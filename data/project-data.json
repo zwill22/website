@@ -17,8 +17,8 @@
       "date": "2026-06-24",
       "url": "https://github.com/zwill22/website/",
       "blurb": "A website showing my personal blog and projects as well as contact details. The website is built using Next.js, React, Typescript, HeroUI, with Tailwind CSS for styling.",
-      "imageSrc": "main.png",
-      "imgAlt": "Image showing the welcome page of this website"
+      "imageSrc": "logo.svg",
+      "imgAlt": "Image showing the logo for this website"
     },
     {
       "id": "iosbuild_python_2025",
@@ -26,8 +26,8 @@
       "date": "2025-02-19",
       "url": "https://github.com/zwill22/iOSBuild",
       "blurb": "Welcome to iOSBuild, a Python application for building CMake libraries for Apple systems. The aim of the project is to use a CMakeLists.txt file to generate an XCFramework containing static libraries for use across iOS and other Apple operating systems.",
-      "imageSrc": "logo.svg",
-      "imgAlt": "iOSBuild Placeholder Image"
+      "imageSrc":"iosbuild.png",
+      "imgAlt": "iOSBuild Logo"
     },
     {
       "id": "libuw12_cpp_df_uw12_energy_fock_matrix_calculation",
@@ -35,8 +35,17 @@
       "date": "2025-02-24",
       "url": "https://github.com/zwill22/libuw12",
       "blurb": "LibUW12 is a C++ library for the evaluation of the UW12 Fock matrix and energy, using a combination of density-fitting and resolution of the identity (RI). This library does not calculate the two- and three-index density-fitting integrals for either the atomic orbital space or the auxiliary RI space. These therefore must be provided to the library using the BaseIntegrals class. Any issues with this library should be raised here; contributions and suggestions are also welcome.",
-      "imageSrc": "logo.svg",
-      "imgAlt": "Placeholder Image"
+      "imageSrc": "ladder.png",
+      "imgAlt": "Density functional ladder"
+    },
+    {
+      "id": "openid_cpp_aws_api_client_2025",
+      "title": "OpenID",
+      "date": "2025-02-20",
+      "url": "https://github.com/zwill22/openid",
+      "blurb": "OpenID is an API client using the AWS SDK for C++ for user sign-up, verification and authentication. Designed to authorise users for the BusTracker App. By default, the library provides a C++ header file for use in other C++ code. A C header file is also included for use in non-C++ projects.",
+      "imageSrc": "openid.svg",
+      "imgAlt": "OpenID logo image"
     }
   ]
 }
