@@ -8,8 +8,8 @@
       "date": "2026-05-25",
       "url": "https://github.com/zwill22/PlanetSim/",
       "blurb": "2D Solar System Simulation written in Rust showing the motion of planets and dwarf planets around the Sun, the motion of satellites around each of these bodies, and the orbital motion around a fixed elliptical path",
-      "imageSrc": "https://raw.githubusercontent.com/zwill22/PlanetSim/d90733c1d2eb4676bd186b7f5f5fcd8b9a2861e8/screenshots/main.png",
-      "imgAlt": "Image showing the main view of the Solar System with default settings in Planet Simulation"
+      "imageSrc": "planetsim.png",
+      "imgAlt": "Image showing a partial view of the Solar System in Planet Simulation"
     },
     {
       "id": "website_original_2026",
@@ -26,7 +26,7 @@
       "date": "2025-02-19",
       "url": "https://github.com/zwill22/iOSBuild",
       "blurb": "Welcome to iOSBuild, a Python application for building CMake libraries for Apple systems. The aim of the project is to use a CMakeLists.txt file to generate an XCFramework containing static libraries for use across iOS and other Apple operating systems.",
-      "imageSrc":"iosbuild.png",
+      "imageSrc": "iosbuild.png",
       "imgAlt": "iOSBuild Logo"
     },
     {
@@ -46,6 +46,33 @@
       "blurb": "OpenID is an API client using the AWS SDK for C++ for user sign-up, verification and authentication. Designed to authorise users for the BusTracker App. By default, the library provides a C++ header file for use in other C++ code. A C header file is also included for use in non-C++ projects.",
       "imageSrc": "openid.svg",
       "imgAlt": "OpenID logo image"
+    },
+    {
+      "id": "bustracker_swiftui_app_2025",
+      "title": "BusTracker",
+      "date": "2025-04-07",
+      "url": "https://github.com/zwill22/BusTracker",
+      "blurb": "This is a bus tracking app for UK Bus services using the Bus Open Data Service. The aim of this project is to provide users with real-time information for buses across the UK. The app uses the UK's Buss Open Data Service API -- specifically the Bus location data. This data is in XML format using the SIRI-VM standard. This data is decoded using the XMLDecoder from the XMLCoder library. Additionally, WrappingHStack is used for some formatting.",
+      "imageSrc": "https://raw.githubusercontent.com/zwill22/BusTracker/refs/heads/main/BusTracker/Assets.xcassets/AppIcon.appiconset/logo.png",
+      "imgAlt": "BusTracker Logo"
+    },
+    {
+      "id": "openbusapi_python_flask_app_2025",
+      "title": "OpenBusAPI",
+      "date": "2025-07-13",
+      "url": "https://github.com/zwill22/OpenBusAPI",
+      "blurb": "OpenBusAPI is the backend interface for the BusTracker App. It provides a gateway API to access transport location data from the Bus Open Data Service API. The API also provides an endpoint to download data on transport operators taken from the NOC Database.",
+      "imageSrc": "openbusapi.png",
+      "imgAlt": "OpenBusAPI Logo"
+    },
+    {
+      "id": "surf_c_game_raylib_2026",
+      "title": "Surf's Up",
+      "date": "2026-05-27",
+      "url": "https://github.com/zwill22/Surf",
+      "blurb": "A simple 2D surfing game made with Raylib in C. The game features menus, moving graphics, a dynamic day-night cycle and sound effects.",
+      "imageSrc": "surf.png",
+      "imgAlt": "Screenshot of Surf's Up featuring a cartoon surfer."
     }
   ]
 }
