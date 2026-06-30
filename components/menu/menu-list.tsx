@@ -4,10 +4,14 @@ import clsx from "clsx";
 import { MenuItemData } from "@/lib/types";
 import { fetchImageSize } from "@/lib/image";
 import { imageSizeFromFile } from "image-size/fromFile";
-import { ListSkeleton } from "@/components/menu/skeletons";
+import {
+  ListSkeleton,
+  PreviewImageSkeleton,
+} from "@/components/menu/skeletons";
+import { Suspense } from "react";
 
 function getMonth(n: number) {
-  switch (n) {
+  switch (n + 1) {
     case 1:
       return "January";
     case 2:
@@ -38,7 +42,7 @@ function getMonth(n: number) {
 }
 
 function getDateString(date: Date) {
-  const day = date.getDay();
+  const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
 
