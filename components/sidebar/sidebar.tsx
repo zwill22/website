@@ -4,10 +4,16 @@ import { GithubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { SponserButton } from "@/components/ui/coffee";
 import { LogoLink, SocialLink } from "@/components/links";
 import { SideLink } from "@/components/sidebar/link";
+import clsx from "clsx";
 
 export function Sidebar() {
   return (
-    <nav className="left-0 top-0 z-40 h-dvh backdrop-blur-lg shadow">
+    <nav
+      className={clsx(
+        "left-0 top-0 z-40 h-dvh backdrop-blur-lg shadow bg-radial from-background",
+        "to-purple-50 dark:to-(--purple-black)",
+      )}
+    >
       <div className="flex flex-col justify-between h-full">
         <div className="flex flex-col gap-6">
           <div className="flex justify-between p-2">
