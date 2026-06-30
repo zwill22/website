@@ -27,7 +27,7 @@ import {
   MinorHeading,
   List,
   ListItem,
-} from "@/components/markdown/format";
+} from "@/components/typesetting/format";
 
 function rehypeListDepth() {
   return (tree: HastRoot) => {
