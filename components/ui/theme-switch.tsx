@@ -25,7 +25,7 @@ export function ThemeSwitch(props: { className?: string }) {
         "focus-visible:ring-foreground focus-visible:ring-offset-background",
         props.className,
       )}
-      onClick={handleToggle}
+      onPress={handleToggle}
     >
       {isLight ? (
         <SunFilledIcon className="text-xl" />

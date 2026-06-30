@@ -37,7 +37,7 @@ function CopyButton(props: { children: ReactNode }) {
         "px-3 py-0 mr-4 my-2.5 z-2 rounded-lg hover:bg-white/80 dark:hover:bg-white/20 hover:shadow-white",
         "hover:text-bold border border-white/90 dark:border-white/10 hover:border-white/10",
       )}
-      onClick={() => copyToClipboard(props.children)}
+      onPress={() => copyToClipboard(props.children)}
     >
       <div>
         {isOk ? (

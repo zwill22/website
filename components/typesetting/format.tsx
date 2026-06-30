@@ -61,12 +61,16 @@ export function MinorHeading(props: {
 
 export function Paragraph(props: {
   children?: ReactNode;
+  className?: string;
   align?: any;
   weight?: any;
 }) {
   return (
     <Typography
-      className="grow md:text-lg py-2 w-full text-pretty"
+      className={clsx(
+        "grow md:text-lg py-2 w-full text-pretty",
+        props.className,
+      )}
       type="body"
       align={props.align ?? "justify"}
       weight={props.weight ?? "normal"}
