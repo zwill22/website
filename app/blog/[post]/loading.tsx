@@ -1,13 +1,8 @@
+import { PostSkeleton } from "@/components/markdown/skeletons";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
-import { fetchPostHTML } from "@/lib/blogs";
 
-export default async function BlogPage(props: {
-  params: Promise<{ post: string }>;
-}) {
-  const params = await props.params;
-  const postHTML = await fetchPostHTML(params.post);
-
+export default function BlogLoadingPage() {
   const breadcrumbs = [
     { name: "Home", href: "/" },
     { name: "Blog", href: "/blog" },
@@ -21,7 +16,7 @@ export default async function BlogPage(props: {
         current="Current Post"
       />
 
-      <div className="max-w-4xl w-full text-left">{postHTML}</div>
+      <PostSkeleton />
     </Section>
   );
 }

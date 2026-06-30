@@ -1,5 +1,3 @@
-import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
-import { Section } from "@/components/ui/section";
 import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 

@@ -1,28 +1,20 @@
+import { PostSkeleton } from "@/components/markdown/skeletons";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
-import { fetchProjectHTML } from "@/lib/projects";
-import { Link } from "@heroui/react";
 import clsx from "clsx";
 
-function GitHubLink(props: { project: string }) {
-  const projectName = props.project.split("_")[0];
-  const fullLink = `https://github.com/zwill22/${projectName}`;
-
+function GitHubLinkSkeleton() {
   return (
     <div className="flex flex-col justify-center">
-      <Link
+      <div
         className={clsx(
           "flex py-1 px-2 rounded-md gap-2 bg-(--github-black)",
-          "shadow shadow-foreground/50 hover:ring hover:ring-foreground",
-          "hover:ring-offset-1 hover:ring-offset-background",
+          "shadow shadow-foreground/20",
         )}
-        href={fullLink}
-        rel="noopener noreferrer"
-        target="_blank"
       >
         <p
           className={clsx(
-            "font-github text-white font-bold text-nowrap text-sm",
+            "font-github text-white font-bold text-nowrap text-sm my-auto",
           )}
         >
           View on GitHub
@@ -30,17 +22,12 @@ function GitHubLink(props: { project: string }) {
         <div className="text-white text-lg">
           <i className="bi bi-github" />
         </div>
-      </Link>
+      </div>
     </div>
   );
 }
 
-export default async function ProjectPage(props: {
-  params: Promise<{ project: string }>;
-}) {
-  const params = await props.params;
-  const postHTML = await fetchProjectHTML(params.project);
-
+export default function ProjectsLoadingPage() {
   const breadcrumbs = [
     { name: "Home", href: "/" },
     { name: "Projects", href: "/projects" },
@@ -55,10 +42,10 @@ export default async function ProjectPage(props: {
           current="Current Project"
         />
 
-        <GitHubLink project={params.project} />
+        <GitHubLinkSkeleton />
       </div>
 
-      <div className="max-w-4xl w-full text-left">{postHTML}</div>
+      <PostSkeleton />
     </Section>
   );
 }

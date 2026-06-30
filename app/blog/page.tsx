@@ -11,6 +11,7 @@ export default async function BlogMenu() {
     <Section>
       <PageBreadcrumbs crumbs={crumbs} back="/" current="Blog" />
       <SectionTitle>Blog Posts</SectionTitle>
+      
       <div className="w-full">
         <ListMenu items={posts} href="/blog" />
       </div>
