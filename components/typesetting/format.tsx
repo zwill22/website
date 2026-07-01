@@ -162,7 +162,11 @@ export function ListItem(props: { children: ReactNode; depth: number }) {
   );
 }
 
-export function Link(props: { children: ReactNode; href: string }) {
+export function Link(props: {
+  children: ReactNode;
+  href: string;
+  inline: boolean;
+}) {
   return (
     <HeroLink
       className={clsx(
@@ -172,7 +176,7 @@ export function Link(props: { children: ReactNode; href: string }) {
       )}
       href={props.href}
     >
-      {props.children}
+      {props.inline ? <span>{props.children}</span> : props.children}
     </HeroLink>
   );
 }

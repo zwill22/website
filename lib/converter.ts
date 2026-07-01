@@ -16,6 +16,34 @@ import rehypeParse from "rehype-parse";
 import rehypeReact from "rehype-react";
 import markdownToHtml from "markdown-to-html";
 import latexToHtml from "latex-to-html";
+import type { Root as HastRoot } from "hast";
+import { visitParents } from "unist-util-visit-parents";
+
+function rehypeLinks() {
+  return (tree: HastRoot) => {
+    visitParents(tree, "element", (node, parents) => {
+      if (node.tagName !== "a") {
+        return;
+      }
+
+      node.properties.inline = true;
+    });
+
+    visitParents(tree, "element", (node, parents) => {
+      if (node.tagName !== "img") {
+        return;
+      }
+
+      for (let i = 0; i < parents.length; i++) {
+        const parent = parents[i];
+        if (parent.type === "element" && parent.tagName === "a") {
+          parent.properties.inline = false;
+          return;
+        }
+      }
+    });
+  };
+}
 
 export async function htmlToReact(html: string): Promise<React.JSX.Element> {
   const production = {
@@ -39,6 +67,7 @@ export async function htmlToReact(html: string): Promise<React.JSX.Element> {
   try {
     const processor = await unified()
       .use(rehypeParse, { fragment: true })
+      .use(rehypeLinks)
       .use(rehypeReact, production);
 
     const file = await processor.process(html);

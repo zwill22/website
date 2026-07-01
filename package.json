@@ -31,7 +31,8 @@
     "react-dom": "19.2.7",
     "rehype-parse": "^9.0.1",
     "rehype-react": "^8.0.0",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "unist-util-visit-parents": "^6.0.2"
   },
   "devDependencies": {
     "@eslint/compat": "2.1.0",
