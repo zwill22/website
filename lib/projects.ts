@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import { MenuItemData } from "@/lib/types";
-import { processMd } from "@/lib/md-processor";
+import { markdownToReact } from "@/lib/converter";
 
 type ProjectData = {
   id: string;
@@ -73,5 +73,5 @@ async function fetchProjectReadme(name: string): Promise<Project> {
 export async function fetchProjectHTML(name: string) {
   const project = await fetchProjectReadme(name);
 
-  return processMd(project.content, project.rootUrl);
+  return markdownToReact(project.content, project.rootUrl);
 }

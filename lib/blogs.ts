@@ -1,5 +1,5 @@
+import { markdownToReact } from "@/lib/converter";
 import { MenuItemData } from "@/lib/types";
-import { processMd } from "@/lib/md-processor";
 
 type BlogData = {
   file: string;
@@ -72,5 +72,5 @@ async function fetchPost(name: string): Promise<Post> {
 export async function fetchPostHTML(name: string): Promise<React.JSX.Element> {
   const post = await fetchPost(name);
 
-  return processMd(post.content, post.rootUrl);
+  return markdownToReact(post.content, post.rootUrl);
 }

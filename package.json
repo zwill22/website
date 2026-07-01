@@ -23,6 +23,8 @@
     "html-to-text": "^10.0.0",
     "image-size": "^2.0.2",
     "intl-messageformat": "11.2.8",
+    "latex-to-html": "link:packages/latex-to-html",
+    "markdown-to-html": "link:packages/markdown-to-html",
     "next": "16.2.9",
     "next-themes": "0.4.6",
     "react": "19.2.7",
