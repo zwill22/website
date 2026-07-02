@@ -1,5 +1,6 @@
 import {
   ArrowRightCircleIcon,
+  ArrowRightIcon,
   ChevronDoubleRightIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
@@ -147,17 +148,19 @@ export function List(props: { children: ReactNode }) {
 
 export function ListItem(props: { children: ReactNode; depth: number }) {
   return (
-    <div className="flex gap-2 align-top">
-      <div className="flex flex-col size-5 justify-center h-8">
+    <div className="flex gap-2">
+      <div className="flex-none size-6 py-2 h-12 flex justify-center">
         {props.depth === 1 ? (
           <ArrowRightCircleIcon />
         ) : props.depth === 2 ? (
           <ChevronRightIcon />
-        ) : (
+        ) : props.depth == 3 ? (
           <ChevronDoubleRightIcon />
+        ) : (
+          <ArrowRightIcon />
         )}
       </div>
-      <div className="md:text-lg justify-start leading-8">{props.children}</div>
+      <div className="leading-12">{props.children}</div>
     </div>
   );
 }
