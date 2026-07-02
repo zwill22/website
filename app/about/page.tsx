@@ -1,11 +1,13 @@
 import { ContactMe } from "@/components/about/contact";
 import { CV } from "@/components/about/cv";
+import { ContactMeSkeleton } from "@/components/about/skeletons";
 import { SocialMedia } from "@/components/about/socials";
 import { Paragraph } from "@/components/typesetting/format";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section, SectionTitle } from "@/components/ui/section";
 
 import { Separator } from "@heroui/react";
+import { Suspense } from "react";
 
 function Intro() {
   return (
@@ -52,7 +54,9 @@ export default function About() {
         <AboutSeparator />
         <Intro />
         <AboutSeparator />
-        <ContactMe />
+        <Suspense fallback={<ContactMeSkeleton />}>
+          <ContactMe />
+        </Suspense>
         <AboutSeparator />
         <SocialMedia />
         <AboutSeparator />

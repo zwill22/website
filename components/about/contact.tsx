@@ -1,15 +1,13 @@
 "use client";
 
-import { Button, ButtonContent, ButtonLabel } from "@/components/about/button";
-import { MinorHeading } from "@/components/typesetting/format";
+import { Button } from "@/components/about/button";
 import {
-  CheckCircleIcon,
-  DocumentDuplicateIcon,
-  EnvelopeIcon,
-  PaperAirplaneIcon,
-  PencilSquareIcon,
-  XCircleIcon,
-} from "@heroicons/react/24/outline";
+  Compose,
+  ContactLabel,
+  Copy,
+  Reset,
+  Submit,
+} from "@/components/about/button-labels";
 import {
   ButtonGroup,
   Form,
@@ -54,12 +52,7 @@ function ComposeBox() {
 
         <div className="w-full flex justify-between">
           <Button type="reset" variant="secondary" className="rounded-md">
-            <div className="flex gap-4 justify-center">
-              <div>
-                <i className="bi bi-arrow-counterclockwise" />
-              </div>
-              <p className="hidden md:inline">Reset</p>
-            </div>
+            <Reset />
           </Button>
 
           <Button type="submit" className="rounded-md">
@@ -76,54 +69,7 @@ function ComposeBox() {
 
 const emailAddress = "This is an email address";
 
-function ContactLabel() {
-  return (
-    <>
-      <div className="flex gap-4 justify-center">
-        <EnvelopeIcon className="size-12 my-auto" />
-        <div className="flex flex-col justify-center">
-          <MinorHeading>Contact Me</MinorHeading>
-        </div>
-      </div>
-    </>
-  );
-}
 
-function ComposeButton() {
-  return (
-    <ButtonContent>
-      <PencilSquareIcon className="my-auto" />
-      <ButtonLabel>Compose</ButtonLabel>
-    </ButtonContent>
-  );
-}
-
-function CopyButton(props: { copied: boolean; error: boolean }) {
-  if (props.copied) {
-    return (
-      <ButtonContent>
-        <CheckCircleIcon className="my-auto" />
-        <ButtonLabel>Copied</ButtonLabel>
-      </ButtonContent>
-    );
-  }
-
-  if (props.error) {
-    return (
-      <ButtonContent>
-        <XCircleIcon className="my-auto" />
-        <ButtonLabel>Error</ButtonLabel>
-      </ButtonContent>
-    );
-  }
-
-  return (
-    <ButtonContent>
-      <DocumentDuplicateIcon className="my-auto" />
-      <ButtonLabel>Copy</ButtonLabel>
-    </ButtonContent>
-  );
-}
 
 export function ContactMe() {
   const [showCompose, setShowCompose] = useState(false);
@@ -145,7 +91,7 @@ export function ContactMe() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div id="contactme" className="flex flex-col gap-4">
       <div className="flex w-full gap-4 justify-between">
         <ContactLabel />
         <div className="h-full flex flex-col gap-2 my-auto">
@@ -157,7 +103,7 @@ export function ContactMe() {
               }}
               isDisabled={false}
             >
-              <ComposeButton />
+              <Compose />
             </Button>
 
             <Button
@@ -166,7 +112,7 @@ export function ContactMe() {
               isDisabled={copied}
             >
               <ButtonGroup.Separator />
-              <CopyButton copied={copied} error={error} />
+              <Copy copied={copied} error={error} />
             </Button>
           </ButtonGroup>
         </div>
