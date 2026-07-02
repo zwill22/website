@@ -41,7 +41,8 @@
     "unified": "^11.0.5",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.1.0",
-    "unist-util-visit-parents": "^6.0.2"
+    "unist-util-visit-parents": "^6.0.2",
+    "@orcid/bibtex-parse-js": "^0.0.25"
   },
   "devDependencies": {
     "@eslint/compat": "2.1.0",

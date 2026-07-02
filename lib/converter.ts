@@ -20,7 +20,7 @@ import type { Root as HastRoot, Element } from "hast";
 import rehypePicture from "rehype-picture";
 import rehypeHighlight from "rehype-highlight";
 import rehypeProbeImageSize from "rehype-probe-image-size";
-import rehypeRemoveEmptyAttribute from 'rehype-remove-empty-attribute'
+import rehypeRemoveEmptyAttribute from "rehype-remove-empty-attribute";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import rehypeStringify from "rehype-stringify";
 import rehypeUrls from "rehype-urls";
@@ -74,7 +74,7 @@ function rehypeLinks() {
         return;
       }
 
-      node.properties.inline = true;
+      node.properties.inline = "true";
     });
 
     visitParents(tree, "element", (node, parents) => {
@@ -85,7 +85,7 @@ function rehypeLinks() {
       for (let i = 0; i < parents.length; i++) {
         const parent = parents[i];
         if (parent.type === "element" && parent.tagName === "a") {
-          parent.properties.inline = false;
+          parent.properties.inline = "false";
           return;
         }
       }
@@ -193,6 +193,5 @@ export async function latexToReact(latex: string): Promise<React.JSX.Element> {
 
   const processedHTML = await processHTML(htmlString, "");
 
-  console.log(processedHTML);
   return htmlToReact(processedHTML);
 }
