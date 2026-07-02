@@ -44,7 +44,7 @@ function getAuthors(input: string) {
     const author = authors.at(0)!;
     const name = authorName(author);
 
-    return `${name}\\emph{et al.}`;
+    return `${name}\\ \\emph{et al.}`;
   }
 
   let output = "";
@@ -93,6 +93,16 @@ function addBibLinks(latex: string, bib: BibEntry[]) {
   return output;
 }
 
+function processLatex(inputData: string, bibData: BibEntry[]) {
+  let data1 = addBibLinks(inputData, bibData);
+
+  data1 = data1.replace(/\\CPP/gm, "C++");
+  data1 = data1.replace(/\\CS/gm, "C\#");
+  data1 = data1.replace("\\LaTeX", "LaTeX");
+  data1 = data1.replace(/\\makeheading{(\s+\%?\\.*)*\s?}/gm, "");
+
+  return data1;
+}
 
 export async function fetchCV() {
   const [data, bibData] = await Promise.all([
@@ -102,7 +112,7 @@ export async function fetchCV() {
 
   const bib = bibtexParse.toJSON(bibData);
 
-  const fullData = addBibLinks(data, bib);
+  const fullData = processLatex(data, bib);
 
   return latexToReact(fullData);
 }
