@@ -18,6 +18,12 @@ import {
   TextArea,
   Description,
 } from "@heroui/react";
+import {
+  ReadonlyURLSearchParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 
 function ComposeBox() {
@@ -56,10 +62,7 @@ function ComposeBox() {
           </Button>
 
           <Button type="submit" className="rounded-md">
-            <div className="flex gap-4 justify-center">
-              <PaperAirplaneIcon className="my-auto" />
-              <p className="hidden md:inline">Send</p>
-            </div>
+            <Submit />
           </Button>
         </div>
       </Form>
@@ -69,10 +72,25 @@ function ComposeBox() {
 
 const emailAddress = "This is an email address";
 
+function getSearchBool(searchParameters: ReadonlyURLSearchParams, key: string) {
+  const value = searchParameters.get(key)?.toString();
 
+  return value ? value == "true" : false;
+}
 
 export function ContactMe() {
-  const [showCompose, setShowCompose] = useState(false);
+  const searchParameters = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleComposeClick = (term: boolean) => {
+    const parameters = new URLSearchParams(searchParameters);
+
+    parameters.set("showCompose", term ? "true" : "false");
+
+    replace(`${pathname}?${parameters.toString()}`);
+  };
+
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(false);
 
@@ -90,6 +108,9 @@ export function ContactMe() {
     }, 3000);
   };
 
+  const showCompose = getSearchBool(searchParameters, "showCompose");
+  const submitted = getSearchBool(searchParameters, "submitted");
+
   return (
     <div id="contactme" className="flex flex-col gap-4">
       <div className="flex w-full gap-4 justify-between">
@@ -99,9 +120,9 @@ export function ContactMe() {
             <Button
               className="rounded-l-md"
               onPress={() => {
-                setShowCompose(!showCompose);
+                handleComposeClick(!showCompose);
               }}
-              isDisabled={false}
+              isDisabled={submitted}
             >
               <Compose />
             </Button>
