@@ -23,22 +23,14 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "rehype-class-names": "^2.0.0",
     "rehype-format": "^5.0.1",
-    "rehype-highlight": "^7.0.2",
-    "rehype-picture": "^5.0.0",
-    "rehype-probe-image-size": "^1.0.0",
-    "rehype-react": "^8.0.0",
     "rehype-sanitize": "^6.0.0",
     "rehype-stringify": "^10.0.1",
-    "rehype-unwrap-images": "^1.0.0",
-    "rehype-urls": "^1.2.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "unified": "^11.0.5",
     "unist-util-find-after": "^5.0.0",
     "unist-util-replace-all-between": "^1.0.0",
-    "unist-util-visit": "^5.1.0",
     "unist-util-visit-parents": "^6.0.2"
   },
   "devDependencies": {
