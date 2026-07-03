@@ -13,4 +13,13 @@
   --coffee-red: #ff5f5f;
   --github-black: #101411;
   --purple-black: #0e0518;
+  --purple-white: #f8f2ff;
+}
+
+.light {
+  --background: var(--purple-white);
+}
+
+.dark {
+  --background: var(--purple-black);
 }
