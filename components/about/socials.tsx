@@ -1,4 +1,5 @@
-import { ButtonContent, ButtonLabel, Link } from "@/components/about/button";
+import { ButtonLink } from "@/components/links";
+import { ButtonContent, ButtonLabel } from "@/components/about/button";
 import { MinorHeading } from "@/components/typesetting/format";
 import { GithubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { siteConfig } from "@/config/site";
@@ -20,24 +21,32 @@ function SocialLabel() {
 
 function GitHubButton() {
   return (
-    <Link className="rounded-l-md" href={siteConfig.links.github}>
+    <ButtonLink
+      className="rounded-l-md"
+      href={siteConfig.links.github}
+      aria-label="Link to my GitHub page"
+    >
       <ButtonContent>
         <GithubIcon className="my-auto" />
         <ButtonLabel>GitHub</ButtonLabel>
       </ButtonContent>
-    </Link>
+    </ButtonLink>
   );
 }
 
 function LinkedInButton() {
   return (
-    <Link className="rounded-r-md" href={siteConfig.links.linkedin}>
+    <ButtonLink
+      className="rounded-r-md"
+      href={siteConfig.links.linkedin}
+      aria-label="Link to my LinkedIn page"
+    >
       <ButtonGroup.Separator />
       <ButtonContent>
         <LinkedInIcon className="my-auto" />
         <ButtonLabel>LinkedIn</ButtonLabel>
       </ButtonContent>
-    </Link>
+    </ButtonLink>
   );
 }
 

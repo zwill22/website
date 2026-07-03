@@ -1,6 +1,6 @@
-import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { ReactNode } from "react";
+import { Link } from "@/components/links";
 
 function BuyMeACoffeeLogo(props: {
   coffeeColour: string;
@@ -102,8 +102,8 @@ export function BuyMeACoffee(props: {
           "active:decoration-0 active:cursor-pointer focus:decoration-0 focus:cursor-pointer",
           props.className,
         )}
-        target="_blank"
         href={props.href}
+        aria-label="Buy me a coffee link"
       >
         {children}
         <span
@@ -153,8 +153,8 @@ export function BuyMeWidget(props: {
           "active:decoration-0 active:cursor-pointer focus:decoration-0 focus:cursor-pointer",
           props.className,
         )}
-        target="_blank"
         href={props.href}
+        aria-label="Buy me a coffee link¬"
       >
         {children}
       </Link>

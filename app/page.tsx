@@ -1,8 +1,7 @@
-import { siteConfig } from "@/config/site";
-import { GithubIcon, LinkedInIcon } from "@/components/ui/icons";
-import { Link } from "@heroui/react";
 import { Section, SectionTitle } from "@/components/ui/section";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
+import { Paragraph } from "@/components/typesetting/format";
+import { ContactLinks } from "@/components/links";
 
 export default function Home() {
   const time = new Date().getHours();
@@ -21,34 +20,13 @@ export default function Home() {
 
       <SectionTitle>{titleText}</SectionTitle>
 
-      <p>Welcome to my site</p>
+      <Paragraph>
+        Welcome to my site. I created this place where I can showcase my work,
+        who I am, and some of my writings. If you wish to contact me, I am
+        available through the links below.
+      </Paragraph>
 
-      <div className="flex gap-3">
-        <Link
-          className="button button--tertiary button--md rounded-full font-plain"
-          href={siteConfig.links.github}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <GithubIcon className="text-xl pr-2" />
-          GitHub
-        </Link>
-        <Link
-          className="button button--tertiary button--md rounded-full font-plain"
-          href={siteConfig.links.linkedin}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <LinkedInIcon className="text-xl pr-2" />
-          LinkedIn
-        </Link>
-      </div>
-
-      <div className="mt-8">
-        <div className="flex items-center gap-2 rounded-xl bg-surface shadow-surface px-4 py-2">
-          <pre className="text-sm font-medium font-plain">Home page</pre>
-        </div>
-      </div>
+      <ContactLinks />
     </Section>
   );
 }

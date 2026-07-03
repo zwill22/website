@@ -1,14 +1,9 @@
-import { Link } from "@heroui/react";
 import Image from "next/image";
 import clsx from "clsx";
 import { MenuItemData } from "@/lib/types";
 import { fetchImageSize } from "@/lib/image";
 import { imageSizeFromFile } from "image-size/fromFile";
-import {
-  ListSkeleton,
-  PreviewImageSkeleton,
-} from "@/components/menu/skeletons";
-import { Suspense } from "react";
+import { Link } from "@/components/links";
 
 function getMonth(n: number) {
   switch (n + 1) {
@@ -116,6 +111,7 @@ export function MenuItem(props: {
         "bg-foreground/5 hover:bg-foreground/10 transition-colors hover:shadow",
         "hover:shadow-foreground/30 w-full",
       )}
+      aria-label={menuItem.id}
     >
       <div className="flex gap-2 md:gap-4 p-2 md:p-4 max-h-28 md:max-h-52 w-full">
         <div className="max-h-full md:max-h-full w-1/4">

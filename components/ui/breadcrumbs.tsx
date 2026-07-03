@@ -1,5 +1,6 @@
 import { ArrowUturnLeftIcon, HomeIcon } from "@heroicons/react/24/solid";
-import { Breadcrumbs, Link } from "@heroui/react";
+import { Link } from "@/components/links";
+import { Breadcrumbs } from "@heroui/react";
 import clsx from "clsx";
 
 interface Crumb {
@@ -17,7 +18,7 @@ export function PageBreadcrumbs(props: {
 
   return (
     <div className="flex gap-2 w-full">
-      <Link className="py-2" href={iconLink}>
+      <Link className="py-2" href={iconLink} aria-label="Back to previous page">
         <div
           className={clsx(
             "flex flex-col size-5 text-foreground hover:text-foreground/80",
@@ -31,7 +32,11 @@ export function PageBreadcrumbs(props: {
       <div className="flex flex-col w-full text-left justify-center">
         <Breadcrumbs>
           {breadcrumbs.map((crumb) => (
-            <Breadcrumbs.Item key={crumb.href} href={crumb.href}>
+            <Breadcrumbs.Item
+              key={crumb.href}
+              href={crumb.href}
+              aria-label={crumb.name}
+            >
               {crumb.name}
             </Breadcrumbs.Item>
           ))}

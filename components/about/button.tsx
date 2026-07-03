@@ -1,32 +1,6 @@
-import { Button as HeroButton, Link as HeroLink } from "@heroui/react";
+import { Button as HeroButton } from "@heroui/react";
 import clsx from "clsx";
 import { ReactNode } from "react";
-
-export function Link(props: {
-  className?: string;
-  children: ReactNode;
-  href: string;
-}) {
-  const external = props.href.startsWith("http");
-  const rel = external ? "noopener noreferrer" : undefined;
-  const target = external ? "_blank" : undefined;
-
-  return (
-    <HeroLink
-      className={clsx(
-        "button",
-        "bg-foreground/5 text-foreground shadow shadow-foreground/50",
-        "hover:bg-foreground/10 hover:shadow-foreground hover:font-semibold",
-        props.className,
-      )}
-      href={props.href}
-      rel={rel}
-      target={target}
-    >
-      {props.children}
-    </HeroLink>
-  );
-}
 
 export function Button(props: {
   className?: string;

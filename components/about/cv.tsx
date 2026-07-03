@@ -1,4 +1,5 @@
-import { ButtonContent, ButtonLabel, Link } from "@/components/about/button";
+import { ButtonLink } from "@/components/links";
+import { ButtonContent, ButtonLabel } from "@/components/about/button";
 import { MinorHeading } from "@/components/typesetting/format";
 import { ButtonGroup } from "@heroui/react";
 
@@ -19,13 +20,17 @@ function CVLabel() {
 
 function CVButton() {
   return (
-    <Link className="rounded-md" href="/about/cv">
+    <ButtonLink
+      className="rounded-md"
+      href="/about/cv"
+      aria-label="Link to my CV"
+    >
       <ButtonGroup.Separator />
       <ButtonContent>
         <i className="bi bi-file-earmark-person"></i>
         <ButtonLabel>View</ButtonLabel>
       </ButtonContent>
-    </Link>
+    </ButtonLink>
   );
 }
 

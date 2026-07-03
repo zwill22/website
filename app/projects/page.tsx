@@ -21,7 +21,11 @@ export default function Projects() {
     <Section>
       <div className="flex w-full">
         <PageBreadcrumbs crumbs={crumbs} back="/" current="Projects" />
-        <GitHubLink href={siteConfig.links.github} label="My GitHub" />
+        <GitHubLink
+          href={siteConfig.links.github}
+          label="My GitHub"
+          aria-label="Link to my GitHub page"
+        />
       </div>
       <SectionTitle>My Projects</SectionTitle>
 

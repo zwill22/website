@@ -7,7 +7,13 @@ function GitHubPageLink(props: { project: string }) {
   const projectName = props.project.split("_")[0];
   const fullLink = `https://github.com/zwill22/${projectName}`;
 
-  return <GitHubLink href={fullLink} label="View on GitHub" />;
+  return (
+    <GitHubLink
+      href={fullLink}
+      label="View on GitHub"
+      aria-label="View page on GitHub"
+    />
+  );
 }
 
 export default async function ProjectPage(props: {

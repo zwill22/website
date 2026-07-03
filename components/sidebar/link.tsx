@@ -1,7 +1,7 @@
 "use client";
 
-import { Link } from "@heroui/react";
 import clsx from "clsx";
+import { Link } from "@/components/links";
 import { usePathname } from "next/navigation";
 import {
   CodeBracketIcon,
