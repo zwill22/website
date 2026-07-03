@@ -1,7 +1,9 @@
+import { GitHubLink } from "@/components/links";
 import { ListMenu } from "@/components/menu/menu-list";
 import { ListSkeleton } from "@/components/menu/skeletons";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section, SectionTitle } from "@/components/ui/section";
+import { siteConfig } from "@/config/site";
 import { fetchProjects } from "@/lib/projects";
 import { Paragraph } from "@heroui/react/typography";
 import { Suspense } from "react";
@@ -17,7 +19,10 @@ export default function Projects() {
 
   return (
     <Section>
-      <PageBreadcrumbs crumbs={crumbs} back="/" current="Projects" />
+      <div className="flex w-full">
+        <PageBreadcrumbs crumbs={crumbs} back="/" current="Projects" />
+        <GitHubLink href={siteConfig.links.github} label="My GitHub" />
+      </div>
       <SectionTitle>My Projects</SectionTitle>
 
       <Paragraph className="w-full px-2 md:px-4">

@@ -3,6 +3,34 @@ import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { ReactNode } from "react";
 
+export function GitHubLink(props: { href: string; label: string }) {
+  return (
+    <div className="flex flex-col justify-center">
+      <Link
+        className={clsx(
+          "flex py-1 px-2 rounded-md gap-2 bg-(--github-black)",
+          "shadow shadow-foreground/50 hover:ring hover:ring-foreground",
+          "hover:ring-offset-1 hover:ring-offset-background",
+        )}
+        href={props.href}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p
+          className={clsx(
+            "font-github text-white font-bold text-nowrap text-sm",
+          )}
+        >
+          {props.label}
+        </p>
+        <div className="text-white text-lg">
+          <i className="bi bi-github" />
+        </div>
+      </Link>
+    </div>
+  );
+}
+
 export function LogoLink() {
   return (
     <Link
