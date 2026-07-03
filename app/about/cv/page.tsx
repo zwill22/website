@@ -3,7 +3,7 @@ import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
 import { siteConfig } from "@/config/site";
 import { fetchCV } from "@/lib/cv";
-import { Link } from "@heroui/react";
+import { Link } from "@/components/about/button";
 import clsx from "clsx";
 import { ReactNode } from "react";
 
@@ -12,21 +12,9 @@ function CVLink(props: {
   external: boolean;
   children: ReactNode;
 }) {
-  const rel = props.external ? "noopener noreferrer" : undefined;
-  const target = props.external ? "_blank" : undefined;
-
   return (
     <div className="flex flex-col justify-center">
-      <Link
-        className={clsx(
-          "flex py-1 px-2 rounded-md gap-2 bg-foreground/20 text-foreground",
-          "shadow shadow-foreground/50 hover:ring hover:ring-foreground/50 hover:bg-foreground/20",
-          "hover:ring-offset-1 hover:ring-offset-background",
-        )}
-        href={props.href}
-        rel={rel}
-        target={target}
-      >
+      <Link className="flex py-1 px-2 rounded-md gap-2" href={props.href}>
         {props.children}
       </Link>
     </div>
