@@ -1,98 +1,8 @@
-import Image from "next/image";
 import clsx from "clsx";
 import { MenuItemData } from "@/lib/types";
-import { fetchImageSize } from "@/lib/image";
-import { imageSizeFromFile } from "image-size/fromFile";
 import { Link } from "@/components/links";
-
-function getMonth(n: number) {
-  switch (n + 1) {
-    case 1:
-      return "January";
-    case 2:
-      return "February";
-    case 3:
-      return "March";
-    case 4:
-      return "April";
-    case 5:
-      return "May";
-    case 6:
-      return "June";
-    case 7:
-      return "July";
-    case 8:
-      return "August";
-    case 9:
-      return "September";
-    case 10:
-      return "October";
-    case 11:
-      return "November";
-    case 12:
-      return "December";
-    default:
-      throw new Error("Invalid month");
-  }
-}
-
-function getDateString(date: Date) {
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-
-  const fullMonth = getMonth(month);
-
-  return `${day} ${fullMonth} ${year}`;
-}
-
-interface ImageProps {
-  src: string;
-  description: string;
-}
-
-async function LocalImage(props: ImageProps) {
-  const imageFile = props.src;
-  const imagePath = `./public/${imageFile}`;
-  const imageSrc = `/${imageFile}`;
-
-  const dimensions = await imageSizeFromFile(imagePath);
-
-  return (
-    <Image
-      src={imageSrc}
-      alt={props.description}
-      width={dimensions.width}
-      height={dimensions.height}
-      className="object-contain max-h-full"
-    />
-  );
-}
-
-async function RemoteImage(props: ImageProps) {
-  const imageSize = await fetchImageSize(props.src);
-
-  return (
-    <Image
-      src={props.src}
-      alt={props.description}
-      width={imageSize.width}
-      height={imageSize.height}
-      className="object-contain max-h-full"
-    />
-  );
-}
-
-function PreviewImage(props: ImageProps) {
-  const isRemote = props.src.startsWith("https");
-
-  return (
-    <div className="flex flex-col h-full w-full relative justify-center">
-      {isRemote ? <RemoteImage {...props} /> : <LocalImage {...props} />}
-    </div>
-  );
-}
-
+import { PreviewImage } from "@/components/menu/preview-image";
+import { getDateString } from "@/lib/date";
 export function MenuItem(props: {
   key: string;
   itemData: MenuItemData;
@@ -124,8 +34,8 @@ export function MenuItem(props: {
         <div className="flex flex-col w-3/4">
           <h2
             className={clsx(
-              "font-heading text-lg overflow-hidden line-clamp-2 leading-5",
-              "md:text-2xl min-h-16 md:min-h-18 leading-6 md:leading-8",
+              "font-heading text-lg overflow-hidden line-clamp-2 leading-6",
+              "md:text-2xl min-h-16 md:min-h-18 md:leading-8",
             )}
           >
             {menuItem.title}

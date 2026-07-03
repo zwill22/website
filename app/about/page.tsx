@@ -5,8 +5,7 @@ import { SocialMedia } from "@/components/about/socials";
 import { Paragraph } from "@/components/typesetting/format";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section, SectionTitle } from "@/components/ui/section";
-
-import { Separator } from "@heroui/react";
+import { MainSeparator as AboutSeparator } from "@/components/ui/separator";
 import { Suspense } from "react";
 
 function Intro() {
@@ -38,9 +37,6 @@ function Intro() {
   );
 }
 
-function AboutSeparator() {
-  return <Separator className="my-10" />;
-}
 
 export default function About() {
   const crumbs = [{ name: "Home", href: "/" }];
