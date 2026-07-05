@@ -8,6 +8,7 @@ import {
   Reset,
   Submit,
 } from "@/components/about/button-labels";
+import { sendEmail, State } from "@/lib/email";
 import {
   ButtonGroup,
   Form,
@@ -24,34 +25,35 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import { SyntheticEvent, useState } from "react";
+import { useActionState, useState } from "react";
 
 function ComposeBox() {
-  const onSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data: Record<string, string> = {};
-    // Convert FormData to plain object
-    formData.forEach((value, key) => {
-      data[key] = value.toString();
-    });
-
-    console.log(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
+  const initialState: State = {
+    message: null,
+    errors: {},
   };
+
+  const [state, formAction] = useActionState(sendEmail, initialState);
 
   return (
     <div className="flex w-full font-plain md:text-lg rounded-xl p-4 mx-auto shadow shadow-foreground/50">
-      <Form className="flex flex-col w-full gap-4 md:gap-6" onSubmit={onSubmit}>
+      <Form className="flex flex-col w-full gap-4 md:gap-6" action={formAction}>
         <TextField isRequired name="subject" type="text" minLength={4}>
           <Label>Subject</Label>
           <Input placeholder="Help needed!" />
           <FieldError />
         </TextField>
-        <TextField isRequired name="password" type="password" minLength={20}>
+        <TextField isRequired name="email" type="email" minLength={6}>
+          <Label>Contact Email</Label>
+          <Input placeholder="c.kent@dailyplanet.com" />
+          <FieldError />
+        </TextField>
+        <TextField isRequired name="message" type="text" minLength={20}>
           <Label>Message</Label>
           <TextArea placeholder="I need some code urgently..." rows={8} />
           <Description className="py-2">
-            Please enter a detailed description of how I can help.
+            Please enter a detailed description of how I can help. Supports
+            markdown.
           </Description>
           <FieldError />
         </TextField>
