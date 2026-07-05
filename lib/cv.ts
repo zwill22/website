@@ -106,8 +106,8 @@ function processLatex(inputData: string, bibData: BibEntry[]) {
 
 export async function fetchCV() {
   const [data, bibData] = await Promise.all([
-    fetchFile("CVFILE"),
-    fetchFile("BIBFILE"),
+    fetchFile(process.env.CV_FILE ?? "CVFILE"),
+    fetchFile(process.env.BIB_FILE ?? "BIBFILE"),
   ]);
 
   const bib = bibtexParse.toJSON(bibData);
