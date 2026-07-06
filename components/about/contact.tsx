@@ -72,7 +72,15 @@ function ComposeBox() {
   );
 }
 
-const emailAddress = "This is an email address";
+const emailAddress = (() => {
+  const email = process.env.NEXT_PUBLIC_EMAIL_ADDRESS;
+
+  if (!email) {
+    throw new Error("Cannot find email address");
+  }
+
+  return email;
+})();
 
 function getSearchBool(searchParameters: ReadonlyURLSearchParams, key: string) {
   const value = searchParameters.get(key)?.toString();

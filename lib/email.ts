@@ -11,19 +11,50 @@ interface MessageDetails {
   subject: string;
   message: string;
 }
+
+function checkVariable(variable: string | undefined, name: string) {
+  if (!variable) {
+    throw new Error(`${name} not found`);
+  }
+
+  return variable;
+}
+
+const smtpHost = checkVariable(process.env.EMAIL_APP_SMTP_HOST, "SMTP Host");
+
+const smtpPort = (() => {
+  const port = checkVariable(process.env.EMAIL_APP_SMTP_PORT, "SMTP Port");
+
+  return Number(port);
+})();
+
+const userName = checkVariable(
+  process.env.EMAIL_APP_AUTH_ADDRESS,
+  "SMTP Account address",
+);
+
+const password = checkVariable(
+  process.env.EMAIL_APP_AUTH_PASSWORD,
+  "Account password",
+);
+
+const sendAddress = checkVariable(
+  process.env.EMAIL_APP_SMTP_ADDRESS,
+  "Send address",
+);
 class MailService {
   async send(messageDetails: MessageDetails) {
     const transporter = nodemailer.createTransport({
-      host: "smtp.mail.me.com",
-      port: 587,
+      host: smtpHost,
+      port: smtpPort,
       auth: {
-        user: process.env.EMAIL_APP_AUTH_ADDRESS,
-        pass: process.env.EMAIL_APP_AUTH_PASSWORD,
+        user: userName,
+        pass: password,
       },
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_APP_SMTP_ADDRESS,
+      from: sendAddress,
       to: messageDetails.address,
       subject: messageDetails.subject,
       html: messageDetails.message,
@@ -38,7 +69,7 @@ class MailService {
 }
 
 function composeMeesageToMe(subject: string, email: string, message: string) {
-  const myAddress = process.env.EMAIL_APP_SMTP_ADDRESS ?? "";
+  const myAddress = sendAddress;
   if (myAddress.length == 0) {
     throw new Error("Unable to send email, no forwarding address found");
   }

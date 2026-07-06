@@ -104,10 +104,30 @@ function processLatex(inputData: string, bibData: BibEntry[]) {
   return data1;
 }
 
+const cvFile = (() => {
+  const file = process.env.CV_FILE;
+
+  if (!file) {
+    throw new Error("No CV file found");
+  }
+
+  return file;
+})();
+
+const bibFile = (() => {
+  const file = process.env.BIB_FILE;
+
+  if (!file) {
+    throw new Error("No Bibliography file found");
+  }
+
+  return file;
+})();
+
 export async function fetchCV() {
   const [data, bibData] = await Promise.all([
-    fetchFile(process.env.CV_FILE ?? "CVFILE"),
-    fetchFile(process.env.BIB_FILE ?? "BIBFILE"),
+    fetchFile(cvFile),
+    fetchFile(bibFile),
   ]);
 
   const bib = bibtexParse.toJSON(bibData);
