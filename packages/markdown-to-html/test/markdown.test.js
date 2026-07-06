@@ -17,7 +17,9 @@ describe("Conversion", () => {
       fetchFile("./test/output.html"),
     ]);
 
-    const result = await markdownToHtml(mdString, "");
+    const result = await markdownToHtml(mdString);
+
+    console.log(result);
 
     assert.strictEqual(result.trim(), htmlString.trim());
   });
