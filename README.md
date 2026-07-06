@@ -13,19 +13,44 @@
 [![No AI][noai-badge]](#)
 
 Source code for my website, built using:
+
+- [Typescript][typescript-lang]
 - [Next.js][nextjs]
 - [React][react]
 - [TailwindCSS][tailwindcss]
 - [HeroUI][heroui] component library
 - [HeroIcons][heroicons]
 - [Bootstrap Icons][bootstrap]
+- [pnpm][pnpm] package manager
 
 This project was initialised using the HeroUI template:
+
 ```bash
 npx heroui-cli@latest init -t app -p pnpm
 ```
 
-[//]: # (Links)
+To run the site in development mode, run:
+
+```bash
+pnpm run dev
+```
+
+However, a `.env` file is necessary for secrets.
+
+Two sub-packages [markdown-to-html](packages/markdown-to-html/README.md),
+and [latex-to-html](packages/latex-to-html/README.md) are used to convert
+Markdown and LaTeX into HTML. These utilise the [unified][unified]
+JavaScript ecosystem for the conversion. Blog posts and project READMEs are converted from Markdown syntax, while the online version of my CV is converted
+from the original LaTeX version.
+
+Additional features include:
+
+- [Nodemailer][nodemailer] for SMTP email transport.
+- [Rehype][rehype] for HTML manipulation and conversion to React
+
+The aim is to further expand this website, adding new projects and blog posts.
+
+[//]: # "Links"
 [typescript-lang]: https://www.typescriptlang.org
 [repo]: https://github.com/zwill22/website
 [license]: https://github.com/zwill22/website/blob/main/LICENSE
@@ -37,8 +62,10 @@ npx heroui-cli@latest init -t app -p pnpm
 [heroui]: https://heroui.com
 [heroicons]: https://heroicons.com
 [bootstrap]: https://icons.getbootstrap.com
-
-[//]: # (Badges)
+[nodemailer]: https://nodemailer.com
+[unified]: https://unifiedjs.com
+[rehype]: https://github.com/rehypejs/rehype
+[//]: # "Badges"
 [github-badge]: https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white
 [buy-me-coffee]: https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black
 [license-badge]: https://img.shields.io/github/license/zwill22/website
