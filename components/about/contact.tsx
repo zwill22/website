@@ -27,6 +27,70 @@ import {
 } from "next/navigation";
 import { useActionState, useState } from "react";
 
+function SubjectField(props: { currentState: State }) {
+  const allErrors = props.currentState.errors ?? {};
+
+  const errors = allErrors.subject?.errors ?? [];
+
+  const isInvalid = errors.length > 0;
+
+  return (
+    <TextField isRequired name="subject" type="text" isInvalid={isInvalid}>
+      <Label>Subject</Label>
+      <Input placeholder="Help needed!" />
+      {isInvalid ? (
+        errors.map((e) => <FieldError>{e}</FieldError>)
+      ) : (
+        <FieldError />
+      )}
+    </TextField>
+  );
+}
+
+function EmailField(props: { currentState: State }) {
+  const allErrors = props.currentState.errors ?? {};
+
+  const errors = allErrors.email?.errors ?? [];
+
+  const isInvalid = errors.length > 0;
+
+  return (
+    <TextField isRequired name="email" type="email" isInvalid={isInvalid}>
+      <Label>Contact Email</Label>
+      <Input placeholder="c.kent@dailyplanet.com" />
+      {isInvalid ? (
+        errors.map((e) => <FieldError>{e}</FieldError>)
+      ) : (
+        <FieldError />
+      )}
+    </TextField>
+  );
+}
+
+function MessageBox(props: { currentState: State }) {
+  const allErrors = props.currentState.errors ?? {};
+
+  const errors = allErrors.message?.errors ?? [];
+
+  const isInvalid = errors.length > 0;
+
+  return (
+    <TextField isRequired name="message" type="text" isInvalid={isInvalid}>
+      <Label>Message</Label>
+      <TextArea placeholder="I need some code urgently..." rows={8} />
+      <Description className="py-2">
+        Please enter a detailed description of how I can help. Supports
+        markdown.
+      </Description>
+      {isInvalid ? (
+        errors.map((e) => <FieldError>{e}</FieldError>)
+      ) : (
+        <FieldError />
+      )}
+    </TextField>
+  );
+}
+
 function ComposeBox() {
   const initialState: State = {
     message: null,
@@ -38,25 +102,9 @@ function ComposeBox() {
   return (
     <div className="flex w-full font-plain md:text-lg rounded-xl p-4 mx-auto shadow shadow-foreground/50">
       <Form className="flex flex-col w-full gap-4 md:gap-6" action={formAction}>
-        <TextField isRequired name="subject" type="text" minLength={4}>
-          <Label>Subject</Label>
-          <Input placeholder="Help needed!" />
-          <FieldError />
-        </TextField>
-        <TextField isRequired name="email" type="email" minLength={6}>
-          <Label>Contact Email</Label>
-          <Input placeholder="c.kent@dailyplanet.com" />
-          <FieldError />
-        </TextField>
-        <TextField isRequired name="message" type="text" minLength={20}>
-          <Label>Message</Label>
-          <TextArea placeholder="I need some code urgently..." rows={8} />
-          <Description className="py-2">
-            Please enter a detailed description of how I can help. Supports
-            markdown.
-          </Description>
-          <FieldError />
-        </TextField>
+        <SubjectField currentState={state} />
+        <EmailField currentState={state} />
+        <MessageBox currentState={state} />
 
         <div className="w-full flex justify-between">
           <Button type="reset" variant="secondary" className="rounded-md">

@@ -118,15 +118,21 @@ function composeMeesageToThem(subject: string, email: string, message: string) {
 
 const FormSchema = z.object({
   id: z.string(),
-  subject: z.string({
-    error: "Please enter a valid subject",
-  }),
+  subject: z
+    .string({
+      error: "Please enter a valid subject",
+    })
+    .min(4, {
+      error: "Please enter a valid subject",
+    }),
   email: z.email({
     error: "Please enter a vaid email address",
   }),
-  message: z.string({
-    error: "Please enter a valid message",
-  }),
+  message: z
+    .string({
+      error: "Please enter a valid message",
+    })
+    .min(20, "Please provide more information"),
 });
 
 const SendMessage = FormSchema.omit({ id: true });
