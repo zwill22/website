@@ -156,7 +156,19 @@ export default function Home() {
 
       <MainSeparator />
       <div className="w-full">
-        <div className="flex gap-4">
+        <div className="flex gap-4 pb-4 md:pb-6">
+          <div className="flex my-auto text-4xl ">
+            <i className="bi bi-link-45deg" />
+          </div>
+          <MinorHeading>Contact Links</MinorHeading>
+        </div>
+        <div className="text-right w-fit shrink ml-auto">
+          <ContactLinks />
+        </div>
+      </div>
+      <MainSeparator />
+      <div className="w-full">
+        <div className="flex gap-4 pb-4 md:pb-6">
           <div className="flex my-auto text-4xl ">
             <i className="bi bi-file-earmark-text" />
           </div>
@@ -168,7 +180,7 @@ export default function Home() {
       </div>
       <MainSeparator />
       <div className="w-full">
-        <div className="flex gap-4">
+        <div className="flex gap-4 pb-4 md:pb-6">
           <div className="flex my-auto text-4xl ">
             <i className="bi bi-file-earmark-text" />
           </div>
@@ -179,17 +191,6 @@ export default function Home() {
         </PreviewMenu>
       </div>
       <MainSeparator />
-      <div className="w-full">
-        <div className="flex gap-4">
-          <div className="flex my-auto text-4xl ">
-            <i className="bi bi-link-45deg" />
-          </div>
-          <MinorHeading>Contact Links</MinorHeading>
-        </div>
-        <div className="text-right w-fit shrink border ml-auto">
-          <ContactLinks />
-        </div>
-      </div>
     </Section>
   );
 }
