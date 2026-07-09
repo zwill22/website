@@ -7,14 +7,16 @@ import { MainSeparator } from "@/components/ui/separator";
 import { Card, ScrollShadow } from "@heroui/react";
 import { fetchBlogPosts } from "@/lib/blogs";
 import { ReactNode, Suspense } from "react";
-import { PreviewImageSkeleton } from "@/components/menu/skeletons";
 import { PreviewImage } from "@/components/menu/preview-image";
 import { getDateString } from "@/lib/date";
 import { MenuItemData } from "@/lib/types";
 import clsx from "clsx";
 import { fetchProjects } from "@/lib/projects";
+import {
+  PreviewMenuSkeleton,
+} from "@/components/skeletons";
 
-export function MenuItem(props: {
+function MenuItem(props: {
   key: string;
   itemData: MenuItemData;
   hrefRoot: string;
@@ -62,27 +64,6 @@ export function MenuItem(props: {
   );
 }
 
-function PostSkeleton() {
-  return (
-    <div className="flex flex-row gap-4">
-      {Array.from({ length: 10 }).map((_, idx) => (
-        <Card
-          key={`scroll-shadow-lorem-cards-${idx}`}
-          className="flex min-w-full flex-row gap-3 p-1"
-        >
-          <PreviewImageSkeleton />
-          <div className="flex flex-1 flex-col justify-center gap-1">
-            <Card.Title className="text-sm">Bridging the Future</Card.Title>
-            <Card.Description className="text-xs">
-              Today, 6:30 PM
-            </Card.Description>
-          </div>
-        </Card>
-      ))}
-    </div>
-  );
-}
-
 async function Projects() {
   const projects = await fetchProjects();
 
@@ -119,15 +100,17 @@ async function BlogPosts() {
   );
 }
 
-function PreviewMenu(props: { children: ReactNode }) {
+function PreviewMenu(props: { children: ReactNode; length: number }) {
   return (
-    <div className="w-full">
-      <Card className="w-full p-2 bg-purple-50/90 dark:bg-(--purple-black)/90 shadow shadow-foreground/50">
-        <ScrollShadow className="p-4" orientation="horizontal">
-          <Suspense fallback={<PostSkeleton />}>{props.children}</Suspense>
-        </ScrollShadow>
-      </Card>
-    </div>
+    <Suspense fallback={<PreviewMenuSkeleton length={props.length} />}>
+      <div className="w-full">
+        <Card className="w-full p-2 bg-purple-50/90 dark:bg-(--purple-black)/90 shadow shadow-foreground/50">
+          <ScrollShadow className="p-4" orientation="horizontal">
+            {props.children}
+          </ScrollShadow>
+        </Card>
+      </div>
+    </Suspense>
   );
 }
 
@@ -174,7 +157,7 @@ export default function Home() {
           </div>
           <MinorHeading>Projects</MinorHeading>
         </div>
-        <PreviewMenu>
+        <PreviewMenu length={1}>
           <Projects />
         </PreviewMenu>
       </div>
@@ -186,7 +169,7 @@ export default function Home() {
           </div>
           <MinorHeading>Blog Posts</MinorHeading>
         </div>
-        <PreviewMenu>
+        <PreviewMenu length={3}>
           <BlogPosts />
         </PreviewMenu>
       </div>
