@@ -1,7 +1,14 @@
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
-import { fetchProjectHTML } from "@/lib/projects";
+import { fetchProjectHTML, fetchProjects } from "@/lib/projects";
 import { GitHubLink } from "@/components/links";
+
+export async function generateStaticParams() {
+    const projects = await fetchProjects();
+
+    return projects.map(p => { return { project: p.id }; });
+}
+
 
 function GitHubPageLink(props: { project: string }) {
   const projectName = props.project.split("_")[0];
