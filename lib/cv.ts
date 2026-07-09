@@ -1,13 +1,75 @@
+import { Octokit } from "octokit";
 import { latexToReact } from "@/lib/converter";
-import fs from "fs/promises";
 import bibtexParse from "@orcid/bibtex-parse-js";
 
-async function fetchFile(path: string) {
-  const cvString = await fs.readFile(path, {
-    encoding: "utf8",
-  });
+const owner =  (() =>{
+   const val = process.env.GITHUB_CV_REPO_OWNER
 
-  return cvString;
+  if (!val) {
+    throw new Error("No github cv repo owner found");
+  }
+
+  return val;
+})();
+
+const repo =  (() =>{
+   const val = process.env.GITHUB_CV_REPO_NAME
+
+  if (!val) {
+    throw new Error("No github cv repo found");
+  }
+
+  return val;
+})();
+
+const authToken = (() => {
+  const token = process.env.GITHUB_CV_ACCESS_TOKEN;
+
+  if (!token) {
+    throw new Error("No github cv authentication token found");
+  }
+
+  return token;
+})();
+
+const octokit = new Octokit({
+  auth: authToken
+});
+
+interface FileResponseData {
+  content: string;
+}
+
+interface FileResponse {
+  data: FileResponseData;
+}
+
+async function fetchFile(name: string): Promise<string> {
+  try {
+    const response = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}",
+      
+      {
+        owner: owner,
+        repo: repo,
+        path: name,
+        mediaType: {
+          format: "file"
+        }
+      }
+    );
+
+    if (response.status != 200) {
+      throw new Error(`Invalid response, code: ${response.status}`);
+    }
+
+    const data = (response as FileResponse).data;
+    
+    const base64Content = data.content;
+
+    return Buffer.from(base64Content, "base64").toString("utf-8");
+  } catch {
+    throw new Error(`Failed to fetch CV file: ${name}`);
+  }
 }
 
 interface BibEntryTags {
