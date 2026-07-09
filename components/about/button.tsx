@@ -1,15 +1,13 @@
-import { Button as HeroButton } from "@heroui/react";
+import { ButtonRootProps, Button as HeroButton } from "@heroui/react";
 import clsx from "clsx";
 import { ReactNode } from "react";
 
-export function Button(props: {
-  className?: string;
-  children: ReactNode;
-  onPress?: () => void;
-  isDisabled?: boolean;
-  type?: any;
-  variant?: any;
-}) {
+interface ButtonProps
+  extends ButtonRootProps {
+  isDisabled?: boolean
+}
+
+export function Button(props: ButtonProps) {
   const isDisabled = props.isDisabled ?? false;
 
   return (

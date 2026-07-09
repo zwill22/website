@@ -50,7 +50,7 @@ export default async function markdownToHtml(input) {
     const file = await processor.process(matterResult.content);
 
     return file.value;
-  } catch (error) {
+  } catch {
     throw new Error(`Failed to process markdown: ${input}`);
   }
 }

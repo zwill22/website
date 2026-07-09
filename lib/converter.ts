@@ -1,7 +1,6 @@
 import prod from "react/jsx-runtime";
 import { CodeBlock } from "@/components/markdown/code-block";
 import {
-  Image,
   Link,
   Paragraph,
   Subheading,
@@ -10,6 +9,7 @@ import {
   MinorHeading,
   List,
   ListItem,
+  Img,
 } from "@/components/typesetting/format";
 import { unified } from "unified";
 import rehypeParse from "rehype-parse";
@@ -27,6 +27,7 @@ import rehypeUrls from "rehype-urls";
 import { visitParents } from "unist-util-visit-parents";
 import { visit } from "unist-util-visit";
 import { remove } from "unist-util-remove";
+import { getErrorMessage } from "@/lib/errors";
 
 function rehypeListDepth() {
   return (tree: HastRoot) => {
@@ -113,8 +114,14 @@ function rehypeClean() {
   };
 }
 
+interface URL {
+  protocol: null | string;
+  path: string;
+  href: string;
+}
+
 async function processHTML(html: string, rootUrl: string): Promise<string> {
-  function fixUrls(url: any) {
+  function fixUrls(url: URL) {
     if (url.protocol == null) {
       return `${rootUrl}/${url.path}`;
     }
@@ -140,8 +147,10 @@ async function processHTML(html: string, rootUrl: string): Promise<string> {
     const file = await processor.process(html);
 
     return file.value;
-  } catch (error) {
-    throw new Error(`Failed to process HTML: ${html}`);
+  } catch (error: unknown) {
+    const message = getErrorMessage(error);
+
+    throw new Error(`Failed to process HTML: ${message}`);
   }
 }
 
@@ -158,7 +167,7 @@ export async function htmlToReact(html: string): Promise<React.JSX.Element> {
       a: Link,
       pre: CodeBlock,
       code: Code,
-      img: Image,
+      img: Img,
       ul: List,
       li: ListItem,
     },
@@ -173,7 +182,9 @@ export async function htmlToReact(html: string): Promise<React.JSX.Element> {
 
     return file.result;
   } catch (error) {
-    throw new Error(`Failed to convert HTML to React: ${html}`);
+    const message = getErrorMessage(error);
+
+    throw new Error(`Failed to convert HTML to React: ${message}`);
   }
 }
 

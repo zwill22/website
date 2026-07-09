@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import { MenuItemData } from "@/lib/types";
 import { markdownToReact } from "@/lib/converter";
+import { getErrorMessage } from "@/lib/errors";
 
 type ProjectData = {
   id: string;
@@ -36,7 +37,8 @@ export async function fetchProjects(): Promise<MenuItemData[]> {
           project2.date.getTime() - project1.date.getTime(),
       );
   } catch (error) {
-    throw new Error("Failed to fetch Blog Posts");
+    const message = getErrorMessage(error);
+    throw new Error(`Failed to fetch Blog Posts: ${message}`);
   }
 }
 
@@ -65,8 +67,10 @@ async function fetchProjectReadme(name: string): Promise<Project> {
       rootUrl: url,
       content: text,
     };
-  } catch (error) {
-    throw new Error(`Unable to fetch project readme from ${readme}`);
+  } catch (error: unknown) {
+    const message = getErrorMessage(error);
+
+    throw new Error(`Unable to fetch project readme from ${readme}: ${message}`);
   }
 }
 

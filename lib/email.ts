@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import nodemailer from "nodemailer";
 import markdownToHtml from "@/packages/markdown-to-html";
+import { getErrorMessage } from "@/lib/errors";
 
 interface MessageDetails {
   address: string;
@@ -62,8 +63,9 @@ class MailService {
 
     try {
       await transporter.sendMail(mailOptions);
-    } catch (error: any) {
-      throw new Error("Error sending email ", error.message);
+    } catch (error: unknown) {
+      const errorMessage = getErrorMessage(error);
+      throw new Error(`Error sending email: ${errorMessage}`);
     }
   }
 }
@@ -181,8 +183,8 @@ export async function sendEmail(_: State, formData: FormData) {
     await emailService.send(messageToMe);
     // Only send to them if first message is successful
     await emailService.send(messageToThem);
-  } catch (error: any) {
-    return { message: String(error.message) };
+  } catch (error: unknown) {
+    return { message: getErrorMessage(error) };
   }
 
   revalidatePath("/about");

@@ -39,7 +39,7 @@ function SubjectField(props: { currentState: State }) {
       <Label>Subject</Label>
       <Input placeholder="Help needed!" />
       {isInvalid ? (
-        errors.map((e) => <FieldError>{e}</FieldError>)
+        errors.map((e, idx) => <FieldError key={`subject-field-error-${idx}`}>{e}</FieldError>)
       ) : (
         <FieldError />
       )}
@@ -59,7 +59,7 @@ function EmailField(props: { currentState: State }) {
       <Label>Contact Email</Label>
       <Input placeholder="c.kent@dailyplanet.com" />
       {isInvalid ? (
-        errors.map((e) => <FieldError>{e}</FieldError>)
+        errors.map((e, idx) => <FieldError key={`email-field-error-${idx}`}>{e}</FieldError>)
       ) : (
         <FieldError />
       )}
@@ -83,7 +83,7 @@ function MessageBox(props: { currentState: State }) {
         markdown.
       </Description>
       {isInvalid ? (
-        errors.map((e) => <FieldError>{e}</FieldError>)
+        errors.map((e, idx) => <FieldError key={`message-box-error-${idx}`}>{e}</FieldError>)
       ) : (
         <FieldError />
       )}
@@ -156,7 +156,7 @@ export function ContactMe() {
     try {
       await navigator.clipboard.writeText(emailAddress);
       setCopied(true);
-    } catch (error) {
+    } catch {
       setError(true);
     }
 

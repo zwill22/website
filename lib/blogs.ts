@@ -1,4 +1,5 @@
 import { markdownToReact } from "@/lib/converter";
+import { getErrorMessage } from "@/lib/errors";
 import { MenuItemData } from "@/lib/types";
 
 type BlogData = {
@@ -44,7 +45,8 @@ export async function fetchBlogPosts(): Promise<MenuItemData[]> {
       })
       .sort((blog1, blog2) => blog2.date.getTime() - blog1.date.getTime());
   } catch (error) {
-    throw new Error("Failed to fetch Blog Posts");
+    const message = getErrorMessage(error);
+    throw new Error(`Failed to fetch Blog Posts: ${message}`);
   }
 }
 
@@ -65,7 +67,8 @@ async function fetchPost(name: string): Promise<Post> {
       content: text,
     };
   } catch (error) {
-    throw new Error(`Failed to fetch Blog Post: ${name}`);
+    const message = getErrorMessage(error)
+    throw new Error(`Failed to fetch Blog Post ${name}: ${message}`);
   }
 }
 

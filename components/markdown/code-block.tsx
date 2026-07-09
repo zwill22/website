@@ -20,7 +20,7 @@ function CopyButton(props: { children: ReactNode }) {
     try {
       await navigator.clipboard.writeText(plainText);
       setIsCopied(true);
-    } catch (error) {
+    } catch {
       setIsOk(false);
     }
 

@@ -4,16 +4,13 @@ import {
   ChevronDoubleRightIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
-import { Skeleton, Typography } from "@heroui/react";
+import { Typography, TypographyProps } from "@heroui/react";
 import clsx from "clsx";
-import { ReactNode, Suspense } from "react";
+import { ReactNode } from "react";
 import { Link as HeroLink } from "@heroui/react";
+import Image, { ImageProps } from "next/image";
 
-export function Heading(props: {
-  children?: ReactNode;
-  align?: any;
-  weight?: any;
-}) {
+export function Heading(props: TypographyProps) {
   return (
     <Typography
       type="h1"
@@ -26,11 +23,7 @@ export function Heading(props: {
   );
 }
 
-export function Subheading(props: {
-  children?: ReactNode;
-  align?: any;
-  weight?: any;
-}) {
+export function Subheading(props: TypographyProps) {
   return (
     <Typography
       type="h2"
@@ -43,11 +36,7 @@ export function Subheading(props: {
   );
 }
 
-export function MinorHeading(props: {
-  children?: ReactNode;
-  align?: any;
-  weight?: any;
-}) {
+export function MinorHeading(props: TypographyProps) {
   return (
     <Typography
       type="h3"
@@ -60,12 +49,7 @@ export function MinorHeading(props: {
   );
 }
 
-export function Paragraph(props: {
-  children?: ReactNode;
-  className?: string;
-  align?: any;
-  weight?: any;
-}) {
+export function Paragraph(props: TypographyProps) {
   return (
     <Typography
       className={clsx(
@@ -104,31 +88,10 @@ export function Code(props: {
   );
 }
 
-interface ImageProps {
-  alt: string;
-  title: string;
-  width: number;
-  height: number;
-  src: string;
-}
-
-function ImageSkeleton(props: ImageProps) {
+export function Img(props: ImageProps) {
   return (
-    <div className="flex w-full">
-      <Skeleton
-        className="rounded max-h-100"
-        aria-label={props.alt}
-        title={props.title}
-      />
-    </div>
-  );
-}
-
-export function Image(props: ImageProps) {
-  return (
-    <Suspense fallback={<ImageSkeleton {...props} />}>
       <div className="max-w-full shrink py-2">
-        <img
+        <Image
           className="mx-auto shadow shadow-foreground"
           alt={props.alt}
           title={props.title}
@@ -138,7 +101,6 @@ export function Image(props: ImageProps) {
           loading="lazy"
         />
       </div>
-    </Suspense>
   );
 }
 

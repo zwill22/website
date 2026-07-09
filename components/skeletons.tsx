@@ -36,7 +36,7 @@ export function PreviewMenuItemSkeleton(props: {
           <div className="flex flex-col my-2">
             <div className="flex flex-col gap-2 py-2">
               {Array.from({ length: props.titleLength - 1 }).map((_, idx) => (
-                <Skeleton className="h-2 md:h-4 w-full" />
+                <Skeleton className="h-2 md:h-4 w-full"  key={`preview-menu-item-${idx}`}/>
               ))}
               <Skeleton className="h-2 md:h-4 w-3/4" />
             </div>
