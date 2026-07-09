@@ -1,8 +1,4 @@
 packages:
   - "packages/*"
-allowBuilds:
-  esbuild: true
-  sharp: false
-  unrs-resolver: false
 configDependencies:
   '@pnpm/plugin-types-fixer': 0.1.0
