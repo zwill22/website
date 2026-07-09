@@ -11,6 +11,7 @@ export function Logo(props: { size: number; className?: string }) {
         alt="Logo"
         className={clsx("focus-visible:outline-0", props.className)}
         unoptimized
+        loading="eager"
       />
     </div>
   );
