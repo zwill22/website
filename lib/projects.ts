@@ -70,7 +70,9 @@ async function fetchProjectReadme(name: string): Promise<Project> {
   } catch (error: unknown) {
     const message = getErrorMessage(error);
 
-    throw new Error(`Unable to fetch project readme from ${readme}: ${message}`);
+    throw new Error(
+      `Unable to fetch project readme from ${readme}: ${message}`,
+    );
   }
 }
 

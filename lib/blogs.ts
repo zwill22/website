@@ -67,7 +67,7 @@ async function fetchPost(name: string): Promise<Post> {
       content: text,
     };
   } catch (error) {
-    const message = getErrorMessage(error)
+    const message = getErrorMessage(error);
     throw new Error(`Failed to fetch Blog Post ${name}: ${message}`);
   }
 }

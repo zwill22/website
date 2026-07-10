@@ -8,7 +8,6 @@ export async function generateStaticParams() {
     return posts.map(p => { return { post: p.id }; });
 }
 
-
 export default async function BlogPage(props: {
   params: Promise<{ post: string }>;
 }) {

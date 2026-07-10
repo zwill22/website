@@ -2,8 +2,8 @@ import { Octokit } from "octokit";
 import { latexToReact } from "@/lib/converter";
 import bibtexParse from "@orcid/bibtex-parse-js";
 
-const owner =  (() =>{
-   const val = process.env.GITHUB_CV_REPO_OWNER
+const owner = (() => {
+  const val = process.env.GITHUB_CV_REPO_OWNER;
 
   if (!val) {
     throw new Error("No github cv repo owner found");
@@ -12,8 +12,8 @@ const owner =  (() =>{
   return val;
 })();
 
-const repo =  (() =>{
-   const val = process.env.GITHUB_CV_REPO_NAME
+const repo = (() => {
+  const val = process.env.GITHUB_CV_REPO_NAME;
 
   if (!val) {
     throw new Error("No github cv repo found");
@@ -33,7 +33,7 @@ const authToken = (() => {
 })();
 
 const octokit = new Octokit({
-  auth: authToken
+  auth: authToken,
 });
 
 interface FileResponseData {
@@ -46,16 +46,17 @@ interface FileResponse {
 
 async function fetchFile(name: string): Promise<string> {
   try {
-    const response = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}",
-      
+    const response = await octokit.request(
+      "GET /repos/{owner}/{repo}/contents/{path}",
+
       {
         owner: owner,
         repo: repo,
         path: name,
         mediaType: {
-          format: "file"
-        }
-      }
+          format: "file",
+        },
+      },
     );
 
     if (response.status != 200) {
@@ -63,7 +64,7 @@ async function fetchFile(name: string): Promise<string> {
     }
 
     const data = (response as FileResponse).data;
-    
+
     const base64Content = data.content;
 
     return Buffer.from(base64Content, "base64").toString("utf-8");
