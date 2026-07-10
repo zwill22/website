@@ -6,9 +6,17 @@ const config: NextConfig = {
       {
         protocol: "https",
         hostname: "raw.githubusercontent.com",
-        port: "",
         pathname: "/zwill22/**",
-        search: "",
+      },
+      {
+        protocol: "https",
+        hostname: "img.shields.io",
+        pathname: "/badge/**",
+      },
+      {
+        protocol: "https",
+        hostname: "custom-icon-badges.demolab.com",
+        pathname: "/badge/**",
       },
     ],
   },

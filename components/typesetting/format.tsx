@@ -9,6 +9,8 @@ import clsx from "clsx";
 import { ReactNode } from "react";
 import { Link as HeroLink } from "@heroui/react";
 import Image, { ImageProps } from "next/image";
+import { isBadge } from "is-badge";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 export function Heading(props: TypographyProps) {
   return (
@@ -16,7 +18,7 @@ export function Heading(props: TypographyProps) {
       type="h1"
       align={props.align ?? "start"}
       weight={props.weight ?? "normal"}
-      className="flex grow w-full text-5xl md:text-6xl font-heading py-4 md:py-8 text-pretty"
+      className="font-heading flex w-full grow py-4 text-5xl text-pretty md:py-8 md:text-6xl"
     >
       {props.children}
     </Typography>
@@ -29,7 +31,7 @@ export function Subheading(props: TypographyProps) {
       type="h2"
       align={props.align ?? "start"}
       weight={props.weight ?? "normal"}
-      className="grow w-full text-2xl md:text-3xl font-heading py-3 md:py-6 text-pretty"
+      className="font-heading w-full grow py-3 text-2xl text-pretty md:py-6 md:text-3xl"
     >
       {props.children}
     </Typography>
@@ -42,7 +44,7 @@ export function MinorHeading(props: TypographyProps) {
       type="h3"
       align={props.align ?? "start"}
       weight={props.weight ?? "normal"}
-      className="grow w-full text-xl md:text-2xl font-heading py-2 md:py-4 text-pretty"
+      className="font-heading w-full grow py-2 text-xl text-pretty md:py-4 md:text-2xl"
     >
       {props.children}
     </Typography>
@@ -53,7 +55,7 @@ export function Paragraph(props: TypographyProps) {
   return (
     <Typography
       className={clsx(
-        "grow md:text-lg py-2 w-full text-pretty",
+        "w-full grow py-2 text-pretty md:text-lg",
         props.className,
       )}
       type="body"
@@ -73,9 +75,9 @@ export function Code(props: {
   return (
     <Typography
       className={clsx(
-        "shrink font-mono hljs not-italic",
+        "hljs shrink font-mono not-italic",
         props.inline
-          ? "rounded-lg shadow shadow-foreground/50"
+          ? "shadow-foreground/50 rounded-lg shadow"
           : "p-0 text-pretty",
         props.className,
       )}
@@ -88,19 +90,32 @@ export function Code(props: {
   );
 }
 
-export function Img(props: ImageProps) {
+function checkBadge(src: string | StaticImport) {
+  if (typeof src !== "string") {
+    return false;
+  }
+
   return (
-      <div className="max-w-full shrink py-2">
+    isBadge(src) ||
+    src.startsWith("https://custom-icon-badges.demolab.com/badge/")
+  );
+}
+
+export function Img(props: ImageProps) {
+  const badge = checkBadge(props.src);
+
+  return (
+    <div className="max-w-full shrink py-2">
+      {
+        // eslint-disable-next-line jsx-a11y/alt-text
         <Image
-          className="mx-auto shadow shadow-foreground"
-          alt={props.alt}
-          title={props.title}
-          src={props.src}
-          width={props.width}
-          height={props.height}
+          className="shadow-foreground mx-auto shadow"
           loading="lazy"
+          unoptimized={badge}
+          {...props}
         />
-      </div>
+      }
+    </div>
   );
 }
 
@@ -111,7 +126,7 @@ export function List(props: { children: ReactNode }) {
 export function ListItem(props: { children: ReactNode; depth: number }) {
   return (
     <div className="flex gap-2">
-      <div className="flex-none size-6 py-2 h-12 flex justify-center">
+      <div className="flex size-6 h-12 flex-none justify-center py-2">
         {props.depth === 1 ? (
           <ArrowRightCircleIcon />
         ) : props.depth === 2 ? (
@@ -135,9 +150,9 @@ export function Link(props: {
   return (
     <HeroLink
       className={clsx(
-        "text-purple-800 dark:text-purple-300 underline",
+        "text-purple-800 underline dark:text-purple-300",
         "hover:text-purple-600 dark:hover:text-purple-500",
-        "hover:shadow hover:shadow-background",
+        "hover:shadow-background hover:shadow",
       )}
       href={props.href}
     >

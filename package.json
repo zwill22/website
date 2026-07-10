@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@coderosh/image-size": "^2.0.1",
@@ -19,6 +20,7 @@
     "highlight.js": "^11.11.1",
     "html-to-text": "^10.0.0",
     "image-size": "^2.0.2",
+    "is-badge": "^2.1.1",
     "latex-to-html": "./packages/latex-to-html",
     "markdown-to-html": "./packages/markdown-to-html",
     "next": "^16.2.10",
