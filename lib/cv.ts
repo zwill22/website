@@ -1,6 +1,7 @@
-import { Octokit } from "octokit";
 import { latexToReact } from "@/lib/converter";
+import { fetchContent } from "@/lib/github";
 import bibtexParse from "@orcid/bibtex-parse-js";
+import { Octokit } from "octokit";
 
 const owner = (() => {
   const val = process.env.GITHUB_CV_REPO_OWNER;
@@ -35,43 +36,6 @@ const authToken = (() => {
 const octokit = new Octokit({
   auth: authToken,
 });
-
-interface FileResponseData {
-  content: string;
-}
-
-interface FileResponse {
-  data: FileResponseData;
-}
-
-async function fetchFile(name: string): Promise<string> {
-  try {
-    const response = await octokit.request(
-      "GET /repos/{owner}/{repo}/contents/{path}",
-
-      {
-        owner: owner,
-        repo: repo,
-        path: name,
-        mediaType: {
-          format: "file",
-        },
-      },
-    );
-
-    if (response.status != 200) {
-      throw new Error(`Invalid response, code: ${response.status}`);
-    }
-
-    const data = (response as FileResponse).data;
-
-    const base64Content = data.content;
-
-    return Buffer.from(base64Content, "base64").toString("utf-8");
-  } catch {
-    throw new Error(`Failed to fetch CV file: ${name}`);
-  }
-}
 
 interface BibEntryTags {
   author: string;
@@ -189,8 +153,8 @@ const bibFile = (() => {
 
 export async function fetchCV() {
   const [data, bibData] = await Promise.all([
-    fetchFile(cvFile),
-    fetchFile(bibFile),
+    fetchContent(octokit, owner, repo, cvFile),
+    fetchContent(octokit, owner, repo, bibFile),
   ]);
 
   const bib = bibtexParse.toJSON(bibData);
