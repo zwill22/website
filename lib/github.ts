@@ -1,3 +1,4 @@
+import { getErrorMessage } from "@/lib/errors";
 import { Octokit } from "octokit";
 
 interface FileResponseData {
@@ -6,6 +7,33 @@ interface FileResponseData {
 
 interface FileResponse {
   data: FileResponseData;
+}
+
+const username = "zwill22";
+const githubApiVersion = "2026-03-10";
+
+export async function fetchReposList(octokit: Octokit) {
+  try {
+    const response = await octokit.request("GET /users/{username}/repos", {
+      username: username,
+      per_page: 100, // I don't have that many repos
+      direction: "desc",
+      headers: {
+        "X-GitHub-Api-Version": githubApiVersion,
+      },
+    });
+
+    if (response.status !== 200) {
+      throw new Error(
+        `Failed to fetch project list, status code: ${response.status}`,
+      );
+    }
+
+    return response.data;
+  } catch (error) {
+    const message = getErrorMessage(error);
+    throw new Error(`Failed to fetch Repo List: ${message}`);
+  }
 }
 
 export async function fetchContent(
@@ -24,6 +52,9 @@ export async function fetchContent(
         path: path,
         mediaType: {
           format: "file",
+        },
+        headers: {
+          "X-GitHub-Api-Version": githubApiVersion,
         },
       },
     );

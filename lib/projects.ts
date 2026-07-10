@@ -2,82 +2,119 @@ import fs from "fs/promises";
 import { MenuItemData } from "@/lib/types";
 import { markdownToReact } from "@/lib/converter";
 import { getErrorMessage } from "@/lib/errors";
+import { Octokit } from "octokit";
+import { fetchContent, fetchReposList } from "@/lib/github";
 
 type ProjectData = {
-  id: string;
-  title: string;
-  date: string;
-  url: string;
+  name: string;
   blurb: string;
   imageSrc: string;
   imgAlt: string;
 };
 
-export async function fetchProjects(): Promise<MenuItemData[]> {
+const authToken = (() => {
+  const token = process.env.GITHUB_PUBLIC_ACCESS_TOKEN;
+
+  if (!token) {
+    throw new Error("No github authentication token found");
+  }
+
+  return token;
+})();
+
+const octokit = new Octokit({
+  auth: authToken,
+});
+
+async function fetchProjectData() {
   try {
     const jsonString = await fs.readFile("./data/project-data.json", {
       encoding: "utf8",
     });
 
-    const jsonData = JSON.parse(jsonString);
-
-    return jsonData.projects
-      .map((project: ProjectData): MenuItemData => {
-        return {
-          id: project.id,
-          title: project.title,
-          date: new Date(project.date),
-          preview: project.blurb,
-          image: project.imageSrc,
-          imageDescription: project.imgAlt,
-        };
-      })
-      .sort(
-        (project1: MenuItemData, project2: MenuItemData) =>
-          project2.date.getTime() - project1.date.getTime(),
-      );
+    return JSON.parse(jsonString).projects;
   } catch (error) {
     const message = getErrorMessage(error);
-    throw new Error(`Failed to fetch Blog Posts: ${message}`);
+    throw new Error(`Failed to read project data: ${message}`);
   }
 }
 
-const projectUrl = (projectTitle: string) => {
-  return `https://raw.githubusercontent.com/zwill22/${projectTitle}/refs/heads/main`;
-};
-
-interface Project {
-  rootUrl: string;
-  content: string;
+interface Repo {
+  id: number;
+  name: string;
+  created_at?: string | null;
+  owner: {
+    login: string;
+  };
 }
 
-async function fetchProjectReadme(name: string): Promise<Project> {
-  const projectTitle = name.split("_")[0];
-  const url = projectUrl(projectTitle);
-  const readme = url + "/" + "README.md";
+function convertData(repo: Repo, jsonData: ProjectData[]) {
+  const repoData = jsonData.find((data: ProjectData) => {
+    return data.name == repo.name;
+  });
 
-  try {
-    const fetchedData = await fetch(readme);
+  return {
+    id: `github_repos_${repo.owner.login}_${repo.name}_path__${repo.id}`,
+    title: repo.name,
+    date: new Date(repo.created_at ?? ""),
+    preview: repoData?.blurb ?? "Repo",
+    image: repoData?.imageSrc ?? "logo.svg",
+    imageDescription: repoData?.imgAlt ?? "Placeholder image",
+  };
+}
 
-    const stream = fetchedData.body;
+export async function fetchProjects(): Promise<MenuItemData[]> {
+  const [jsonData, repoData] = await Promise.all([
+    fetchProjectData(),
+    fetchReposList(octokit),
+  ]);
 
-    const text = await new Response(stream).text();
+  const data = repoData.filter((repo) => {
+    return jsonData.find((data: ProjectData) => {
+      return data.name == repo.name;
+    });
+  });
 
-    return {
-      rootUrl: url,
-      content: text,
-    };
-  } catch (error: unknown) {
-    const message = getErrorMessage(error);
-
-    throw new Error(
-      `Unable to fetch project readme from ${readme}: ${message}`,
+  return data
+    .map((repo) => convertData(repo, jsonData))
+    .sort(
+      (project1: MenuItemData, project2: MenuItemData) =>
+        project2.date.getTime() - project1.date.getTime(),
     );
-  }
 }
 
-export async function fetchProjectHTML(name: string) {
-  const project = await fetchProjectReadme(name);
+export interface RepoData {
+  source: string;
+  owner: string;
+  repo: string;
+  path?: string;
+  id: string;
+}
 
-  return markdownToReact(project.content, project.rootUrl);
+function getRootUrl(repoData: RepoData) {
+  return `https://raw.githubusercontent.com/${repoData.owner}/${repoData.repo}/refs/heads/main`;
+}
+
+async function fetchGitHubReadme(repoData: RepoData) {
+  const path = repoData.path ?? "";
+  const filepath = `${path}README.md`;
+
+  const rootUrl = getRootUrl(repoData);
+
+  const contentString = await fetchContent(
+    octokit,
+    repoData.owner,
+    repoData.repo,
+    filepath,
+  );
+
+  return markdownToReact(contentString, rootUrl);
+}
+
+export async function fetchReadme(repoData: RepoData) {
+  if (repoData.source === "github") {
+    return fetchGitHubReadme(repoData);
+  } else {
+    throw new Error(`Unknown data source: ${repoData.source}`);
+  }
 }

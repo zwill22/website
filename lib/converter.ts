@@ -28,6 +28,7 @@ import { visitParents } from "unist-util-visit-parents";
 import { visit } from "unist-util-visit";
 import { remove } from "unist-util-remove";
 import { getErrorMessage } from "@/lib/errors";
+import { Url } from "node:url";
 
 function rehypeListDepth() {
   return (tree: HastRoot) => {
@@ -114,16 +115,10 @@ function rehypeClean() {
   };
 }
 
-interface URL {
-  protocol: null | string;
-  path: string;
-  href: string;
-}
-
 async function processHTML(html: string, rootUrl: string): Promise<string> {
-  function fixUrls(url: URL) {
+  function fixUrls(url: Url) {
     if (url.protocol == null) {
-      return `${rootUrl}/${url.path}`;
+      return `${rootUrl}/${url.path ?? url.href}`;
     }
 
     return url.href;
