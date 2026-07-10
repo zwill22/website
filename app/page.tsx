@@ -12,9 +12,8 @@ import { getDateString } from "@/lib/date";
 import { MenuItemData } from "@/lib/types";
 import clsx from "clsx";
 import { fetchProjects } from "@/lib/projects";
-import {
-  PreviewMenuSkeleton,
-} from "@/components/skeletons";
+import { PreviewMenuSkeleton } from "@/components/skeletons";
+import { HomeTitle } from "@/components/home/title";
 
 function MenuItem(props: {
   key: string;
@@ -29,17 +28,17 @@ function MenuItem(props: {
   const dateString = getDateString(menuItem.date);
 
   return (
-    <div className="flex flex-col min-w-60 md:min-w-5/12 w-90">
+    <div className="flex w-90 min-w-60 flex-col md:min-w-5/12">
       <Link
         href={`${hrefRoot}/${menuItem.id}`}
         className={clsx(
-          "border border-foreground/10 rounded-xl shadow shadow-foreground/20",
+          "border-foreground/10 shadow-foreground/20 rounded-xl border shadow",
           "bg-foreground/5 hover:bg-foreground/10 transition-colors hover:shadow",
           "hover:shadow-foreground/30 h-full",
         )}
         aria-label={menuItem.id}
       >
-        <div className="flex flex-col gap-2 md:gap-4 p-2 md:p-4 h-full">
+        <div className="flex h-full flex-col gap-2 p-2 md:gap-4 md:p-4">
           <div className={props.imageClass}>
             <PreviewImage
               src={menuItem.image}
@@ -50,13 +49,13 @@ function MenuItem(props: {
           <div className="flex flex-col">
             <h2
               className={clsx(
-                "font-heading md:text-lg overflow-hidden",
+                "font-heading overflow-hidden md:text-lg",
                 props.titleClass,
               )}
             >
               {menuItem.title}
             </h2>
-            <p className="leading-6 h-6">{dateString}</p>
+            <p className="h-6 leading-6">{dateString}</p>
           </div>
         </div>
       </Link>
@@ -104,7 +103,7 @@ function PreviewMenu(props: { children: ReactNode; length: number }) {
   return (
     <Suspense fallback={<PreviewMenuSkeleton length={props.length} />}>
       <div className="w-full">
-        <Card className="w-full p-2 bg-purple-50/90 dark:bg-(--purple-black)/90 shadow shadow-foreground/50">
+        <Card className="shadow-foreground/50 w-full bg-purple-50/90 p-2 shadow dark:bg-(--purple-black)/90">
           <ScrollShadow className="p-4" orientation="horizontal">
             {props.children}
           </ScrollShadow>
@@ -115,21 +114,13 @@ function PreviewMenu(props: { children: ReactNode; length: number }) {
 }
 
 export default function Home() {
-  const time = new Date().getHours();
-  const titleText =
-    time >= 17
-      ? "Good Evening"
-      : time >= 12
-        ? "Good Afternoon"
-        : time >= 6
-          ? "Good Morning"
-          : "Late night?";
-
   return (
     <Section>
       <PageBreadcrumbs current="Home" />
 
-      <SectionTitle>{titleText}</SectionTitle>
+      <Suspense fallback={<SectionTitle>Hello There</SectionTitle>}>
+        <HomeTitle />
+      </Suspense>
 
       <Paragraph>
         Welcome to my site. I created this place, so that I can showcase my
@@ -140,19 +131,19 @@ export default function Home() {
       <MainSeparator />
       <div className="w-full">
         <div className="flex gap-4 pb-4 md:pb-6">
-          <div className="flex my-auto text-4xl ">
+          <div className="my-auto flex text-4xl">
             <i className="bi bi-link-45deg" />
           </div>
           <MinorHeading>Contact Links</MinorHeading>
         </div>
-        <div className="text-right w-fit shrink ml-auto">
+        <div className="ml-auto w-fit shrink text-right">
           <ContactLinks />
         </div>
       </div>
       <MainSeparator />
       <div className="w-full">
         <div className="flex gap-4 pb-4 md:pb-6">
-          <div className="flex my-auto text-4xl ">
+          <div className="my-auto flex text-4xl">
             <i className="bi bi-file-earmark-text" />
           </div>
           <MinorHeading>Projects</MinorHeading>
@@ -164,7 +155,7 @@ export default function Home() {
       <MainSeparator />
       <div className="w-full">
         <div className="flex gap-4 pb-4 md:pb-6">
-          <div className="flex my-auto text-4xl ">
+          <div className="my-auto flex text-4xl">
             <i className="bi bi-file-earmark-text" />
           </div>
           <MinorHeading>Blog Posts</MinorHeading>
