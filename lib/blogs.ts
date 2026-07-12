@@ -1,5 +1,5 @@
-import { markdownToReact } from "@/lib/converter";
 import { getErrorMessage } from "@/lib/errors";
+import { fetchContent } from "@/lib/github";
 import { MenuItemData } from "@/lib/types";
 
 type BlogData = {
@@ -11,28 +11,30 @@ type BlogData = {
   description: string;
 };
 
-interface JsonData {
-  contents: BlogData[];
-}
-export type Post = {
-  rootUrl: string;
-  content: string;
-};
-
 const urlRoot =
   "https://raw.githubusercontent.com/zwill22/blogs/refs/heads/main";
 
 export async function fetchBlogPosts(): Promise<MenuItemData[]> {
   try {
-    const fetchedData = await fetch(`${urlRoot}/meta.json`);
-    const jsonData = fetchedData.json();
+    const owner = "zwill22";
+    const repo = "blogs";
 
-    const contents = await jsonData.then((data: JsonData) => data.contents);
+    const fetchedData = await fetchContent(owner, repo, "meta.json");
+    const contents = JSON.parse(fetchedData).contents;
 
     return contents
       .map((blog: BlogData) => {
         const imageSrc = `${urlRoot}/${blog.image}`;
-        const id = `${blog.file.split(".")[0]}_${blog.title.replaceAll(" ", "_").replaceAll("+", "p").toLowerCase().slice(0, 40)}`;
+        const numId = Math.floor(Math.random() * 1e8);
+
+        const pathComponents = blog.file.split(".");
+        if (pathComponents.length !== 2) {
+          throw new Error(`Invalid file name: ${blog.file}`);
+        }
+        const filename = pathComponents[0];
+        const ext = pathComponents[1];
+
+        const id = `github_repo_${owner}_${repo}_path_blogs_${filename}_${ext}_${numId}`;
 
         return {
           id: id,
@@ -43,37 +45,12 @@ export async function fetchBlogPosts(): Promise<MenuItemData[]> {
           imageDescription: blog.description,
         };
       })
-      .sort((blog1, blog2) => blog2.date.getTime() - blog1.date.getTime());
+      .sort(
+        (blog1: MenuItemData, blog2: MenuItemData) =>
+          blog2.date.getTime() - blog1.date.getTime(),
+      );
   } catch (error) {
     const message = getErrorMessage(error);
     throw new Error(`Failed to fetch Blog Posts: ${message}`);
   }
-}
-
-async function fetchPost(name: string): Promise<Post> {
-  try {
-    const filename = `${name.split("_")[0]}.md`;
-    const fileRoot = `${urlRoot}/blogs`;
-    const fileUrl = `${fileRoot}/${filename}`;
-
-    const fetchedData = await fetch(fileUrl);
-
-    const stream = fetchedData.body;
-
-    const text = await new Response(stream).text();
-
-    return {
-      rootUrl: fileRoot,
-      content: text,
-    };
-  } catch (error) {
-    const message = getErrorMessage(error);
-    throw new Error(`Failed to fetch Blog Post ${name}: ${message}`);
-  }
-}
-
-export async function fetchPostHTML(name: string): Promise<React.JSX.Element> {
-  const post = await fetchPost(name);
-
-  return markdownToReact(post.content, post.rootUrl);
 }

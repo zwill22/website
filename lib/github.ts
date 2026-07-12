@@ -3,6 +3,7 @@ import { Octokit } from "octokit";
 
 interface FileResponseData {
   content: string;
+  encoding: string;
 }
 
 interface FileResponse {
@@ -12,7 +13,21 @@ interface FileResponse {
 const username = "zwill22";
 const githubApiVersion = "2026-03-10";
 
-export async function fetchReposList(octokit: Octokit) {
+const authToken = (() => {
+  const token = process.env.GITHUB_PUBLIC_ACCESS_TOKEN;
+
+  if (!token) {
+    throw new Error("No github authentication token found");
+  }
+
+  return token;
+})();
+
+const octokit = new Octokit({
+  auth: authToken,
+});
+
+export async function fetchReposList() {
   try {
     const response = await octokit.request("GET /users/{username}/repos", {
       username: username,
@@ -36,23 +51,28 @@ export async function fetchReposList(octokit: Octokit) {
   }
 }
 
-export async function fetchContent(
-  kit: Octokit,
+function base64ToString(content: string) {
+  const output = Buffer.from(content, "base64").toString("utf-8");
+
+  return output;
+}
+
+export async function fetchRawContent(
   owner: string,
   repo: string,
   path: string,
-): Promise<string> {
+  auth?: Octokit,
+) {
+  const ok = auth ?? octokit;
+
   try {
-    const response = await kit.request(
+    const response = await ok.request(
       "GET /repos/{owner}/{repo}/contents/{path}",
 
       {
         owner: owner,
         repo: repo,
         path: path,
-        mediaType: {
-          format: "file",
-        },
         headers: {
           "X-GitHub-Api-Version": githubApiVersion,
         },
@@ -63,12 +83,23 @@ export async function fetchContent(
       throw new Error(`Invalid response, code: ${response.status}`);
     }
 
-    const data = (response as FileResponse).data;
-
-    const base64Content = data.content;
-
-    return Buffer.from(base64Content, "base64").toString("utf-8");
+    return (response as FileResponse).data;
   } catch {
     throw new Error(`Failed to fetch file: ${path}`);
+  }
+}
+
+export async function fetchContent(
+  owner: string,
+  repo: string,
+  path: string,
+  auth?: Octokit,
+): Promise<string> {
+  const data = await fetchRawContent(owner, repo, path, auth);
+
+  if (data.encoding === "base64") {
+    return base64ToString(data.content);
+  } else {
+    throw new Error(`Unsupported encoding for data: ${data.encoding}`);
   }
 }

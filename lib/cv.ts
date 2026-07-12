@@ -33,7 +33,7 @@ const authToken = (() => {
   return token;
 })();
 
-const octokit = new Octokit({
+const auth = new Octokit({
   auth: authToken,
 });
 
@@ -153,8 +153,8 @@ const bibFile = (() => {
 
 export async function fetchCV() {
   const [data, bibData] = await Promise.all([
-    fetchContent(octokit, owner, repo, cvFile),
-    fetchContent(octokit, owner, repo, bibFile),
+    fetchContent(owner, repo, cvFile, auth),
+    fetchContent(owner, repo, bibFile, auth),
   ]);
 
   const bib = bibtexParse.toJSON(bibData);
