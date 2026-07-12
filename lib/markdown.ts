@@ -1,39 +1,6 @@
 import { markdownToReact } from "@/lib/converter";
+import { FileData } from "@/lib/filedata";
 import { fetchContent } from "@/lib/github";
-
-interface FileData {
-  source: string;
-  owner: string;
-  repo: string;
-  path: string;
-  id: string;
-}
-
-function getFileData(project: string): FileData {
-  const regex =
-    /(\w.*?)_repo_(\w.*?)_(\w.*?)_path_(\w.*?)_([a-zA-Z\d]+)_(\d+)/gm;
-
-  const m = regex.exec(project);
-  if (!m) {
-    throw new Error("Invalid project code");
-  }
-
-  const source = m[1];
-  const owner = m[2];
-  const repo = m[3];
-  const path = `${m[4].replaceAll("_", "/")}.${m[5]}`;
-  const id = m[6];
-
-  const out = {
-    source: source,
-    owner: owner,
-    repo: repo,
-    path: path,
-    id: id,
-  };
-
-  return out;
-}
 
 function getRootUrl(fileData: FileData) {
   const path = (() => {
@@ -68,16 +35,10 @@ async function fetchGitHubMarkdown(fileData: FileData) {
   return markdownToReact(contentString, rootUrl);
 }
 
-async function fetchMarkdownAsReact(fileData: FileData) {
+export async function fetchMarkdownAsReact(fileData: FileData) {
   if (fileData.source === "github") {
     return fetchGitHubMarkdown(fileData);
   } else {
     throw new Error(`Unknown data source: ${fileData.source}`);
   }
-}
-
-export async function fetchReact(id: string) {
-  const fileData = getFileData(id);
-
-  return fetchMarkdownAsReact(fileData);
 }

@@ -2,7 +2,8 @@ import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
 import { fetchProjects } from "@/lib/projects";
 import { GitHubLink } from "@/components/links";
-import { fetchReact } from "@/lib/markdown";
+import { fetchMarkdownAsReact } from "@/lib/markdown";
+import { FileData, getFileData } from "@/lib/filedata";
 
 export async function generateStaticParams() {
   const projects = await fetchProjects();
@@ -12,9 +13,10 @@ export async function generateStaticParams() {
   });
 }
 
-function GitHubPageLink(props: { project: string }) {
-  const projectName = props.project.split("_")[0];
-  const fullLink = `https://github.com/zwill22/${projectName}`;
+function GitHubPageLink(props: { filedata: FileData }) {
+  const repoOwner = props.filedata.owner;
+  const repoName = props.filedata.repo;
+  const fullLink = `https://github.com/${repoOwner}/${repoName}`;
 
   return (
     <GitHubLink
@@ -30,7 +32,9 @@ export default async function ProjectPage(props: {
 }) {
   const params = await props.params;
 
-  const project = fetchReact(params.project);
+  const filedata = getFileData(params.project);
+
+  const project = fetchMarkdownAsReact(filedata);
 
   const breadcrumbs = [
     { name: "Home", href: "/" },
@@ -46,7 +50,7 @@ export default async function ProjectPage(props: {
           current="Current Project"
         />
 
-        <GitHubPageLink project={params.project} />
+        <GitHubPageLink filedata={filedata} />
       </div>
 
       <div className="w-full text-left">{project}</div>
