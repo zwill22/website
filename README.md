@@ -37,16 +37,19 @@ pnpm run dev
 
 However, a `.env` file is necessary for secrets.
 
-Two sub-packages [markdown-to-html](packages/markdown-to-html/README.md),
+The sub-packages [markdown-to-html](packages/markdown-to-html/README.md),
 and [latex-to-html](packages/latex-to-html/README.md) are used to convert
 Markdown and LaTeX into HTML. These utilise the [unified][unified]
 JavaScript ecosystem for the conversion. Blog posts and project READMEs are converted from Markdown syntax, while the online version of my CV is converted
 from the original LaTeX version.
 
+The package [html-processor](packages/html-processor/README.md) uses [Rehype][rehype] to manipulate
+HTML into the desired format.
+
 Additional features include:
 
 - [Nodemailer][nodemailer] for SMTP email transport.
-- [Rehype][rehype] for HTML manipulation and conversion to React
+- [Rehype React][rehype-react] for converting HTML to React
 
 The aim is to further expand this website, adding new projects and blog posts.
 
@@ -65,6 +68,7 @@ The aim is to further expand this website, adding new projects and blog posts.
 [nodemailer]: https://nodemailer.com
 [unified]: https://unifiedjs.com
 [rehype]: https://github.com/rehypejs/rehype
+[rehype-react]: https://github.com/rehypejs/rehype-react
 [//]: # "Badges"
 [github-badge]: https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white
 [buy-me-coffee]: https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black
