@@ -19,8 +19,6 @@ describe("Conversion", () => {
 
     const result = await markdownToHtml(mdString);
 
-    console.log(result);
-
     assert.strictEqual(result.trim(), htmlString.trim());
   });
 });

@@ -103,7 +103,6 @@ function fixHtml(inputUrl, rootUrl) {
     }
   }
 
-  console.log(`${rootUrl}/${inputUrl}`);
   const url = new URL(`${rootUrl}/${inputUrl}`);
 
   return url.href;

@@ -9,7 +9,7 @@ export default function ErrorPage({
   error: Error & { digest?: string };
 }) {
   useEffect(() => {
-    console.log(error);
+    console.error(error);
   }, [error]);
 
   return (

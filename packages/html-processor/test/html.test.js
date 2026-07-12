@@ -22,8 +22,6 @@ describe("Processor", () => {
       "https://example.com/files",
     );
 
-    console.log(outputHTML);
-
     assert.strictEqual(outputHTML.trim(), expectedOutputHTML.trim());
   });
 });
