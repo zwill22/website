@@ -1,4 +1,4 @@
 export default async function processHTML(
   html: string,
-  rootUrl: string,
+  urlFunction: (url: string) => string,
 ): Promise<string>;

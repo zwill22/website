@@ -92,7 +92,7 @@ function cleanEmptyTags() {
   };
 }
 
-function fixHtml(inputUrl, rootUrl) {
+function fixHtml(inputUrl, urlFunction) {
   try {
     const url = new URL(inputUrl);
 
@@ -103,12 +103,12 @@ function fixHtml(inputUrl, rootUrl) {
     }
   }
 
-  const url = new URL(`${rootUrl}/${inputUrl}`);
+  const href = urlFunction(inputUrl)
 
-  return [url.href, "false"];
+  return [href, "false"];
 }
 
-function fixUrls(rootUrl) {
+function fixUrls(urlFunction) {
   return (tree) => {
     visit(tree, "element", (node) => {
       if (node.tagName !== "a" && node.tagName !== "img") {
@@ -116,14 +116,14 @@ function fixUrls(rootUrl) {
       }
 
       if (node.tagName === "a") {
-        const [html, external] = fixHtml(`${node.properties.href}`, rootUrl);
+        const [html, external] = fixHtml(`${node.properties.href}`, urlFunction);
 
         node.properties.href = html;
         node.properties.external = external;
       }
 
       if (node.tagName === "img") {
-        const [html, external] = fixHtml(`${node.properties.src}`, rootUrl);
+        const [html, external] = fixHtml(`${node.properties.src}`, urlFunction);
 
         node.properties.src = html;
         node.properties.external = external;
@@ -161,11 +161,11 @@ async function probeImageSizes() {
   };
 }
 
-export default async function processHTML(html, rootUrl) {
+export default async function processHTML(html, urlFunction) {
   try {
     const processor = await unified()
       .use(rehypeParse, { fragment: true })
-      .use(fixUrls, rootUrl)
+      .use(fixUrls, urlFunction)
       .use(rehypeHighlight)
       .use(rehypeUnwrapImages)
       .use(probeImageSizes)

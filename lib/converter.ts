@@ -55,11 +55,11 @@ async function convertHtmlIntoReact(html: string): Promise<React.JSX.Element> {
 
 export async function markdownToReact(
   input: string,
-  rootUrl: string,
+  urlFunction: (url: string) => string,
 ): Promise<React.JSX.Element> {
   const htmlString = await markdownToHtml(input);
 
-  const processedHTML = await processHTML(htmlString, rootUrl);
+  const processedHTML = await processHTML(htmlString, urlFunction);
 
   return convertHtmlIntoReact(processedHTML);
 }
@@ -67,7 +67,7 @@ export async function markdownToReact(
 export async function latexToReact(latex: string): Promise<React.JSX.Element> {
   const htmlString = await latexToHtml(latex);
 
-  const processedHTML = await processHTML(htmlString, "");
+  const processedHTML = await processHTML(htmlString, (url) => url);
 
   return convertHtmlIntoReact(processedHTML);
 }

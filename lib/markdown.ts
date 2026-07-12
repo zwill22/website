@@ -23,16 +23,26 @@ function getRootUrl(fileData: FileData) {
   return `https://raw.githubusercontent.com/${fileData.owner}/${fileData.repo}/refs/heads/main${path}`;
 }
 
-async function fetchGitHubMarkdown(fileData: FileData) {
+function fixUrl(url: string, fileData: FileData) {
   const rootUrl = getRootUrl(fileData);
 
+  const newUrl = new URL(`${rootUrl}/${url}`);
+  return newUrl.href;
+}
+
+async function fetchGitHubMarkdown(fileData: FileData) {
   const contentString = await fetchContent(
     fileData.owner,
     fileData.repo,
     fileData.path,
   );
 
-  return markdownToReact(contentString, rootUrl);
+  const urlFunction = (url: string) => {
+    return fixUrl(url, fileData);
+  }
+  
+
+  return markdownToReact(contentString, urlFunction);
 }
 
 export async function fetchMarkdownAsReact(fileData: FileData) {

@@ -65,9 +65,11 @@ This `htmlString` can be processed using:
 ```javascript
 import processHTML from "html-processor";
 
-const rootURL = "https://example.com/files";
+const urlFn = (url) => {
+  return `https://example.com/files/${url}`;
+};
 
-const result = await processHTML(htmlString, rootURL);
+const result = await processHTML(htmlString, urlFn);
 ```
 
 The output HTML string is:
