@@ -14,11 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        run: npm install -g pnpm@latest
-
       - name: Install ESLint
-        run: pnpm install
+        run: npm install
 
       - name: Run ESLint
-        run: pnpx eslint .
+        run: npx eslint .

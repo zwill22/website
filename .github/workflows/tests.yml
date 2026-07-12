@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: ["latex-to-html", "markdown-to-html"]
+        package: ["latex-to-html", "markdown-to-html", "html-processor"]
 
     defaults:
       run:
@@ -20,11 +20,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup pnpm
-      run: npm install -g pnpm@latest
-
     - name: Install dependencies
-      run: pnpm install
+      run: npm install
 
     - name: Run tests
-      run: pnpm test
+      run: npm test
