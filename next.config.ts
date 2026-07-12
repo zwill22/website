@@ -18,6 +18,17 @@ const config: NextConfig = {
         hostname: "custom-icon-badges.demolab.com",
         pathname: "/badge/**",
       },
+      {
+        protocol: "https",
+        hostname: "readthedocs.org",
+        pathname: "/projects/*/badge/**",
+      },
+      {
+        protocol: "https",
+        hostname: "github.com",
+        pathname: "/zwill22/*/actions/workflows/*/badge.svg",
+      },
+      
     ],
   },
 };

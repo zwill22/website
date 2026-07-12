@@ -97,7 +97,13 @@ function checkBadge(src: string | StaticImport) {
 
   return (
     isBadge(src) ||
-    src.startsWith("https://custom-icon-badges.demolab.com/badge/")
+    src.startsWith("https://custom-icon-badges.demolab.com/badge/") ||
+    src.match(
+      /https:\/\/readthedocs\.org\/projects\/\w+\/badge\/\?version=\w+/,
+    ) !== null ||
+    src.match(
+      /https:\/\/github\.com\/\w+\/\w+\/actions\/workflows\/[\w-\.]+\/badge\.svg/,
+    ) !== null
   );
 }
 
