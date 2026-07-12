@@ -19,18 +19,16 @@ import latexToHtml from "latex-to-html";
 import type { Root as HastRoot, Element } from "hast";
 import rehypePicture from "rehype-picture";
 import rehypeHighlight from "rehype-highlight";
-import rehypeProbeImageSize from "rehype-probe-image-size";
 import rehypeRemoveEmptyAttribute from "rehype-remove-empty-attribute";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import rehypeStringify from "rehype-stringify";
-import rehypeUrls from "rehype-urls";
 import { visitParents } from "unist-util-visit-parents";
 import { visit } from "unist-util-visit";
 import { remove } from "unist-util-remove";
 import { getErrorMessage } from "@/lib/errors";
-import { Url } from "node:url";
+import { fetchImageSize } from "@/lib/image";
 
-function rehypeListDepth() {
+function checkListDepth() {
   return (tree: HastRoot) => {
     visitParents(tree, "element", (node, parents) => {
       if (node.tagName !== "li") {
@@ -50,7 +48,7 @@ function rehypeListDepth() {
   };
 }
 
-function rehypeTagCodeBlocks() {
+function inlineCodeBlocks() {
   return (tree: HastRoot) => {
     visitParents(tree, "element", (node, parents) => {
       if (node.tagName !== "code") {
@@ -69,7 +67,7 @@ function rehypeTagCodeBlocks() {
   };
 }
 
-function rehypeLinks() {
+function inlineLinks() {
   return (tree: HastRoot) => {
     visit(tree, "element", (node) => {
       if (node.tagName !== "a") {
@@ -95,7 +93,7 @@ function rehypeLinks() {
   };
 }
 
-function rehypeClean() {
+function cleanEmptyTags() {
   return (tree: HastRoot) => {
     remove(tree, (node) => {
       if (node.type !== "element") {
@@ -115,28 +113,92 @@ function rehypeClean() {
   };
 }
 
-async function processHTML(html: string, rootUrl: string): Promise<string> {
-  function fixUrls(url: Url) {
-    if (url.protocol == null) {
-      return `${rootUrl}/${url.path ?? url.href}`;
-    }
+function fixHtml(inputUrl: string, rootUrl: string) {
+  try {
+    const url = new URL(inputUrl);
 
     return url.href;
+  } catch (error) {
+    const message = getErrorMessage(error);
+    if (message !== "Invalid URL") {
+      throw error;
+    }
   }
 
+  const url = new URL(`${rootUrl}/${inputUrl}`);
+
+  return url.href;
+}
+
+function fixUrls(rootUrl: string) {
+  return (tree: HastRoot) => {
+    visit(tree, "element", (node) => {
+      if (node.tagName !== "a" && node.tagName !== "img") {
+        return;
+      }
+
+      if (node.tagName === "a") {
+        const html = fixHtml(`${node.properties.href}`, rootUrl);
+
+        node.properties.href = html;
+      }
+
+      if (node.tagName === "img") {
+        const html = fixHtml(`${node.properties.src}`, rootUrl);
+
+        node.properties.src = html;
+      }
+    });
+  };
+}
+
+async function probeImageSizes() {
+  return async (tree: HastRoot) => {
+    // Collect relevent nodes
+    const matches: Element[] = [];
+
+    // Visit all nodes and add relevent ones to matches
+    visit(tree, "element", (node) => {
+      if (node.tagName !== "img") {
+        return;
+      }
+
+      const src = node.properties.src;
+
+      if (typeof src === "string") {
+        matches.push(node);
+      }
+    });
+
+    const promises = matches.map(async (match: Element) => {
+      const src = match.properties.src;
+
+      const imageSize = await fetchImageSize(`${src}`);
+
+      match.properties.width = imageSize.width;
+      match.properties.height = imageSize.height;
+    });
+
+    Promise.all(promises);
+
+    return tree;
+  };
+}
+
+async function processHTML(html: string, rootUrl: string): Promise<string> {
   try {
     const processor = await unified()
       .use(rehypeParse, { fragment: true })
-      .use(rehypeUrls, fixUrls)
+      .use(fixUrls, rootUrl)
       .use(rehypeHighlight)
       .use(rehypeUnwrapImages)
-      .use(rehypeProbeImageSize)
+      .use(probeImageSizes)
       .use(rehypePicture)
-      .use(rehypeListDepth)
-      .use(rehypeTagCodeBlocks)
-      .use(rehypeLinks)
+      .use(checkListDepth)
+      .use(inlineCodeBlocks)
+      .use(inlineLinks)
       .use(rehypeRemoveEmptyAttribute)
-      .use(rehypeClean)
+      .use(cleanEmptyTags)
       .use(rehypeStringify);
 
     const file = await processor.process(html);
@@ -144,12 +206,11 @@ async function processHTML(html: string, rootUrl: string): Promise<string> {
     return file.value;
   } catch (error: unknown) {
     const message = getErrorMessage(error);
-
     throw new Error(`Failed to process HTML: ${message}`);
   }
 }
 
-export async function htmlToReact(html: string): Promise<React.JSX.Element> {
+async function convertHtmlIntoReact(html: string): Promise<React.JSX.Element> {
   const production = {
     Fragment: prod.Fragment,
     jsx: prod.jsx,
@@ -191,7 +252,7 @@ export async function markdownToReact(
 
   const processedHTML = await processHTML(htmlString, rootUrl);
 
-  return htmlToReact(processedHTML);
+  return convertHtmlIntoReact(processedHTML);
 }
 
 export async function latexToReact(latex: string): Promise<React.JSX.Element> {
@@ -199,5 +260,5 @@ export async function latexToReact(latex: string): Promise<React.JSX.Element> {
 
   const processedHTML = await processHTML(htmlString, "");
 
-  return htmlToReact(processedHTML);
+  return convertHtmlIntoReact(processedHTML);
 }
