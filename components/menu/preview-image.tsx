@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { fetchImageSize } from "@/lib/image";
+import imageSize from "@coderosh/image-size";
 import { imageSizeFromFile } from "image-size/fromFile";
 
 interface ImageProps {
@@ -20,21 +20,21 @@ async function LocalImage(props: ImageProps) {
       alt={props.description}
       width={dimensions.width}
       height={dimensions.height}
-      className="object-contain max-h-full"
+      className="max-h-full object-contain"
     />
   );
 }
 
 async function RemoteImage(props: ImageProps) {
-  const imageSize = await fetchImageSize(props.src);
+  const { height, width } = await imageSize(props.src);
 
   return (
     <Image
       src={props.src}
       alt={props.description}
-      width={imageSize.width}
-      height={imageSize.height}
-      className="object-contain max-h-full"
+      width={width}
+      height={height}
+      className="max-h-full object-contain"
     />
   );
 }
@@ -43,7 +43,7 @@ export function PreviewImage(props: ImageProps) {
   const isRemote = props.src.startsWith("https");
 
   return (
-    <div className="flex flex-col h-full w-full relative justify-center">
+    <div className="relative flex h-full w-full flex-col justify-center">
       {isRemote ? <RemoteImage {...props} /> : <LocalImage {...props} />}
     </div>
   );
