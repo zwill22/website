@@ -32,9 +32,9 @@ Consider the following HTML:
 ```html
 <h1>Title</h1>
 <p>
-    Some paragraph with
-    <a href="https://www.wrexhamafc.co.uk/"> a random inline link, </a>
-    to test.
+  Some paragraph with
+  <a href="https://www.wrexhamafc.co.uk/"> a random inline link, </a>
+  to test.
 </p>
 <h2>Some code</h2>
 <pre><code class="language-python">
@@ -42,34 +42,26 @@ Consider the following HTML:
         # TODO: implement
         pass
 </code></pre>
-<p>
-    List of TODOs
-</p>
+<p>List of TODOs</p>
 <ul>
-    <li>Figure</li>
-    <li>Out</li>
-    <li>Everthing</li>
+  <li>Figure</li>
+  <li>Out</li>
+  <li>Everthing</li>
 </ul>
 <p>
-    <img
-    src="images/example.png"
-    alt="An example image."
-    title="Example image"
-    />
+  <img src="images/example.png" alt="An example image." title="Example image" />
 </p>
 <p>
-    Example code <code>print("Hello World!")</code> can appear anywhere,
-    like image links: 
-    <a href="LICENSE">
-        <img
-        src="https://img.shields.io/github/license" 
-        alt="License: MIT"
-        />
-    </a>
+  Example code <code>print("Hello World!")</code> can appear anywhere, like
+  image links:
+  <a href="LICENSE">
+    <img src="https://img.shields.io/github/license" alt="License: MIT" />
+  </a>
 </p>
 ```
 
 This `htmlString` can be processed using:
+
 ```javascript
 import processHTML from "html-processor";
 
@@ -81,42 +73,54 @@ const result = await processHTML(htmlString, rootURL);
 The output HTML string is:
 
 ```html
+Processor
 <h1>Title</h1>
 <p>
-    Some paragraph with
-    <a href="https://www.wrexhamafc.co.uk/" inline="true"> a random inline link, </a>
-    to test.
+  Some paragraph with
+  <a href="https://www.wrexhamafc.co.uk/" external="true" inline="true">
+    a random inline link,
+  </a>
+  to test.
 </p>
 <h2>Some code</h2>
-<pre><code class="hljs language-python">
+<pre><code class="hljs language-python" inline="false">
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">functionToSolveEverything</span>():
         <span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> implement</span>
         <span class="hljs-keyword">pass</span>
 </code></pre>
-<p>
-    List of TODOs
-</p>
+<p>List of TODOs</p>
 <ul>
-    <li depth="1">Figure</li>
-    <li depth="1">Out</li>
-    <li depth="1">Everthing</li>
+  <li depth="1">Figure</li>
+  <li depth="1">Out</li>
+  <li depth="1">Everthing</li>
 </ul>
 
-    <img src="https://example.com/files/images/example.png" alt="An example image." title="Example image">
+<img
+  src="https://example.com/files/images/example.png"
+  alt="An example image."
+  title="Example image"
+  external="false"
+/>
 
 <p>
-    Example code <code inline>print("Hello World!")</code> can appear anywhere,
-    like image links: 
-    <a href="https://example.com/files/LICENSE" inline="false">
-        <img src="https://img.shields.io/github/license" alt="License: MIT">
-    </a>
+  Example code <code inline="true">print("Hello World!")</code> can appear
+  anywhere, like image links:
+  <a href="https://example.com/files/LICENSE" external="false" inline="false">
+    <img
+      src="https://img.shields.io/github/license"
+      alt="License: MIT"
+      external="true"
+    />
+  </a>
 </p>
 ```
 
 Notice that:
+
 - Links `<a>` now have an `inline` attribute
+- Links and images now have an `external` attribute
 - Code blocks now have `hljs` highlighting, including `<span>` tags for keywords
-- Inline code blocks have an `inline` flag
+- Code blocks have an `inline` attribute
 - List items `<li>` have a `depth` attribute
 - Relative URLs now start with the `rootURL`
 

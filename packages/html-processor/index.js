@@ -36,11 +36,11 @@ function inlineCodeBlocks() {
         return;
       }
 
-      node.properties.inline = true;
+      node.properties.inline = "true";
       for (let i = 0; i < parents.length; i++) {
         const parent = parents[i];
         if (parent.type === "element" && parent.tagName === "pre") {
-          node.properties.inline = false;
+          node.properties.inline = "false";
           return;
         }
       }
@@ -96,7 +96,7 @@ function fixHtml(inputUrl, rootUrl) {
   try {
     const url = new URL(inputUrl);
 
-    return url.href;
+    return [url.href, "true"];
   } catch (error) {
     if (error.message !== "Invalid URL") {
       throw error;
@@ -105,7 +105,7 @@ function fixHtml(inputUrl, rootUrl) {
 
   const url = new URL(`${rootUrl}/${inputUrl}`);
 
-  return url.href;
+  return [url.href, "false"];
 }
 
 function fixUrls(rootUrl) {
@@ -116,15 +116,17 @@ function fixUrls(rootUrl) {
       }
 
       if (node.tagName === "a") {
-        const html = fixHtml(`${node.properties.href}`, rootUrl);
+        const [html, external] = fixHtml(`${node.properties.href}`, rootUrl);
 
         node.properties.href = html;
+        node.properties.external = external;
       }
 
       if (node.tagName === "img") {
-        const html = fixHtml(`${node.properties.src}`, rootUrl);
+        const [html, external] = fixHtml(`${node.properties.src}`, rootUrl);
 
         node.properties.src = html;
+        node.properties.external = external;
       }
     });
   };

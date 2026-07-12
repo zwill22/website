@@ -70,15 +70,15 @@ export function Paragraph(props: TypographyProps) {
 export function Code(props: {
   children?: ReactNode;
   className?: string;
-  inline: boolean;
+  inline: string;
 }) {
+  const inline = props.inline == "true";
+
   return (
     <Typography
       className={clsx(
         "hljs shrink font-mono not-italic",
-        props.inline
-          ? "shadow-foreground/50 rounded-lg shadow"
-          : "p-0 text-pretty",
+        inline ? "shadow-foreground/50 rounded-lg shadow" : "p-0 text-pretty",
         props.className,
       )}
       type="code"
@@ -151,8 +151,15 @@ export function ListItem(props: { children: ReactNode; depth: number }) {
 export function Link(props: {
   children: ReactNode;
   href: string;
-  inline: boolean;
+  inline: string;
+  external: string;
 }) {
+  const inline = props.inline === "true";
+  const external = props.external === "true";
+
+  const rel = external ? "noopener noreferrer" : undefined;
+  const target = external ? "_blank" : undefined;
+
   return (
     <HeroLink
       className={clsx(
@@ -161,8 +168,10 @@ export function Link(props: {
         "hover:shadow-background hover:shadow",
       )}
       href={props.href}
+      rel={rel}
+      target={target}
     >
-      {props.inline ? <span>{props.children}</span> : props.children}
+      {inline ? <span>{props.children}</span> : props.children}
     </HeroLink>
   );
 }
