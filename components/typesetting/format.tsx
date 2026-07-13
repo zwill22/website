@@ -6,11 +6,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { Typography, TypographyProps } from "@heroui/react";
 import clsx from "clsx";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { Link as HeroLink } from "@heroui/react";
 import Image, { ImageProps } from "next/image";
 import { isBadge } from "is-badge";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import imageSize from "@coderosh/image-size";
+import { PreviewImageSkeleton } from "@/components/menu/skeletons";
 
 export function Heading(props: TypographyProps) {
   return (
@@ -107,21 +109,54 @@ function checkBadge(src: string | StaticImport) {
   );
 }
 
-export function Img(props: ImageProps) {
-  const badge = checkBadge(props.src);
+async function Im(props: ImageProps) {
+  let { height, width } = await imageSize(props.src as string);
+
+  let factor = 1;
+
+  if (props.height) {
+    const h = props.height.toString().replace("/", "");
+
+    const originalHeight = Number(h);
+    factor = originalHeight / height;
+    height = originalHeight;
+    width *= factor;
+  }
 
   return (
     <div className="max-w-full shrink py-2">
-      {
-        // eslint-disable-next-line jsx-a11y/alt-text
+      <Image
+        src={props.src}
+        alt={props.alt}
+        loading="lazy"
+        height={height}
+        width={width}
+      />
+    </div>
+  );
+}
+
+export function Img(props: ImageProps) {
+  const badge = checkBadge(props.src);
+
+  if (badge) {
+    return (
+      <div className="max-w-full shrink py-2">
         <Image
+          src={props.src}
+          alt={props.alt}
           className="shadow-foreground mx-auto shadow"
           loading="lazy"
-          unoptimized={badge}
-          {...props}
+          unoptimized={true}
         />
-      }
-    </div>
+      </div>
+    );
+  }
+
+  return (
+    <Suspense fallback={<PreviewImageSkeleton />}>
+      <Im {...props} />
+    </Suspense>
   );
 }
 
