@@ -7,7 +7,6 @@ import rehypeStringify from "rehype-stringify";
 import { visitParents } from "unist-util-visit-parents";
 import { visit } from "unist-util-visit";
 import { remove } from "unist-util-remove";
-import imageSize from "@coderosh/image-size";
 
 function checkListDepth() {
   return (tree) => {
@@ -103,7 +102,7 @@ function fixHtml(inputUrl, urlFunction) {
     }
   }
 
-  const href = urlFunction(inputUrl)
+  const href = urlFunction(inputUrl);
 
   return [href, "false"];
 }
@@ -116,7 +115,10 @@ function fixUrls(urlFunction) {
       }
 
       if (node.tagName === "a") {
-        const [html, external] = fixHtml(`${node.properties.href}`, urlFunction);
+        const [html, external] = fixHtml(
+          `${node.properties.href}`,
+          urlFunction,
+        );
 
         node.properties.href = html;
         node.properties.external = external;
@@ -132,43 +134,13 @@ function fixUrls(urlFunction) {
   };
 }
 
-async function probeImageSizes() {
-  return async (tree) => {
-    // Collect relevent nodes
-    const matches = [];
-
-    // Visit all nodes and add relevent ones to matches
-    visit(tree, "element", (node) => {
-      if (node.tagName !== "img") {
-        return;
-      }
-
-      matches.push(node);
-    });
-
-    const promises = matches.map(async (match) => {
-      const src = match.properties.src;
-
-      const size = await imageSize(`${src}`);
-
-      match.properties.width = size.width;
-      match.properties.height = size.height;
-    });
-
-    Promise.all(promises);
-
-    return tree;
-  };
-}
-
 export default async function processHTML(html, urlFunction) {
   try {
-    const processor = await unified()
+    const processor = unified()
       .use(rehypeParse, { fragment: true })
       .use(fixUrls, urlFunction)
       .use(rehypeHighlight)
       .use(rehypeUnwrapImages)
-      .use(probeImageSizes)
       .use(checkListDepth)
       .use(inlineCodeBlocks)
       .use(inlineLinks)

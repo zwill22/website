@@ -19,7 +19,7 @@ describe("Processor", () => {
 
     const outputHTML = await processHTML(
       inputHTML,
-      "https://example.com/files",
+      (url) => `https://example.com/files/${url}`,
     );
 
     assert.strictEqual(outputHTML.trim(), expectedOutputHTML.trim());
