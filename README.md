@@ -8,6 +8,12 @@
 [![CSS][css-badge]](#)
 [![GitHub][github-badge]][repo]
 [![pnpm][pnpm-badge]][pnpm]
+[![GitHub Actions][github-actions-badge]][github-actions]
+[![Vercel][vercel-badge]][vercel]
+[![Vercel Deploy][vercel-deploy-badge]][website]
+[![ESLint][eslint-badge]][eslint]
+[![Package tests][package-tests-badge]][package-tests]
+[![Mocha][mocha-badge]](#)
 [![Coffee][buy-me-coffee]][coffee]
 [![License: MIT][license-badge]][license]
 [![No AI][noai-badge]](#)
@@ -53,7 +59,8 @@ Additional features include:
 
 The aim is to further expand this website, adding new projects and blog posts.
 
-[//]: # "Links"
+<!-- Links -->
+
 [typescript-lang]: https://www.typescriptlang.org
 [repo]: https://github.com/zwill22/website
 [license]: https://github.com/zwill22/website/blob/main/LICENSE
@@ -69,15 +76,29 @@ The aim is to further expand this website, adding new projects and blog posts.
 [unified]: https://unifiedjs.com
 [rehype]: https://github.com/rehypejs/rehype
 [rehype-react]: https://github.com/rehypejs/rehype-react
-[//]: # "Badges"
-[github-badge]: https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white
-[buy-me-coffee]: https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black
-[license-badge]: https://img.shields.io/github/license/zwill22/website
-[noai-badge]: https://custom-icon-badges.demolab.com/badge/No%20AI-2f2f2f?logo=non-ai&logoColor=white
-[next-badge]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
-[react-badge]: https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB
-[pnpm-badge]: https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=fff
-[typescript-badge]: https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff
-[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white
-[html-badge]: https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white
-[css-badge]: https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff
+[github-actions]: https://github.com/zwill22/website/actions
+[eslint]: https://github.com/zwill22/website/actions/workflows/eslint.yml
+[package-tests]: https://github.com/zwill22/website/actions/workflows/tests.yml
+[mocha]: https://mochajs.org/
+[vercel]: https://vercel.com
+[website]: https://website-iota-lake-90.vercel.app/
+
+<!-- Badges -->
+
+[github-badge]: https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white&style=for-the-badge
+[buy-me-coffee]: https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black&style=for-the-badge
+[license-badge]: https://img.shields.io/github/license/zwill22/website?style=for-the-badge
+[noai-badge]: https://custom-icon-badges.demolab.com/badge/No%20AI-2f2f2f?logo=non-ai&logoColor=white&style=for-the-badge
+[next-badge]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white&style=for-the-badge
+[react-badge]: https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB&style=for-the-badge
+[pnpm-badge]: https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=fff&style=for-the-badge
+[typescript-badge]: https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=for-the-badge
+[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white&style=for-the-badge
+[html-badge]: https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white&style=for-the-badge
+[css-badge]: https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff&style=for-the-badge
+[github-actions-badge]: https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white&style=for-the-badge
+[eslint-badge]: https://img.shields.io/github/actions/workflow/status/zwill22/website/eslint.yml?style=for-the-badge&logo=github&label=ESLint
+[package-tests-badge]: https://img.shields.io/github/actions/workflow/status/zwill22/website/tests.yml?style=for-the-badge&logo=github&label=Package%20Tests
+[mocha-badge]: https://img.shields.io/badge/Mocha-8D6748?logo=mocha&logoColor=fff&style=for-the-badge
+[vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white&style=for-the-badge
+[vercel-deploy-badge]: https://deploy-badge.vercel.app/vercel/website-iota-lake-90?name=Vercel&style=for-the-badge
