@@ -31,3 +31,6 @@ That's most of the basic markdown stuff, except lists, and:
 - more code examples
 
 etc. -->
+
+An html img tag:
+<img src="logo.png" alt="Logo" height=256 />

@@ -4,6 +4,7 @@ import remarkRehype from "remark-rehype";
 import rehypeSanitize from "rehype-sanitize";
 import rehypeFormat from "rehype-format";
 import rehypeStringify from "rehype-stringify";
+import rehypeRaw from "rehype-raw";
 import matter from "gray-matter";
 import { findAfter } from "unist-util-find-after";
 import { visitParents } from "unist-util-visit-parents";
@@ -42,7 +43,8 @@ export default async function markdownToHtml(input) {
     const processor = await unified()
       .use(remarkParse, { fragment: true })
       .use(remarkImages)
-      .use(remarkRehype)
+      .use(remarkRehype, { allowDangerousHtml: true })
+      .use(rehypeRaw)
       .use(rehypeSanitize)
       .use(rehypeFormat)
       .use(rehypeStringify);
