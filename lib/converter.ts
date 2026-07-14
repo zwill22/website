@@ -18,6 +18,14 @@ import markdownToHtml from "markdown-to-html";
 import latexToHtml from "latex-to-html";
 import processHTML from "html-processor";
 import { getErrorMessage } from "@/lib/errors";
+import {
+  Tbl,
+  TblBody,
+  TblCell,
+  TblCol,
+  TblHead,
+  TblRow,
+} from "@/components/typesetting/table";
 
 async function convertHtmlIntoReact(html: string): Promise<React.JSX.Element> {
   const production = {
@@ -35,6 +43,12 @@ async function convertHtmlIntoReact(html: string): Promise<React.JSX.Element> {
       img: Img,
       ul: List,
       li: ListItem,
+      table: Tbl,
+      thead: TblHead,
+      tr: TblRow,
+      th: TblCol,
+      tbody: TblBody,
+      td: TblCell,
     },
   };
 
