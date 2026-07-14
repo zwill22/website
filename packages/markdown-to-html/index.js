@@ -1,4 +1,5 @@
 import { unified } from "unified";
+import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeSanitize from "rehype-sanitize";
@@ -42,6 +43,7 @@ export default async function markdownToHtml(input) {
 
     const processor = await unified()
       .use(remarkParse, { fragment: true })
+      .use(remarkGfm)
       .use(remarkImages)
       .use(remarkRehype, { allowDangerousHtml: true })
       .use(rehypeRaw)
