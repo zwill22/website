@@ -134,6 +134,25 @@ function fixUrls(urlFunction) {
   };
 }
 
+function tableHeaders() {
+  return (tree) => {
+    visitParents(tree, "element", (node, parents) => {
+      if (node.tagName !== "tr") {
+        return;
+      }
+
+      const parent = parents[parents.length - 1];
+
+      if (parent.tagName != "thead") {
+        node.properties.header = "false"
+      } else {
+        node.properties.header = "true"
+      }
+    });
+  };
+}
+
+
 export default async function processHTML(html, urlFunction) {
   try {
     const processor = unified()
@@ -146,6 +165,7 @@ export default async function processHTML(html, urlFunction) {
       .use(inlineLinks)
       .use(rehypeRemoveEmptyAttribute)
       .use(cleanEmptyTags)
+      .use(tableHeaders)
       .use(rehypeStringify);
 
     const file = await processor.process(html);

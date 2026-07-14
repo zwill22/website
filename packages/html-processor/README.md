@@ -26,6 +26,7 @@ In addition the following (manual) methods are also used:
 - `inlineCodeBlocks` checks whether a `<code>` tag is inline or inside a `<pre>` tag
 - `inlineLinks` checks whether a link is inline (text only)
 - `cleanEmptyTags` removes empty text tags
+- `tableHeaders` tags `<tr>` elements as being inside a `<thead>` or not
 
 Consider the following HTML:
 
