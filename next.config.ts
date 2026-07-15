@@ -20,15 +20,9 @@ const config: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "readthedocs.org",
-        pathname: "/projects/*/badge/**",
+        hostname: "deploy-badge.vercel.app",
+        pathname: "/vercel/**",
       },
-      {
-        protocol: "https",
-        hostname: "github.com",
-        pathname: "/zwill22/*/actions/workflows/*/badge.svg",
-      },
-      
     ],
   },
 };

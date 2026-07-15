@@ -100,11 +100,9 @@ function checkBadge(src: string | StaticImport) {
   return (
     isBadge(src) ||
     src.startsWith("https://custom-icon-badges.demolab.com/badge/") ||
+    src.startsWith("https://deploy-badge.vercel.app/vercel/") ||
     src.match(
       /https:\/\/readthedocs\.org\/projects\/\w+\/badge\/\?version=\w+/,
-    ) !== null ||
-    src.match(
-      /https:\/\/github\.com\/\w+\/\w+\/actions\/workflows\/[\w-\.]+\/badge\.svg/,
     ) !== null
   );
 }
@@ -141,15 +139,13 @@ export function Img(props: ImageProps) {
 
   if (badge) {
     return (
-      <div className="max-w-full shrink py-2">
-        <Image
-          src={props.src}
-          alt={props.alt}
-          className="shadow-foreground mx-auto shadow"
-          loading="lazy"
-          unoptimized={true}
-        />
-      </div>
+      <Image
+        src={props.src}
+        alt={props.alt}
+        className="shadow-foreground/40 shadow"
+        loading="lazy"
+        unoptimized={true}
+      />
     );
   }
 
@@ -198,9 +194,10 @@ export function Link(props: {
   return (
     <HeroLink
       className={clsx(
-        "text-purple-800 underline dark:text-purple-300",
-        "hover:text-purple-600 dark:hover:text-purple-500",
-        "hover:shadow-background hover:shadow",
+        inline ? "text-purple-800 underline hover:text-purple-600" : "",
+        inline
+          ? "dark:text-purple-300 dark:hover:text-purple-500"
+          : "hover:shadow-foreground rounded-none p-0 hover:shadow",
       )}
       href={props.href}
       rel={rel}
