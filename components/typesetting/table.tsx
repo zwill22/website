@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 export function Tbl(props: { children: ReactNode }) {
   return (
-    <Table>
+    <Table className="font-plain shadow-foreground/50 my-2 px-2 shadow">
       <Table.ScrollContainer>
         <Table.Content aria-label="Team members" className="min-w-150">
           {props.children}
@@ -28,7 +28,11 @@ export function TblRow(props: { children: ReactNode; header: string }) {
 }
 
 export function TblCol(props: { children: ReactNode }) {
-  return <Table.Column>{props.children}</Table.Column>;
+  return (
+    <Table.Column className="text-xl font-semibold font-body">
+      {props.children}
+    </Table.Column>
+  );
 }
 
 export function TblBody(props: { children: ReactNode }) {
