@@ -173,7 +173,7 @@ export async function sendEmail(_: State, formData: FormData) {
 
   const { subject, email, message } = validatedFields.data;
 
-  const htmlMessage = await markdownToHtml(message);
+  const htmlMessage = await markdownToHtml(message, false);
 
   const emailService = new MailService();
   try {

@@ -71,7 +71,7 @@ export async function markdownToReact(
   input: string,
   urlFunction: (url: string) => string,
 ): Promise<React.JSX.Element> {
-  const htmlString = await markdownToHtml(input);
+  const htmlString = await markdownToHtml(input, true);
 
   const processedHTML = await processHTML(htmlString, urlFunction);
 
