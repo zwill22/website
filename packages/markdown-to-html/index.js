@@ -37,7 +37,7 @@ function remarkImages() {
   };
 }
 
-export default async function markdownToHtml(input) {
+export default async function markdownToHtml(input, allowHtml) {
   try {
     const matterResult = matter(input);
 
@@ -45,7 +45,7 @@ export default async function markdownToHtml(input) {
       .use(remarkParse, { fragment: true })
       .use(remarkGfm)
       .use(remarkImages)
-      .use(remarkRehype, { allowDangerousHtml: true })
+      .use(remarkRehype, { allowDangerousHtml: allowHtml })
       .use(rehypeRaw)
       .use(rehypeSanitize)
       .use(rehypeFormat)

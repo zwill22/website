@@ -12,13 +12,18 @@ async function fetchFile(path) {
 
 describe("Conversion", () => {
   it("Markdown to HTML", async () => {
-    const [mdString, htmlString] = await Promise.all([
+    const [mdString, htmlString1, htmlString2] = await Promise.all([
       fetchFile("./test/input.md"),
-      fetchFile("./test/output.html"),
+      fetchFile("./test/output1.html"),
+      fetchFile("./test/output2.html"),
     ]);
 
-    const result = await markdownToHtml(mdString);
+    const result1 = await markdownToHtml(mdString, true);
 
-    assert.strictEqual(result.trim(), htmlString.trim());
+    assert.strictEqual(result1.trim(), htmlString1.trim());
+
+    const result2 = await markdownToHtml(mdString, false);
+
+    assert.strictEqual(result2.trim(), htmlString2.trim());
   });
 });
