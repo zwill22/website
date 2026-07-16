@@ -170,7 +170,7 @@ export function SponserButton() {
         "text-white bg-(--coffee-red) text-[28px] h-10 shadow shadow-foreground/50",
         "hover:shadow hover:shadow-foreground",
       )}
-      text="Buy me a Diet Cola"
+      text="Buy me a Cherry Cola"
     >
       🥤
     </BuyMeACoffee>
