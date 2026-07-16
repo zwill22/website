@@ -58,18 +58,23 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative bg-foreground/5 h-dvh md:flex">
+          <div className="bg-foreground/5 relative h-dvh md:flex">
             <div className="hidden md:flex">
               <Sidebar />
             </div>
             <div className="md:hidden">
               <Navbar />
             </div>
-            <div className="relative grow bg-background h-full max-w-full overflow-y-scroll ">
-              <main className="container grow mx-auto py-16 md:py-4 p-4">
+            <div className="bg-background relative flex h-full max-w-full grow flex-col overflow-y-scroll">
+              <main className="container mx-auto grow p-4 py-16 md:py-4">
                 {children}
               </main>
-              <footer className="fixed md:hidden bottom-0 right-0 p-5 z-30">
+              <div className="flex max-h-full grow flex-col justify-end">
+                <p className="font-plain text-foreground/50 p-2 text-center text-sm">
+                  <i className="bi bi-c-circle" /> 2026 Z M Williams
+                </p>
+              </div>
+              <footer className="fixed right-0 bottom-0 z-30 p-5 md:hidden">
                 <SponserWidget />
               </footer>
             </div>
