@@ -1,22 +1,28 @@
-import fs from "fs/promises";
 import { MenuItemData } from "@/lib/types";
 import { getErrorMessage } from "@/lib/errors";
-import { fetchReposList } from "@/lib/github";
+import { fetchContent, fetchReposList, imageUrlRoot } from "@/lib/github";
+
+const owner = "zwill22";
+const projects_repo = "projects";
 
 type ProjectData = {
   name: string;
-  blurb: string;
-  imageSrc: string;
-  imgAlt: string;
+  description: string;
+  thumbnail: string;
+  alt: string;
 };
 
-async function fetchProjectData() {
+async function fetchProjectData(): Promise<ProjectData[]> {
   try {
-    const jsonString = await fs.readFile("./data/project-data.json", {
-      encoding: "utf8",
-    });
+    const fetchedData = await fetchContent(
+      owner,
+      projects_repo,
+      "projects.json",
+    );
 
-    return JSON.parse(jsonString).projects;
+    const projects = JSON.parse(fetchedData).projects;
+
+    return projects;
   } catch (error) {
     const message = getErrorMessage(error);
     throw new Error(`Failed to read project data: ${message}`);
@@ -37,13 +43,23 @@ function convertData(repo: Repo, jsonData: ProjectData[]) {
     return data.name == repo.name;
   });
 
+  const image = (() => {
+    const urlRoot = imageUrlRoot(owner, projects_repo);
+    const image = repoData?.thumbnail ?? "";
+    if (image.length > 0) {
+      return `${urlRoot}/thumbnails/${image}`;
+    }
+
+    return "logo.svg";
+  })();
+
   return {
     id: `github_repo_${repo.owner.login}_${repo.name}_path_README_md_${repo.id}`,
     title: repo.name,
     date: new Date(repo.created_at ?? ""),
-    preview: repoData?.blurb ?? "Repo",
-    image: repoData?.imageSrc ?? "logo.svg",
-    imageDescription: repoData?.imgAlt ?? "Placeholder image",
+    preview: repoData?.description ?? "Repo",
+    image: image,
+    imageDescription: repoData?.alt ?? "Placeholder image",
   };
 }
 
@@ -53,14 +69,14 @@ export async function fetchProjects(): Promise<MenuItemData[]> {
     fetchReposList(),
   ]);
 
-  const data = repoData.filter((repo) => {
+  const data = repoData.filter((repo: Repo) => {
     return jsonData.find((data: ProjectData) => {
       return data.name == repo.name;
     });
   });
 
   return data
-    .map((repo) => convertData(repo, jsonData))
+    .map((repo: Repo) => convertData(repo, jsonData))
     .sort(
       (project1: MenuItemData, project2: MenuItemData) =>
         project2.date.getTime() - project1.date.getTime(),

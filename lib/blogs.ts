@@ -1,5 +1,5 @@
 import { getErrorMessage } from "@/lib/errors";
-import { fetchContent } from "@/lib/github";
+import { fetchContent, imageUrlRoot } from "@/lib/github";
 import { MenuItemData } from "@/lib/types";
 
 type BlogData = {
@@ -11,9 +11,6 @@ type BlogData = {
   description: string;
 };
 
-const urlRoot =
-  "https://raw.githubusercontent.com/zwill22/blogs/refs/heads/main";
-
 export async function fetchBlogPosts(): Promise<MenuItemData[]> {
   try {
     const owner = "zwill22";
@@ -21,6 +18,7 @@ export async function fetchBlogPosts(): Promise<MenuItemData[]> {
 
     const fetchedData = await fetchContent(owner, repo, "meta.json");
     const contents = JSON.parse(fetchedData).contents;
+    const urlRoot = imageUrlRoot(owner, repo);
 
     return contents
       .map((blog: BlogData) => {

@@ -27,7 +27,7 @@ const octokit = new Octokit({
   auth: authToken,
 });
 
-export async function fetchReposList() {
+export async function fetchReposList()  {
   try {
     const response = await octokit.request("GET /users/{username}/repos", {
       username: username,
@@ -102,4 +102,8 @@ export async function fetchContent(
   } else {
     throw new Error(`Unsupported encoding for data: ${data.encoding}`);
   }
+}
+
+export function imageUrlRoot(owner: string, repo: string) {
+  return `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/main`;
 }
