@@ -1,4 +1,4 @@
-name: Test packages
+name: Package tests
 
 on:
   push:
@@ -9,6 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: ["latex-to-html", "markdown-to-html", "html-processor"]
+
+    defaults:
+      run:
+        working-directory: ./packages/${{matrix.package}}
 
     steps:
     - uses: actions/checkout@v6
