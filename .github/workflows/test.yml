@@ -26,4 +26,6 @@ jobs:
           GITHUB_CV_REPO_OWNER: ${{secrets.CV_REPO_OWNER}}
           GITHUB_CV_REPO_NAME: ${{secrets.CV_REPO_NAME}}
           GITHUB_CV_ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          CV_FILE: ${{secrets.CV_FILE}}
+          BIB_FILE: ${{secrets.BIB_FILE}}
         run: npm run test
