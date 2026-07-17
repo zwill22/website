@@ -17,7 +17,7 @@ const authToken = (() => {
   const token = process.env.GITHUB_PUBLIC_ACCESS_TOKEN;
 
   if (!token) {
-    throw new Error("No github authentication token found");
+    throw new Error("Cannot find environment variable: GITHUB_PUBLIC_ACCESS_TOKEN");
   }
 
   return token;

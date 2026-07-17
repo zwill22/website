@@ -7,7 +7,7 @@ const owner = (() => {
   const val = process.env.GITHUB_CV_REPO_OWNER;
 
   if (!val) {
-    throw new Error("No github cv repo owner found");
+    throw new Error("Cannot find environment variable: GITHUB_CV_REPO_OWNER");
   }
 
   return val;
@@ -17,7 +17,7 @@ const repo = (() => {
   const val = process.env.GITHUB_CV_REPO_NAME;
 
   if (!val) {
-    throw new Error("No github cv repo found");
+    throw new Error("Cannot find environment variable: GITHUB_CV_REPO_NAME");
   }
 
   return val;
@@ -27,7 +27,7 @@ const authToken = (() => {
   const token = process.env.GITHUB_CV_ACCESS_TOKEN;
 
   if (!token) {
-    throw new Error("No github cv authentication token found");
+    throw new Error("Cannot find environment variable: GITHUB_CV_ACCESS_TOKEN")
   }
 
   return token;
@@ -135,7 +135,7 @@ const cvFile = (() => {
   const file = process.env.CV_FILE;
 
   if (!file) {
-    throw new Error("No CV file found");
+    throw new Error("Cannot find environment variable: CV_FILE");
   }
 
   return file;
@@ -145,7 +145,7 @@ const bibFile = (() => {
   const file = process.env.BIB_FILE;
 
   if (!file) {
-    throw new Error("No Bibliography file found");
+    throw new Error("Cannot find environment variable: BIB_FILE");
   }
 
   return file;

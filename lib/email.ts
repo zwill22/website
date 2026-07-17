@@ -15,33 +15,33 @@ interface MessageDetails {
 
 function checkVariable(variable: string | undefined, name: string) {
   if (!variable) {
-    throw new Error(`${name} not found`);
+    throw new Error(`Cannot find envrionment variable: ${name}`);
   }
 
   return variable;
 }
 
-const smtpHost = checkVariable(process.env.EMAIL_APP_SMTP_HOST, "SMTP Host");
+const smtpHost = checkVariable(process.env.EMAIL_APP_SMTP_HOST, "EMAIL_APP_SMTP_HOST");
 
 const smtpPort = (() => {
-  const port = checkVariable(process.env.EMAIL_APP_SMTP_PORT, "SMTP Port");
+  const port = checkVariable(process.env.EMAIL_APP_SMTP_PORT, "EMAIL_APP_SMTP_PORT");
 
   return Number(port);
 })();
 
 const userName = checkVariable(
   process.env.EMAIL_APP_AUTH_ADDRESS,
-  "SMTP Account address",
+  "EMAIL_APP_AUTH_ADDRESS",
 );
 
 const password = checkVariable(
   process.env.EMAIL_APP_AUTH_PASSWORD,
-  "Account password",
+  "EMAIL_APP_AUTH_PASSWORD",
 );
 
 const sendAddress = checkVariable(
   process.env.EMAIL_APP_SMTP_ADDRESS,
-  "Send address",
+  "EMAIL_APP_SMTP_ADDRESS",
 );
 class MailService {
   async send(messageDetails: MessageDetails) {

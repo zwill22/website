@@ -124,7 +124,7 @@ const emailAddress = (() => {
   const email = process.env.NEXT_PUBLIC_EMAIL_ADDRESS;
 
   if (!email) {
-    throw new Error("Cannot find email address");
+    throw new Error("Cannot find environment variable: NEXT_PUBLIC_EMAIL_ADDRESS");
   }
 
   return email;
