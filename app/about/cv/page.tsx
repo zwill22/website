@@ -1,8 +1,9 @@
-import { Heading } from "@/components/typesetting/format";
+import { Heading } from "@/components/react/format";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
 import { fetchCV } from "@/lib/cv";
 import { ContactLinks, CVPdfLink } from "@/components/links";
+import { htmlToReact } from "@/components/react/converter";
 
 function CVHeader() {
   return (
@@ -14,7 +15,8 @@ function CVHeader() {
 }
 
 export default async function CV() {
-  const cvComponent = await fetchCV();
+  const cvHtml = await fetchCV();
+  const cvComponent = htmlToReact(cvHtml);
 
   const crumbs = [
     { name: "Home", href: "/" },

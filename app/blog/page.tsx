@@ -2,7 +2,7 @@ import { Section, SectionTitle } from "@/components/ui/section";
 import { fetchBlogPosts } from "@/lib/blogs";
 import { ListMenu } from "@/components/menu/menu-list";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
-import { Paragraph } from "@/components/typesetting/format";
+import { Paragraph } from "@/components/react/format";
 import { Suspense } from "react";
 import { ListSkeleton } from "@/components/menu/skeletons";
 

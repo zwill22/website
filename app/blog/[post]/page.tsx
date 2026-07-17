@@ -1,8 +1,9 @@
+import { htmlToReact } from "@/components/react/converter";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
 import { fetchBlogPosts } from "@/lib/blogs";
 import { getFileData } from "@/lib/filedata";
-import { fetchMarkdownAsReact } from "@/lib/markdown";
+import { fetchHtml } from "@/lib/markdown";
 
 export async function generateStaticParams() {
   const posts = await fetchBlogPosts();
@@ -18,7 +19,8 @@ export default async function BlogPage(props: {
   const params = await props.params;
   const filedata = getFileData(params.post);
 
-  const post = await fetchMarkdownAsReact(filedata);
+  const postHtml = await fetchHtml(filedata);
+  const post = htmlToReact(postHtml);
 
   const breadcrumbs = [
     { name: "Home", href: "/" },

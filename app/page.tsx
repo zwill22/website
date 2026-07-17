@@ -1,6 +1,6 @@
 import { Section, SectionTitle } from "@/components/ui/section";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
-import { MinorHeading, Paragraph } from "@/components/typesetting/format";
+import { MinorHeading, Paragraph } from "@/components/react/format";
 import { ContactLinks, Link } from "@/components/links";
 import { MainSeparator } from "@/components/ui/separator";
 

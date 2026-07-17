@@ -1,5 +1,5 @@
 import { ButtonContent, ButtonLabel } from "@/components/about/button";
-import { MinorHeading } from "@/components/typesetting/format";
+import { MinorHeading } from "@/components/react/format";
 import {
   CheckCircleIcon,
   DocumentDuplicateIcon,

@@ -1,6 +1,6 @@
 import { ButtonLink } from "@/components/links";
 import { ButtonContent, ButtonLabel } from "@/components/about/button";
-import { MinorHeading } from "@/components/typesetting/format";
+import { MinorHeading } from "@/components/react/format";
 import { GithubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { siteConfig } from "@/config/site";
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";

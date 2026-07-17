@@ -1,4 +1,4 @@
-import { markdownToReact } from "@/lib/converter";
+import { convertMarkdown } from "@/lib/converter";
 import { FileData } from "@/lib/filedata";
 import { fetchContent } from "@/lib/github";
 
@@ -42,10 +42,10 @@ async function fetchGitHubMarkdown(fileData: FileData) {
   }
   
 
-  return markdownToReact(contentString, urlFunction);
+  return convertMarkdown(contentString, urlFunction);
 }
 
-export async function fetchMarkdownAsReact(fileData: FileData) {
+export async function fetchHtml(fileData: FileData) {
   if (fileData.source === "github") {
     return fetchGitHubMarkdown(fileData);
   } else {

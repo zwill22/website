@@ -1,4 +1,4 @@
-import { latexToReact } from "@/lib/converter";
+import { convertLatex } from "@/lib/converter";
 import { fetchContent } from "@/lib/github";
 import bibtexParse from "@orcid/bibtex-parse-js";
 import { Octokit } from "octokit";
@@ -161,5 +161,5 @@ export async function fetchCV() {
 
   const fullData = processLatex(data, bib);
 
-  return latexToReact(fullData);
+  return convertLatex(fullData);
 }

@@ -2,8 +2,9 @@ import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
 import { fetchProjects } from "@/lib/projects";
 import { GitHubLink } from "@/components/links";
-import { fetchMarkdownAsReact } from "@/lib/markdown";
+import { fetchHtml } from "@/lib/markdown";
 import { FileData, getFileData } from "@/lib/filedata";
+import { htmlToReact } from "@/components/react/converter";
 
 export async function generateStaticParams() {
   const projects = await fetchProjects();
@@ -34,7 +35,8 @@ export default async function ProjectPage(props: {
 
   const filedata = getFileData(params.project);
 
-  const project = fetchMarkdownAsReact(filedata);
+  const projectHtml = await fetchHtml(filedata);
+  const project = htmlToReact(projectHtml);
 
   const breadcrumbs = [
     { name: "Home", href: "/" },
