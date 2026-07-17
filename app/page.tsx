@@ -103,7 +103,7 @@ function PreviewMenu(props: { children: ReactNode; length: number }) {
   return (
     <Suspense fallback={<PreviewMenuSkeleton length={props.length} />}>
       <div className="w-full">
-        <Card className="shadow-foreground/50 w-full light:bg-purple-50/90 p-2 shadow dark:bg-(--purple-black)/90">
+        <Card className="shadow-foreground/50 light:bg-purple-50/90 w-full p-2 shadow dark:bg-(--purple-black)/90">
           <ScrollShadow className="p-4" orientation="horizontal">
             {props.children}
           </ScrollShadow>
@@ -123,8 +123,8 @@ export default function Home() {
       </Suspense>
 
       <Paragraph>
-        Welcome to my site. I created this place, so that I can showcase my
-        work, who I am, and some of my writings. If you wish to contact me, I am
+        Welcome to my site. I created this place so that I can showcase my work,
+        who I am, and some of my writings. If you wish to contact me, I am
         available through the links below.
       </Paragraph>
 

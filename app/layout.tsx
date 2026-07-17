@@ -27,7 +27,9 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/favicon.ico",
+    icon: siteConfig.logo,
+    shortcut: siteConfig.logo,
+    apple: siteConfig.logo,
   },
 };
 
@@ -71,7 +73,8 @@ export default function RootLayout({
               </main>
               <div className="flex max-h-full grow flex-col justify-end">
                 <p className="font-plain text-foreground/50 p-2 text-center text-sm">
-                  <i className="bi bi-c-circle" /> 2026 Z M Williams
+                  <i className="bi bi-c-circle" /> {new Date().getFullYear()} Z
+                  M Williams
                 </p>
               </div>
               <footer className="fixed right-0 bottom-0 z-30 p-5 md:hidden">

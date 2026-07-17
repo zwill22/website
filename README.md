@@ -1,4 +1,4 @@
-# My website
+# My website: ZMWill
 
 [![TypeScript][typescript-badge]][typescript-lang]
 [![Next.js][next-badge]][nextjs]
@@ -29,19 +29,7 @@ Source code for my website, built using:
 - [Bootstrap Icons][bootstrap]
 - [pnpm][pnpm] package manager
 
-This project was initialised using the HeroUI template:
-
-```bash
-npx heroui-cli@latest init -t app -p pnpm
-```
-
-To run the site in development mode, run:
-
-```bash
-pnpm run dev
-```
-
-However, a `.env` file is necessary for secrets.
+The site is an online space for me to share my work. To visit the site, click: [zmwill.uk][website]
 
 The sub-packages [markdown-to-html](packages/markdown-to-html/README.md),
 and [latex-to-html](packages/latex-to-html/README.md) are used to convert
@@ -81,7 +69,7 @@ The aim is to further expand this website, adding new projects and blog posts.
 [package-tests]: https://github.com/zwill22/website/actions/workflows/test-packages.yml
 [mocha]: https://mochajs.org/
 [vercel]: https://vercel.com
-[website]: https://website-iota-lake-90.vercel.app/
+[website]: https://www.zmwill.uk
 
 <!-- Badges -->
 
