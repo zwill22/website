@@ -99,7 +99,7 @@ export function BuyMeACoffee(props: {
         className={clsx(
           "min-w-52.5 border-none radius rounded-xl py-0 px-6 leading-6.75 decoration-0",
           "inline-flex items-center box-border hover:decoration-0 hover:cursor-pointer",
-          "active:decoration-0 active:cursor-pointer focus:decoration-0 focus:cursor-pointer",
+          "focus:decoration-0 focus:cursor-pointer",
           props.className,
         )}
         href={props.href}
@@ -150,7 +150,7 @@ export function BuyMeWidget(props: {
         className={clsx(
           "flex border-none radius rounded-full px-1.5 py-1 leading-6.75 decoration-0",
           "inline-flex items-center box-border hover:decoration-0 hover:cursor-pointer",
-          "active:decoration-0 active:cursor-pointer focus:decoration-0 focus:cursor-pointer",
+          "focus:decoration-0 focus:cursor-pointer",
           props.className,
         )}
         href={props.href}

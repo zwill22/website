@@ -33,21 +33,21 @@ function CopyButton(props: { children: ReactNode }) {
   return (
     <Button
       className={clsx(
-        "absolute bg-white/90 dark:bg-white/10 shadow shadow-white/50 cursor-pointer top-0 right-0",
+        "absolute light:bg-white/90 dark:bg-white/10 shadow shadow-white/50 cursor-pointer top-0 right-0",
         "px-3 py-0 mr-4 my-2.5 z-2 rounded-lg hover:bg-white/80 dark:hover:bg-white/20 hover:shadow-white",
-        "hover:text-bold border border-white/90 dark:border-white/10 hover:border-white/10",
+        "hover:text-bold border light:border-white/90 dark:border-white/10 hover:border-white/10",
       )}
       onPress={() => copyToClipboard(props.children)}
     >
       <div>
         {isOk ? (
           isCopied ? (
-            <i className="bi bi-check-circle text-black dark:text-white" />
+            <i className="bi bi-check-circle light:text-black dark:text-white" />
           ) : (
-            <i className="bi bi-clipboard text-black dark:text-white" />
+            <i className="bi bi-clipboard light:text-black dark:text-white" />
           )
         ) : (
-          <i className="bi bi-x-circle text-black dark:text-white" />
+          <i className="bi bi-x-circle light:text-black dark:text-white" />
         )}
       </div>
     </Button>

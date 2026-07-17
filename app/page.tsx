@@ -103,7 +103,7 @@ function PreviewMenu(props: { children: ReactNode; length: number }) {
   return (
     <Suspense fallback={<PreviewMenuSkeleton length={props.length} />}>
       <div className="w-full">
-        <Card className="shadow-foreground/50 w-full bg-purple-50/90 p-2 shadow dark:bg-(--purple-black)/90">
+        <Card className="shadow-foreground/50 w-full light:bg-purple-50/90 p-2 shadow dark:bg-(--purple-black)/90">
           <ScrollShadow className="p-4" orientation="horizontal">
             {props.children}
           </ScrollShadow>

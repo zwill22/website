@@ -51,7 +51,7 @@ export function PreviewMenuItemSkeleton(props: {
 export function PreviewMenuSkeleton(props: { length: number }) {
   return (
     <div className="w-full flex flex-col h-fit">
-      <Card className="h-full p-2 bg-purple-50/90 dark:bg-(--purple-black)/90 shadow shadow-foreground/50">
+      <Card className="h-full p-2 light:bg-purple-50/90 dark:bg-(--purple-black)/90 shadow shadow-foreground/50">
         <ScrollShadow className="p-4 flex-1" orientation="horizontal">
           <div className="flex flex-row h-full gap-4">
             {Array.from({ length: 4 }).map((_, idx) => (
