@@ -1,6 +1,6 @@
 import { convertMarkdown } from "@/lib/converter";
 import { FileData } from "@/lib/filedata";
-import { fetchContent } from "@/lib/github";
+import { fetchContent, imageUrlRoot } from "@/lib/github";
 
 function getRootUrl(fileData: FileData) {
   const path = (() => {
@@ -20,7 +20,9 @@ function getRootUrl(fileData: FileData) {
     return root_path;
   })();
 
-  return `https://raw.githubusercontent.com/${fileData.owner}/${fileData.repo}/refs/heads/main${path}`;
+  const root = imageUrlRoot(fileData.owner, fileData.repo);
+
+  return `${root}${path}`;
 }
 
 function fixUrl(url: string, fileData: FileData) {
@@ -39,8 +41,7 @@ async function fetchGitHubMarkdown(fileData: FileData) {
 
   const urlFunction = (url: string) => {
     return fixUrl(url, fileData);
-  }
-  
+  };
 
   return convertMarkdown(contentString, urlFunction);
 }

@@ -17,7 +17,9 @@ const authToken = (() => {
   const token = process.env.GITHUB_PUBLIC_ACCESS_TOKEN;
 
   if (!token) {
-    throw new Error("Cannot find environment variable: GITHUB_PUBLIC_ACCESS_TOKEN");
+    throw new Error(
+      "Cannot find environment variable: GITHUB_PUBLIC_ACCESS_TOKEN",
+    );
   }
 
   return token;
@@ -27,7 +29,7 @@ const octokit = new Octokit({
   auth: authToken,
 });
 
-export async function fetchReposList()  {
+export async function fetchReposList() {
   try {
     const response = await octokit.request("GET /users/{username}/repos", {
       username: username,
@@ -104,6 +106,7 @@ export async function fetchContent(
   }
 }
 
-export function imageUrlRoot(owner: string, repo: string) {
-  return `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/main`;
+export function imageUrlRoot(owner: string, repo: string, branch?: string) {
+  const branchName = branch ?? "main";
+  return `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/${branchName}`;
 }
