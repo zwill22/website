@@ -7,8 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  eslint:
-    name: Run eslint scanning
+  build:
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
