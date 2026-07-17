@@ -8,10 +8,10 @@
 [![CSS][css-badge]](#)
 [![GitHub][github-badge]][repo]
 [![pnpm][pnpm-badge]][pnpm]
-[![GitHub Actions][github-actions-badge]][github-actions]
 [![Vercel][vercel-badge]][vercel]
 [![Vercel Deploy][vercel-deploy-badge]][website]
-[![ESLint][eslint-badge]][eslint]
+[![GitHub Actions][github-actions-badge]][github-actions]
+[![Tests][test-badge]][test]
 [![Package tests][package-tests-badge]][package-tests]
 [![Mocha][mocha-badge]](#)
 [![Coffee][buy-me-coffee]][coffee]
@@ -77,8 +77,8 @@ The aim is to further expand this website, adding new projects and blog posts.
 [rehype]: https://github.com/rehypejs/rehype
 [rehype-react]: https://github.com/rehypejs/rehype-react
 [github-actions]: https://github.com/zwill22/website/actions
-[eslint]: https://github.com/zwill22/website/actions/workflows/eslint.yml
-[package-tests]: https://github.com/zwill22/website/actions/workflows/tests.yml
+[test]: https://github.com/zwill22/website/actions/workflows/test.yml
+[package-tests]: https://github.com/zwill22/website/actions/workflows/test-packages.yml
 [mocha]: https://mochajs.org/
 [vercel]: https://vercel.com
 [website]: https://website-iota-lake-90.vercel.app/
@@ -97,8 +97,8 @@ The aim is to further expand this website, adding new projects and blog posts.
 [html-badge]: https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white&style=for-the-badge
 [css-badge]: https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff&style=for-the-badge
 [github-actions-badge]: https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white&style=for-the-badge
-[eslint-badge]: https://img.shields.io/github/actions/workflow/status/zwill22/website/eslint.yml?style=for-the-badge&logo=github&label=ESLint
-[package-tests-badge]: https://img.shields.io/github/actions/workflow/status/zwill22/website/tests.yml?style=for-the-badge&logo=github&label=Package%20Tests
+[test-badge]: https://img.shields.io/github/actions/workflow/status/zwill22/website/test.yml?style=for-the-badge&logo=github&label=Tests
+[package-tests-badge]: https://img.shields.io/github/actions/workflow/status/zwill22/website/test-packages.yml?style=for-the-badge&logo=github&label=Package%20Tests
 [mocha-badge]: https://img.shields.io/badge/Mocha-8D6748?logo=mocha&logoColor=fff&style=for-the-badge
 [vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white&style=for-the-badge
 [vercel-deploy-badge]: https://deploy-badge.vercel.app/vercel/website-iota-lake-90?name=Vercel&style=for-the-badge
