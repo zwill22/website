@@ -1,4 +1,4 @@
-import { PostSkeleton } from "@/components/markdown/skeletons";
+import { PostSkeleton } from "@/components/code/skeletons";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { Section } from "@/components/ui/section";
 

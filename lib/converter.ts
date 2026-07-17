@@ -1,5 +1,5 @@
 import prod from "react/jsx-runtime";
-import { CodeBlock } from "@/components/markdown/code-block";
+import { CodeBlock } from "@/components/code/code-block";
 import {
   Link,
   Paragraph,
