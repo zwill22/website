@@ -3,6 +3,8 @@ import "dotenv/config"
 import { z } from "zod";
 import { assert } from "chai";
 import { fetchProjects } from "@/lib/projects";
+import { fetchContent } from "@/lib/github";
+import imageSize from "@coderosh/image-size";
 
 const projectSchema = z.object({
   id: z.string(),
@@ -14,16 +16,22 @@ const projectSchema = z.object({
 });
 
 describe("fetchProjects Tests", () => {
-  it("should fetch project list", async () => {
+  it("Validate project list", async () => {
     const projects = await fetchProjects();
 
-    for (let i = 0; i < projects.length; i++) {
-      const project = projects[i];
+    projects.forEach(async (project) => {
+      const p = projectSchema.safeParse(project);
 
-      projectSchema.safeParse(project);
-    }
+      assert.isTrue(p.success);
 
-    
-    assert.equal(projects, projects);
-  });
+      // Check readme exists
+      const readme = await fetchContent("zwill22", project.title, "README.md");
+      assert.isString(readme);
+
+      // Indirectly check image is valid
+      const {height, width} = await imageSize(project.image);
+      assert.isAbove(height, 0);
+      assert.isAbove(width, 0);
+    });
+});
 });
