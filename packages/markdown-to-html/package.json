@@ -2,7 +2,6 @@
   "name": "markdown-to-html",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "pnpm run build",
     "test": "mocha"
