@@ -37,7 +37,7 @@ export function ButtonLink(props: {
     <Link
       className={clsx(
         "button",
-        "bg-foreground/5 text-foreground shadow shadow-foreground/50",
+        "bg-foreground/5 text-foreground shadow-foreground/50 shadow",
         "hover:bg-foreground/10 hover:shadow-foreground hover:font-semibold",
         props.className,
       )}
@@ -57,7 +57,7 @@ function ContactLink(props: {
   return (
     <div className="flex flex-col justify-center">
       <ButtonLink
-        className="flex py-1 px-2 rounded-md gap-2"
+        className="flex gap-2 rounded-md px-2 py-1"
         href={props.href}
         aria-label={props["aria-label"]}
       >
@@ -72,8 +72,8 @@ export function CVPdfLink() {
 
   return (
     <ContactLink href={hrefPdf} aria-label="Link to PDF version of CV">
-      <p className={clsx("font-bold text-nowrap text-sm")}>PDF Version</p>
-      <div className="text-lg my-auto">
+      <p className={clsx("text-sm font-bold text-nowrap")}>PDF Version</p>
+      <div className="my-auto text-lg">
         <i className="bi bi-filetype-pdf" />
       </div>
     </ContactLink>
@@ -86,10 +86,10 @@ function Email() {
       href="/about?showCompose=true#contactme"
       aria-label="Email link"
     >
-      <div className="text-lg my-auto">
+      <div className="my-auto text-lg">
         <i className="bi bi-envelope" />
       </div>
-      <p className={clsx("font-bold font-plain text-nowrap text-sm")}>
+      <p className={clsx("font-plain text-sm font-bold text-nowrap")}>
         Send Message
       </p>
     </ContactLink>
@@ -99,12 +99,12 @@ function Email() {
 function LinkedIn() {
   return (
     <ContactLink href={siteConfig.links.linkedin} aria-label="LinkedIn">
-      <div className="text-lg my-auto">
+      <div className="my-auto text-lg">
         <i className="bi bi-linkedin" />
       </div>
       <p
         className={clsx(
-          "font-bold font-plain text-nowrap text-sm text-right w-18",
+          "font-plain w-18 text-right text-sm font-bold text-nowrap",
         )}
       >
         LinkedIn
@@ -116,12 +116,12 @@ function LinkedIn() {
 function GitHub() {
   return (
     <ContactLink href={siteConfig.links.github} aria-label="LinkedIn">
-      <div className="text-lg my-auto">
+      <div className="my-auto text-lg">
         <i className="bi bi-github" />
       </div>
       <p
         className={clsx(
-          "font-bold font-plain text-nowrap text-sm text-right w-16",
+          "font-plain w-16 text-right text-sm font-bold text-nowrap",
         )}
       >
         GitHub
@@ -154,21 +154,21 @@ export function GitHubLink(props: {
     <div className="flex flex-col justify-center">
       <Link
         className={clsx(
-          "flex py-1 px-2 rounded-md gap-2 bg-(--github-black)",
-          "shadow shadow-foreground/50 hover:ring hover:ring-foreground",
-          "hover:ring-offset-1 hover:ring-offset-background",
+          "flex gap-2 rounded-md bg-(--github-black) px-2 py-1",
+          "shadow-foreground/50 hover:ring-foreground shadow hover:ring",
+          "hover:ring-offset-background hover:ring-offset-1",
         )}
         href={props.href}
         aria-label={props["aria-label"]}
       >
         <p
           className={clsx(
-            "font-github text-white font-bold text-nowrap text-sm",
+            "font-github text-sm font-bold text-nowrap text-white",
           )}
         >
           {props.label}
         </p>
-        <div className="text-white text-lg">
+        <div className="text-lg text-white">
           <i className="bi bi-github" />
         </div>
       </Link>
@@ -180,8 +180,8 @@ export function LogoLink() {
   return (
     <Link
       className={clsx(
-        "flex items-center hover:shadow hover:shadow-foreground",
-        "focus-visible:outline-0 focus-visible:ring-offset-background",
+        "hover:shadow-foreground flex items-center hover:shadow",
+        "focus-visible:ring-offset-background focus-visible:outline-0",
         "focus-visible:ring-foreground",
       )}
       href="/"
@@ -200,7 +200,7 @@ export function SocialLink(props: {
   return (
     <Link
       className={clsx(
-        "px-1 focus-visible:ring-foreground focus-visible:rounded-lg",
+        "focus-visible:ring-foreground px-1 focus-visible:rounded-lg",
         "focus-visible:ring-offset-background hover:opacity-80",
       )}
       aria-label={props.label}

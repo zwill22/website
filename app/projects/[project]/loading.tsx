@@ -8,18 +8,18 @@ function GitHubLinkSkeleton() {
     <div className="flex flex-col justify-center">
       <div
         className={clsx(
-          "flex py-1 px-2 rounded-md gap-2 bg-(--github-black)",
-          "shadow shadow-foreground/20",
+          "flex gap-2 rounded-md bg-(--github-black) px-2 py-1",
+          "shadow-foreground/20 shadow",
         )}
       >
         <p
           className={clsx(
-            "font-github text-white font-bold text-nowrap text-sm my-auto",
+            "font-github my-auto text-sm font-bold text-nowrap text-white",
           )}
         >
           View on GitHub
         </p>
-        <div className="text-white text-lg">
+        <div className="text-lg text-white">
           <i className="bi bi-github" />
         </div>
       </div>

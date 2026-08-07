@@ -15,16 +15,22 @@ interface MessageDetails {
 
 function checkVariable(variable: string | undefined, name: string) {
   if (!variable) {
-    throw new Error(`Cannot find envrionment variable: ${name}`);
+    throw new Error(`Cannot find environment variable: ${name}`);
   }
 
   return variable;
 }
 
-const smtpHost = checkVariable(process.env.EMAIL_APP_SMTP_HOST, "EMAIL_APP_SMTP_HOST");
+const smtpHost = checkVariable(
+  process.env.EMAIL_APP_SMTP_HOST,
+  "EMAIL_APP_SMTP_HOST",
+);
 
 const smtpPort = (() => {
-  const port = checkVariable(process.env.EMAIL_APP_SMTP_PORT, "EMAIL_APP_SMTP_PORT");
+  const port = checkVariable(
+    process.env.EMAIL_APP_SMTP_PORT,
+    "EMAIL_APP_SMTP_PORT",
+  );
 
   return Number(port);
 })();

@@ -11,7 +11,7 @@ function BuyMeACoffeeLogo(props: {
       viewBox="0 0 884 1279"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-8 mb-0 border-0 align-middle scale-90 shrink-0 shadow-none"
+      className="mb-0 h-8 shrink-0 scale-90 border-0 align-middle shadow-none"
     >
       <path
         d="M791.109 297.518L790.231 297.002L788.201 296.383C789.018 297.072 790.04 297.472 791.109 297.518Z"
@@ -97,9 +97,9 @@ export function BuyMeACoffee(props: {
     <div>
       <Link
         className={clsx(
-          "min-w-52.5 border-none radius rounded-xl py-0 px-6 leading-6.75 decoration-0",
-          "inline-flex items-center box-border hover:decoration-0 hover:cursor-pointer",
-          "focus:decoration-0 focus:cursor-pointer",
+          "radius min-w-52.5 rounded-xl border-none px-6 py-0 leading-6.75 decoration-0",
+          "box-border inline-flex items-center hover:cursor-pointer hover:decoration-0",
+          "focus:cursor-pointer focus:decoration-0",
           props.className,
         )}
         href={props.href}
@@ -108,7 +108,7 @@ export function BuyMeACoffee(props: {
         {children}
         <span
           className={clsx(
-            "text-left ml-2 inline-block leading-0 w-full shrink-0 whitespace-nowrap",
+            "ml-2 inline-block w-full shrink-0 text-left leading-0 whitespace-nowrap",
             font,
           )}
         >
@@ -124,7 +124,7 @@ export function DefaultVersion() {
     <div className="hidden sm:flex">
       <BuyMeACoffee
         href="https://buymeacoffee.com/zmwill"
-        className="text-white bg-(--coffee-yellow) text-[28px] h-10"
+        className="h-10 bg-(--coffee-yellow) text-[28px] text-white"
       />
     </div>
   );
@@ -148,9 +148,9 @@ export function BuyMeWidget(props: {
     <div>
       <Link
         className={clsx(
-          "flex border-none radius rounded-full px-1.5 py-1 leading-6.75 decoration-0",
-          "inline-flex items-center box-border hover:decoration-0 hover:cursor-pointer",
-          "focus:decoration-0 focus:cursor-pointer",
+          "radius flex rounded-full border-none px-1.5 py-1 leading-6.75 decoration-0",
+          "box-border inline-flex items-center hover:cursor-pointer hover:decoration-0",
+          "focus:cursor-pointer focus:decoration-0",
           props.className,
         )}
         href={props.href}
@@ -162,13 +162,13 @@ export function BuyMeWidget(props: {
   );
 }
 
-export function SponserButton() {
+export function SponsorButton() {
   return (
     <BuyMeACoffee
       href="https://buymeacoffee.com/zmwill"
       className={clsx(
-        "text-white bg-(--coffee-red) text-[28px] h-10 shadow shadow-foreground/50",
-        "hover:shadow hover:shadow-foreground",
+        "shadow-foreground/50 h-10 bg-(--coffee-red) text-[28px] text-white shadow",
+        "hover:shadow-foreground hover:shadow",
       )}
       text="Buy me a Cherry Cola"
     >
@@ -177,13 +177,13 @@ export function SponserButton() {
   );
 }
 
-export function SponserWidget() {
+export function SponsorWidget() {
   return (
     <BuyMeWidget
       href="https://buymeacoffee.com/zmwill"
       className={clsx(
-        "text-white bg-(--coffee-red) text-lg shadow shadow-foreground/50",
-        "hover:shadow hover:shadow-foreground",
+        "shadow-foreground/50 bg-(--coffee-red) text-lg text-white shadow",
+        "hover:shadow-foreground hover:shadow",
       )}
     >
       🥤

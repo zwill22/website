@@ -37,7 +37,6 @@ function Intro() {
   );
 }
 
-
 export default function About() {
   const crumbs = [{ name: "Home", href: "/" }];
 

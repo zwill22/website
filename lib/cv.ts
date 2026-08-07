@@ -27,7 +27,7 @@ const authToken = (() => {
   const token = process.env.GITHUB_CV_ACCESS_TOKEN;
 
   if (!token) {
-    throw new Error("Cannot find environment variable: GITHUB_CV_ACCESS_TOKEN")
+    throw new Error("Cannot find environment variable: GITHUB_CV_ACCESS_TOKEN");
   }
 
   return token;

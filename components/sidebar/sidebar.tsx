@@ -1,7 +1,7 @@
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
 import { GithubIcon, LinkedInIcon } from "@/components/ui/icons";
-import { SponserButton } from "@/components/ui/coffee";
+import { SponsorButton } from "@/components/ui/coffee";
 import { LogoLink, SocialLink } from "@/components/links";
 import { SideLink } from "@/components/sidebar/link";
 import clsx from "clsx";
@@ -10,11 +10,11 @@ export function Sidebar() {
   return (
     <nav
       className={clsx(
-        "left-0 top-0 z-40 h-dvh backdrop-blur-lg shadow bg-linear-to-t from-background",
+        "from-background top-0 left-0 z-40 h-dvh bg-linear-to-t shadow backdrop-blur-lg",
         "light:to-white dark:to-black",
       )}
     >
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex h-full flex-col justify-between">
         <div className="flex flex-col gap-6">
           <div className="flex justify-between p-2">
             <LogoLink />
@@ -35,7 +35,7 @@ export function Sidebar() {
           </div>
         </div>
         <div className="mx-auto px-2 py-4">
-          <SponserButton />
+          <SponsorButton />
         </div>
       </div>
     </nav>

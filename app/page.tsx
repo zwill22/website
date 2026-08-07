@@ -1,4 +1,4 @@
-import { Section, SectionTitle } from "@/components/ui/section";
+import { Section } from "@/components/ui/section";
 import { PageBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { MinorHeading, Paragraph } from "@/components/react/format";
 import { ContactLinks, Link } from "@/components/links";
@@ -118,9 +118,7 @@ export default function Home() {
     <Section>
       <PageBreadcrumbs current="Home" />
 
-      <Suspense fallback={<SectionTitle>Hello There</SectionTitle>}>
-        <HomeTitle />
-      </Suspense>
+      <HomeTitle />
 
       <Paragraph>
         Welcome to my site. I created this place so that I can showcase my work,

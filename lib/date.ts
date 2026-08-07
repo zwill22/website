@@ -1,4 +1,3 @@
-
 function getMonth(n: number) {
   switch (n + 1) {
     case 1:
