@@ -4,8 +4,8 @@
 [![Next.js][next-badge]][nextjs]
 [![React][react-badge]][react]
 [![Tailwind CSS][tailwind-badge]][tailwindcss]
-[![HTML][html-badge]](#)
-[![CSS][css-badge]](#)
+[![HTML][html-badge]][website]
+[![CSS][css-badge]][website]
 [![GitHub][github-badge]][repo]
 [![pnpm][pnpm-badge]][pnpm]
 [![Vercel][vercel-badge]][vercel]
@@ -13,10 +13,10 @@
 [![GitHub Actions][github-actions-badge]][github-actions]
 [![Tests][test-badge]][test]
 [![Package tests][package-tests-badge]][package-tests]
-[![Mocha][mocha-badge]](#)
+[![Mocha][mocha-badge]][mocha]
 [![Coffee][buy-me-coffee]][coffee]
 [![License: MIT][license-badge]][license]
-[![No AI][noai-badge]](#)
+[![No AI][noai-badge]][website]
 
 Source code for my website, built using:
 

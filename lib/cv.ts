@@ -127,6 +127,7 @@ function processLatex(inputData: string, bibData: BibEntry[]) {
   data1 = data1.replace(/\\CS/gm, "C\#");
   data1 = data1.replace("\\LaTeX", "LaTeX");
   data1 = data1.replace(/\\makeheading{(\s+\%?\\.*)*\s?}/gm, "");
+  data1 = data1.replace(/\\makeheading\{[\s\S]*?\\section/gm, "\\section");
 
   return data1;
 }
