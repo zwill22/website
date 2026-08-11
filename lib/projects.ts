@@ -30,7 +30,7 @@ async function fetchProjectData(): Promise<ProjectData[]> {
 }
 
 interface Repo {
-  id: number;
+  id: number | bigint;
   name: string;
   created_at?: string | null;
   owner: {
@@ -69,14 +69,14 @@ export async function fetchProjects(): Promise<MenuItemData[]> {
     fetchReposList(),
   ]);
 
-  const data = repoData.filter((repo: any) => {
+  const data = repoData.filter((repo: Repo) => {
     return jsonData.find((data: ProjectData) => {
       return data.name == repo.name;
     });
   });
 
   return data
-    .map((repo: any) => convertData(repo, jsonData))
+    .map((repo: Repo) => convertData(repo, jsonData))
     .sort(
       (project1: MenuItemData, project2: MenuItemData) =>
         project2.date.getTime() - project1.date.getTime(),
