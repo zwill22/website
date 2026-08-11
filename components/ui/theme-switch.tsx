@@ -19,9 +19,9 @@ export function ThemeSwitch(props: { className?: string }) {
     <Button
       aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
       className={clsx(
-        "px-1 transition-opacity hover:opacity-60 cursor-pointer",
+        "cursor-pointer px-1 transition-opacity hover:opacity-60",
         "inline-flex items-center justify-center",
-        "w-auto h-auto bg-transparent rounded-lg text-foreground",
+        "text-foreground h-auto w-auto rounded-lg bg-transparent",
         "focus-visible:ring-foreground focus-visible:ring-offset-background",
         props.className,
       )}

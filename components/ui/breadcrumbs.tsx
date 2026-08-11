@@ -17,19 +17,19 @@ export function PageBreadcrumbs(props: {
   const iconLink = props.back ?? "/";
 
   return (
-    <div className="flex gap-2 w-full">
+    <div className="flex w-full gap-2">
       <Link className="py-2" href={iconLink} aria-label="Back to previous page">
         <div
           className={clsx(
-            "flex flex-col size-5 text-foreground hover:text-foreground/80",
-            props.back ? "hover:ring hover:ring-foreground" : "",
-            "rounded-full m-1",
+            "text-foreground hover:text-foreground/80 flex size-5 flex-col",
+            props.back ? "hover:ring-foreground hover:ring" : "",
+            "m-1 rounded-full",
           )}
         >
           {props.back ? <ArrowUturnLeftIcon /> : <HomeIcon />}
         </div>
       </Link>
-      <div className="flex flex-col w-full text-left justify-center">
+      <div className="flex w-full flex-col justify-center text-left">
         <Breadcrumbs>
           {breadcrumbs.map((crumb) => (
             <Breadcrumbs.Item

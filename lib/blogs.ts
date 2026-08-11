@@ -11,6 +11,17 @@ type BlogData = {
   description: string;
 };
 
+function toCode(input: string): number {
+  let out = 0;
+
+  for (let i = 0; i < input.length; i++) {
+    const c = input.charCodeAt(i);
+    out = (Math.imul(31, out) + c) | 0;
+  }
+
+  return Math.abs(out);
+}
+
 export async function fetchBlogPosts(): Promise<MenuItemData[]> {
   try {
     const owner = "zwill22";
@@ -23,7 +34,7 @@ export async function fetchBlogPosts(): Promise<MenuItemData[]> {
     return contents
       .map((blog: BlogData) => {
         const imageSrc = `${urlRoot}/${blog.image}`;
-        const numId = Math.floor(Math.random() * 1e8);
+        const numId = toCode(imageSrc);
 
         const pathComponents = blog.file.split(".");
         if (pathComponents.length !== 2) {

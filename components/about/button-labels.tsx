@@ -12,8 +12,8 @@ import {
 export function ContactLabel() {
   return (
     <>
-      <div className="flex gap-4 justify-center">
-        <EnvelopeIcon className="size-12 my-auto" />
+      <div className="flex justify-center gap-4">
+        <EnvelopeIcon className="my-auto size-12" />
         <div className="flex flex-col justify-center">
           <MinorHeading>Contact Me</MinorHeading>
         </div>
@@ -60,7 +60,7 @@ export function Copy(props: { copied: boolean; error: boolean }) {
 
 export function Reset() {
   return (
-    <div className="flex gap-4 justify-center">
+    <div className="flex justify-center gap-4">
       <div>
         <i className="bi bi-arrow-counterclockwise" />
       </div>
@@ -71,7 +71,7 @@ export function Reset() {
 
 export function Submit() {
   return (
-    <div className="flex gap-4 justify-center">
+    <div className="flex justify-center gap-4">
       <PaperAirplaneIcon className="my-auto" />
       <p className="hidden md:inline">Send</p>
     </div>

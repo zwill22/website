@@ -18,7 +18,7 @@ import {
 } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar/sidebar";
-import { SponserWidget } from "@/components/ui/coffee";
+import { SponsorWidget } from "@/components/ui/coffee";
 
 export const metadata: Metadata = {
   title: {
@@ -78,7 +78,7 @@ export default function RootLayout({
                 </p>
               </div>
               <footer className="fixed right-0 bottom-0 z-30 p-5 md:hidden">
-                <SponserWidget />
+                <SponsorWidget />
               </footer>
             </div>
           </div>

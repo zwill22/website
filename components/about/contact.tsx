@@ -39,7 +39,9 @@ function SubjectField(props: { currentState: State }) {
       <Label>Subject</Label>
       <Input placeholder="Help needed!" />
       {isInvalid ? (
-        errors.map((e, idx) => <FieldError key={`subject-field-error-${idx}`}>{e}</FieldError>)
+        errors.map((e, idx) => (
+          <FieldError key={`subject-field-error-${idx}`}>{e}</FieldError>
+        ))
       ) : (
         <FieldError />
       )}
@@ -59,7 +61,9 @@ function EmailField(props: { currentState: State }) {
       <Label>Contact Email</Label>
       <Input placeholder="c.kent@dailyplanet.com" />
       {isInvalid ? (
-        errors.map((e, idx) => <FieldError key={`email-field-error-${idx}`}>{e}</FieldError>)
+        errors.map((e, idx) => (
+          <FieldError key={`email-field-error-${idx}`}>{e}</FieldError>
+        ))
       ) : (
         <FieldError />
       )}
@@ -83,7 +87,9 @@ function MessageBox(props: { currentState: State }) {
         markdown.
       </Description>
       {isInvalid ? (
-        errors.map((e, idx) => <FieldError key={`message-box-error-${idx}`}>{e}</FieldError>)
+        errors.map((e, idx) => (
+          <FieldError key={`message-box-error-${idx}`}>{e}</FieldError>
+        ))
       ) : (
         <FieldError />
       )}
@@ -100,13 +106,13 @@ function ComposeBox() {
   const [state, formAction] = useActionState(sendEmail, initialState);
 
   return (
-    <div className="flex w-full font-plain md:text-lg rounded-xl p-4 mx-auto shadow shadow-foreground/50">
-      <Form className="flex flex-col w-full gap-4 md:gap-6" action={formAction}>
+    <div className="font-plain shadow-foreground/50 mx-auto flex w-full rounded-xl p-4 shadow md:text-lg">
+      <Form className="flex w-full flex-col gap-4 md:gap-6" action={formAction}>
         <SubjectField currentState={state} />
         <EmailField currentState={state} />
         <MessageBox currentState={state} />
 
-        <div className="w-full flex justify-between">
+        <div className="flex w-full justify-between">
           <Button type="reset" variant="secondary" className="rounded-md">
             <Reset />
           </Button>
@@ -124,7 +130,9 @@ const emailAddress = (() => {
   const email = process.env.NEXT_PUBLIC_EMAIL_ADDRESS;
 
   if (!email) {
-    throw new Error("Cannot find environment variable: NEXT_PUBLIC_EMAIL_ADDRESS");
+    throw new Error(
+      "Cannot find environment variable: NEXT_PUBLIC_EMAIL_ADDRESS",
+    );
   }
 
   return email;
@@ -171,9 +179,9 @@ export function ContactMe() {
 
   return (
     <div id="contactme" className="flex flex-col gap-4">
-      <div className="flex w-full gap-4 justify-between">
+      <div className="flex w-full justify-between gap-4">
         <ContactLabel />
-        <div className="h-full flex flex-col gap-2 my-auto">
+        <div className="my-auto flex h-full flex-col gap-2">
           <ButtonGroup className="font-plain">
             <Button
               className="rounded-l-md"

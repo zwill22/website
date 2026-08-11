@@ -5,7 +5,7 @@ import { MenuButton } from "@/components/ui/buttons";
 import { LogoLink, SocialLink } from "@/components/links";
 import clsx from "clsx";
 import { Drawer } from "@heroui/react";
-import { SponserButton } from "@/components/ui/coffee";
+import { SponsorButton } from "@/components/ui/coffee";
 import { SideLink } from "@/components/sidebar/link";
 
 function NavMenu() {
@@ -30,7 +30,7 @@ function NavMenu() {
               </nav>
             </Drawer.Body>
             <Drawer.Footer className="flex justify-center">
-              <SponserButton />
+              <SponsorButton />
             </Drawer.Footer>
           </Drawer.Dialog>
         </Drawer.Content>
@@ -43,7 +43,7 @@ export function Navbar() {
   return (
     <nav
       className={clsx(
-        "fixed top-0 z-40 w-full border-b border-separator shadow",
+        "border-separator fixed top-0 z-40 w-full border-b shadow",
         "bg-background/70 backdrop-blur-lg",
       )}
     >

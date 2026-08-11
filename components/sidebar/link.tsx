@@ -57,17 +57,17 @@ export function SideLink(props: { item: Item }) {
   return (
     <Link
       className={clsx(
-        "flex gap-4 rounded-md w-full h-10 hover:shadow-foreground",
-        "font-semibold text-foreground transition-colors px-4",
+        "hover:shadow-foreground flex h-10 w-full gap-4 rounded-md",
+        "text-foreground px-4 font-semibold transition-colors",
         isActive
-          ? "shadow shadow-foreground/20 bg-foreground/5 hover:shadow-foreground/30"
-          : "hover:bg-foreground/5 hover:shadow hover:shadow-foreground/40 hover:font-extrabold hover:text-foreground",
+          ? "shadow-foreground/20 bg-foreground/5 hover:shadow-foreground/30 shadow"
+          : "hover:bg-foreground/5 hover:shadow-foreground/40 hover:text-foreground hover:font-extrabold hover:shadow",
       )}
       key={item.label}
       href={item.href}
       aria-label={item.label}
     >
-      <div className="flex flex-col justify-center size-5">
+      <div className="flex size-5 flex-col justify-center">
         {isActive ? <SolidIcon /> : <Icon />}
       </div>
       {item.label}

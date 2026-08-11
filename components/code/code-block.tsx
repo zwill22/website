@@ -33,9 +33,9 @@ function CopyButton(props: { children: ReactNode }) {
   return (
     <Button
       className={clsx(
-        "absolute light:bg-white/90 dark:bg-white/10 shadow shadow-white/50 cursor-pointer top-0 right-0",
-        "px-3 py-0 mr-4 my-2.5 z-2 rounded-lg hover:bg-white/80 dark:hover:bg-white/20 hover:shadow-white",
-        "hover:text-bold border light:border-white/90 dark:border-white/10 hover:border-white/10",
+        "light:bg-white/90 absolute top-0 right-0 cursor-pointer shadow shadow-white/50 dark:bg-white/10",
+        "z-2 my-2.5 mr-4 rounded-lg px-3 py-0 hover:bg-white/80 hover:shadow-white dark:hover:bg-white/20",
+        "hover:text-bold light:border-white/90 border hover:border-white/10 dark:border-white/10",
       )}
       onPress={() => copyToClipboard(props.children)}
     >
@@ -58,8 +58,8 @@ export function CodeBlock(props: { children: ReactNode }) {
   return (
     <pre
       className={clsx(
-        "relative flex grow w-full p-2 overflow-x-scroll z-0 hljs rounded-lg",
-        "pr-10 shadow shadow-foreground my-2 md:my-4",
+        "hljs relative z-0 flex w-full grow overflow-x-scroll rounded-lg p-2",
+        "shadow-foreground my-2 pr-10 shadow md:my-4",
       )}
     >
       {props.children}

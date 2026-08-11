@@ -30,7 +30,7 @@ async function fetchProjectData(): Promise<ProjectData[]> {
 }
 
 interface Repo {
-  id: number;
+  id: number | bigint;
   name: string;
   created_at?: string | null;
   owner: {

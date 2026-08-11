@@ -1,5 +1,5 @@
 import "mocha";
-import "dotenv/config"
+import "dotenv/config";
 import { z } from "zod";
 import { assert } from "chai";
 import { fetchProjects } from "@/lib/projects";
@@ -12,7 +12,7 @@ const projectSchema = z.object({
   date: z.date(),
   preview: z.string(),
   image: z.url(),
-  imageDescription: z.string()
+  imageDescription: z.string(),
 });
 
 describe("fetchProjects Tests", () => {
@@ -29,9 +29,9 @@ describe("fetchProjects Tests", () => {
       assert.isString(readme);
 
       // Indirectly check image is valid
-      const {height, width} = await imageSize(project.image);
+      const { height, width } = await imageSize(project.image);
       assert.isAbove(height, 0);
       assert.isAbove(width, 0);
     });
-});
+  });
 });

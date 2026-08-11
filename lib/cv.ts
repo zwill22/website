@@ -27,7 +27,7 @@ const authToken = (() => {
   const token = process.env.GITHUB_CV_ACCESS_TOKEN;
 
   if (!token) {
-    throw new Error("Cannot find environment variable: GITHUB_CV_ACCESS_TOKEN")
+    throw new Error("Cannot find environment variable: GITHUB_CV_ACCESS_TOKEN");
   }
 
   return token;
@@ -127,6 +127,7 @@ function processLatex(inputData: string, bibData: BibEntry[]) {
   data1 = data1.replace(/\\CS/gm, "C\#");
   data1 = data1.replace("\\LaTeX", "LaTeX");
   data1 = data1.replace(/\\makeheading{(\s+\%?\\.*)*\s?}/gm, "");
+  data1 = data1.replace(/\\makeheading\{[\s\S]*?\\section/gm, "\\section");
 
   return data1;
 }

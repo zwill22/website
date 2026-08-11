@@ -9,8 +9,8 @@ import { ButtonGroup } from "@heroui/react";
 function SocialLabel() {
   return (
     <>
-      <div className="flex gap-4 justify-center">
-        <ChatBubbleLeftRightIcon className="size-12 my-auto" />
+      <div className="flex justify-center gap-4">
+        <ChatBubbleLeftRightIcon className="my-auto size-12" />
         <div className="flex flex-col justify-center">
           <MinorHeading>Social Media</MinorHeading>
         </div>
@@ -52,9 +52,9 @@ function LinkedInButton() {
 
 export function SocialMedia() {
   return (
-    <div className="flex w-full gap-4 justify-between">
+    <div className="flex w-full justify-between gap-4">
       <SocialLabel />
-      <div className="h-full flex flex-col gap-2 my-auto">
+      <div className="my-auto flex h-full flex-col gap-2">
         <ButtonGroup className="font-plain">
           <GitHubButton />
           <LinkedInButton />
