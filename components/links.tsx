@@ -130,17 +130,12 @@ function GitHub() {
   );
 }
 
-function Phone() {
-  return <></>;
-}
-
 export function ContactLinks() {
   return (
     <div className="flex w-full gap-4">
       <Email />
       <LinkedIn />
       <GitHub />
-      <Phone />
     </div>
   );
 }
