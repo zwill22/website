@@ -63,12 +63,10 @@ export async function fetchRawContent(
   owner: string,
   repo: string,
   path: string,
-  auth?: Octokit,
+  auth: Octokit,
 ) {
-  const ok = auth ?? octokit;
-
   try {
-    const response = await ok.request(
+    const response = await auth.request(
       "GET /repos/{owner}/{repo}/contents/{path}",
 
       {
@@ -97,7 +95,9 @@ export async function fetchContent(
   path: string,
   auth?: Octokit,
 ): Promise<string> {
-  const data = await fetchRawContent(owner, repo, path, auth);
+  const ok = auth ?? octokit;
+  
+  const data = await fetchRawContent(owner, repo, path, ok);
 
   if (data.encoding === "base64") {
     return base64ToString(data.content);
