@@ -35,7 +35,7 @@ const smtpPort = (() => {
   return Number(port);
 })();
 
-const userName = checkVariable(
+const emailAddress = checkVariable(
   process.env.EMAIL_APP_AUTH_ADDRESS,
   "EMAIL_APP_AUTH_ADDRESS",
 );
@@ -45,23 +45,26 @@ const password = checkVariable(
   "EMAIL_APP_AUTH_PASSWORD",
 );
 
-const sendAddress = checkVariable(
-  process.env.EMAIL_APP_SMTP_ADDRESS,
-  "EMAIL_APP_SMTP_ADDRESS",
-);
 class MailService {
   async send(messageDetails: MessageDetails) {
     const transporter = nodemailer.createTransport({
       host: smtpHost,
       port: smtpPort,
       auth: {
-        user: userName,
+        user: emailAddress,
         pass: password,
       },
     });
 
+    try {
+      await transporter.verify();
+    } catch (err) {
+      console.error("Verification failed:", err);
+      throw new Error(`Unable to connect to email server: ${err}`);
+    }
+
     const mailOptions = {
-      from: sendAddress,
+      from: emailAddress,
       to: messageDetails.address,
       subject: messageDetails.subject,
       html: messageDetails.message,
@@ -77,7 +80,7 @@ class MailService {
 }
 
 function composeMeesageToMe(subject: string, email: string, message: string) {
-  const myAddress = sendAddress;
+  const myAddress = emailAddress;
   if (myAddress.length == 0) {
     throw new Error("Unable to send email, no forwarding address found");
   }
@@ -134,7 +137,7 @@ const FormSchema = z.object({
       error: "Please enter a valid subject",
     }),
   email: z.email({
-    error: "Please enter a vaid email address",
+    error: "Please enter a valid email address",
   }),
   message: z
     .string({

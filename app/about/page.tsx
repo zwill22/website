@@ -31,7 +31,8 @@ function Intro() {
       <Paragraph>
         Outside of work, I enjoy working on my own projects - several of which
         are highlighted here. I am an avid follower of my local football team -
-        Wrexham AFC. I enjoy cooking, baking, and sci-fi television series.
+        Wrexham AFC. I enjoy cooking, baking, gaming, and (almost) anything
+        science-fiction or fantasy.
       </Paragraph>
     </>
   );
