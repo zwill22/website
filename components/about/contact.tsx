@@ -18,7 +18,9 @@ import {
   FieldError,
   TextArea,
   Description,
+  Spinner,
 } from "@heroui/react";
+import clsx from "clsx";
 import {
   ReadonlyURLSearchParams,
   usePathname,
@@ -37,7 +39,7 @@ function SubjectField(props: { currentState: State }) {
   return (
     <TextField isRequired name="subject" type="text" isInvalid={isInvalid}>
       <Label>Subject</Label>
-      <Input placeholder="Help needed!" />
+      <Input placeholder="Help!" />
       {isInvalid ? (
         errors.map((e, idx) => (
           <FieldError key={`subject-field-error-${idx}`}>{e}</FieldError>
@@ -59,7 +61,7 @@ function EmailField(props: { currentState: State }) {
   return (
     <TextField isRequired name="email" type="email" isInvalid={isInvalid}>
       <Label>Contact Email</Label>
-      <Input placeholder="c.kent@dailyplanet.com" />
+      <Input placeholder="person@internet.com" />
       {isInvalid ? (
         errors.map((e, idx) => (
           <FieldError key={`email-field-error-${idx}`}>{e}</FieldError>
@@ -81,7 +83,10 @@ function MessageBox(props: { currentState: State }) {
   return (
     <TextField isRequired name="message" type="text" isInvalid={isInvalid}>
       <Label>Message</Label>
-      <TextArea placeholder="I need some code urgently..." rows={8} />
+      <TextArea
+        placeholder="Help, I need somebody's help. Not just anybody's help. I need someone..."
+        rows={8}
+      />
       <Description className="py-2">
         Please enter a detailed description of how I can help. Supports
         markdown.
@@ -103,10 +108,13 @@ function ComposeBox() {
     errors: {},
   };
 
-  const [state, formAction] = useActionState(sendEmail, initialState);
+  const [state, formAction, isPending] = useActionState(
+    sendEmail,
+    initialState,
+  );
 
   return (
-    <div className="font-plain shadow-foreground/50 mx-auto flex w-full rounded-xl p-4 shadow md:text-lg">
+    <div className="font-plain shadow-foreground/50 relative mx-auto flex w-full rounded-xl p-4 shadow md:text-lg">
       <Form className="flex w-full flex-col gap-4 md:gap-6" action={formAction}>
         <SubjectField currentState={state} />
         <EmailField currentState={state} />
@@ -117,11 +125,23 @@ function ComposeBox() {
             <Reset />
           </Button>
 
-          <Button type="submit" className="rounded-md">
+          <Button type="submit" className="rounded-md" isPending={isPending}>
             <Submit />
           </Button>
         </div>
       </Form>
+      <div
+        className={clsx(
+          isPending
+            ? "text-foreground/50 absolute top-0 left-0 z-2 flex h-full w-full flex-col rounded-xl p-4 backdrop-blur-xs"
+            : "hidden",
+        )}
+      >
+        <div className="bg-foreground/10 shadow-foreground/20 m-auto flex flex-col rounded-xl p-4 shadow backdrop-blur-xs">
+          <Spinner className="text-success m-auto" size="xl" />
+          <p className="font-plain min-w-16 px-2 pt-4">Sending...</p>
+        </div>
+      </div>
     </div>
   );
 }
