@@ -50,7 +50,8 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "text-foreground bg-background font-body antialiased",
+          "text-foreground font-body antialiased",
+          "from-background bg-linear-to-t light:to-white dark:to-black",
           fontBody.variable,
           fontHeading.variable,
           fontMono.variable,

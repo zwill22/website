@@ -10,8 +10,7 @@ export function Sidebar() {
   return (
     <nav
       className={clsx(
-        "from-background top-0 left-0 z-40 h-dvh bg-linear-to-t shadow backdrop-blur-lg",
-        "light:to-white dark:to-black",
+        "bg-background/70 top-0 left-0 z-40 h-dvh backdrop-blur-lg border-r shadow",
       )}
     >
       <div className="flex h-full flex-col justify-between">
