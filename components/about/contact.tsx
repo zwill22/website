@@ -9,7 +9,6 @@ import {
   Submit,
 } from "@/components/about/button-labels";
 import { sendEmail, State } from "@/lib/email";
-import { XCircleIcon } from "@heroicons/react/24/solid";
 import {
   ButtonGroup,
   Form,

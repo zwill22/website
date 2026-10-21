@@ -25,6 +25,7 @@ const config: NextConfig = {
       },
     ],
   },
+  transpilePackages: ["email"],
 };
 
 export default config;

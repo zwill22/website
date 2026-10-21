@@ -1,0 +1,17 @@
+{
+  "name": "email-interface",
+  "version": "1.0.0",
+  "description": "An interface to the Email template",
+  "exports": "./index.ts",
+  "keywords": [],
+  "author": "Z M Williams",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "email": "github:zwill22/emails",
+    "react-email": "^6.11.3"
+  }
+}

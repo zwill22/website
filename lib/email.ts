@@ -4,8 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import nodemailer from "nodemailer";
-import markdownToHtml from "@/packages/markdown-to-html";
 import { getErrorMessage } from "@/lib/errors";
+import composeMessage from "email-interface";
 
 interface MessageDetails {
   address: string;
@@ -45,6 +45,8 @@ const password = checkVariable(
   "EMAIL_APP_AUTH_PASSWORD",
 );
 
+const phoneNumber = checkVariable(process.env.PHONE_NUMBER, "PHONE_NUMBER");
+
 class MailService {
   async send(messageDetails: MessageDetails) {
     const transporter = nodemailer.createTransport({
@@ -79,52 +81,65 @@ class MailService {
   }
 }
 
-function composeMeesageToMe(subject: string, email: string, message: string) {
+async function composeMeesageToMe(
+  subject: string,
+  email: string,
+  message: string,
+) {
   const myAddress = emailAddress;
-  if (myAddress.length == 0) {
-    throw new Error("Unable to send email, no forwarding address found");
-  }
 
   const messageSubject = `New Message from Website: ${subject}`;
 
-  const messageContent = `
-  <h2>New message from website</h2>
-  <p>Subject: ${subject}</p>
-  <p>Contact email: ${email}</p>
-  <br/>
-  <p>Message:</p>
-  ${message.replace("\n", "<br/>")}
+  const content = `
+  *Message from website*
+  
+  Subject: _${subject}_
+
+  Email: ${email}
+
+  Message:
+
+  ${message}
   `;
 
-  return {
-    address: myAddress,
-    subject: messageSubject,
-    message: messageContent,
-  };
+  const preview = message.slice(0, 80);
+
+  return composeMessage(
+    messageSubject,
+    content,
+    preview,
+    phoneNumber,
+    myAddress,
+  );
 }
 
 function composeMeesageToThem(subject: string, email: string, message: string) {
   const messageSubject = `Thank you for your message: ${subject}`;
 
   const messageContent = `
-  <p>Thank you for contacting me via my website.</p>
-  <p>I am thrilled that you have decided to contact me.
-  I will try to get back to you as soon as possible.</p>
-  <p>Kind regards,</p>
-  <p>Zack</p>
-  <br/>
-  <p>Message details:</p>
-  <p>Subject: ${subject}</p>
-  <br/>
-  <p>Message:</p>
+  Thank you for contacting me via my website.
+  I will try to get back to you as soon as possible.
+
+  Best wishes
+
+  Zack
+  
+  Message:
+  
+  # ${subject}
+  
   ${message}
   `;
 
-  return {
-    address: email,
-    subject: messageSubject,
-    message: messageContent,
-  };
+  const preview = "You message has been received. Thank you for contacting me.";
+
+  return composeMessage(
+    messageSubject,
+    messageContent,
+    preview,
+    phoneNumber,
+    email,
+  );
 }
 
 const FormSchema = z.object({
@@ -182,14 +197,13 @@ export async function sendEmail(_: State, formData: FormData) {
 
   const { subject, email, message } = validatedFields.data;
 
-  const htmlMessage = await markdownToHtml(message, false);
-
   const emailService = new MailService();
   try {
-    const messageToMe = composeMeesageToMe(subject, email, htmlMessage);
-    const messageToThem = composeMeesageToThem(subject, email, htmlMessage);
+    const messageToMe = await composeMeesageToMe(subject, email, message);
+    const messageToThem = await composeMeesageToThem(subject, email, message);
 
     await emailService.send(messageToMe);
+
     // Only send to them if first message is successful
     await emailService.send(messageToThem);
   } catch (error: unknown) {
